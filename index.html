@@ -133,6 +133,7 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
   background:color-mix(in srgb,var(--codigo-tinta) 12%,transparent);
   padding:1px 5px;border-radius:4px}
 .codigo .rodape+.rodape{padding-top:10px}
+.so-papel{display:none}
 
 .fim{max-width:1180px;margin:0 auto;padding:0 20px 40px;text-align:center;color:var(--tinta2);font-size:15px}
 .fim strong{color:var(--tinta)}
@@ -156,10 +157,18 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
 
 @media print{
   .barra,.abas,.risca,.baixar,.navega{display:none}
-  .passo{page-break-inside:avoid;box-shadow:none;border-color:#ccc}
   body{background:#fff}
   .gif{display:none!important}
   .foto{display:block!important}
+  /* quebrar DENTRO do passo e nao antes dele: com page-break-inside:avoid num
+     passo alto o Chrome pulava a folha inteira e sobravam paginas em branco. */
+  .passo{break-inside:auto;box-shadow:none;border-color:#ccc;margin:0 0 16px;padding:16px 18px}
+  .cab{break-after:avoid}
+  .midia,.certo,.socorro,.codigo{break-inside:avoid}
+  .legenda{display:none}
+  .legenda.so-papel{display:block}
+  .midia img{max-height:11cm;width:auto;margin:0 auto}
+  .capa{break-after:page}
 }
 </style>
 </head>

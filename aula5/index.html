@@ -133,6 +133,7 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
   background:color-mix(in srgb,var(--codigo-tinta) 12%,transparent);
   padding:1px 5px;border-radius:4px}
 .codigo .rodape+.rodape{padding-top:10px}
+.so-papel{display:none}
 
 .fim{max-width:1180px;margin:0 auto;padding:0 20px 40px;text-align:center;color:var(--tinta2);font-size:15px}
 .fim strong{color:var(--tinta)}
@@ -156,10 +157,18 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
 
 @media print{
   .barra,.abas,.risca,.baixar,.navega{display:none}
-  .passo{page-break-inside:avoid;box-shadow:none;border-color:#ccc}
   body{background:#fff}
   .gif{display:none!important}
   .foto{display:block!important}
+  /* quebrar DENTRO do passo e nao antes dele: com page-break-inside:avoid num
+     passo alto o Chrome pulava a folha inteira e sobravam paginas em branco. */
+  .passo{break-inside:auto;box-shadow:none;border-color:#ccc;margin:0 0 16px;padding:16px 18px}
+  .cab{break-after:avoid}
+  .midia,.certo,.socorro,.codigo{break-inside:avoid}
+  .legenda{display:none}
+  .legenda.so-papel{display:block}
+  .midia img{max-height:11cm;width:auto;margin:0 auto}
+  .capa{break-after:page}
 }
 </style>
 </head>
@@ -176,6 +185,7 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
   <p class="linha-fina">Um número na tela que sobe quando você encosta na moeda — e a moeda some. São 20 passos, 50 minutos.
   Faça um de cada vez e só passe adiante depois de conferir o quadro verde.</p>
   <div class="avisos"><div class="aviso"><b>Antes de digitar</b>O <b>passo 2</b> desta aula prepara o editor: desligar o assistente de código e o fechamento automático. Não pule — sem isso o editor escreve linhas que você não pediu.</div><div class="aviso"><b>Projeto novo</b>Começa do zero. Hoje são <b>dois</b> scripts, em lugares diferentes.</div><div class="aviso"><b>A palavra mais importante</b><span class=ui>leaderstats</span>, tudo junto e tudo minúsculo. É esse nome exato que faz o placar aparecer. Com uma letra diferente, nada acontece.</div><div class="aviso"><b>Atalhos</b>Este material usa <span class=ui>Ctrl</span>, do Windows. Num Mac, troque Ctrl por <span class=ui>⌘</span>.</div></div>
+  <a class="baixar" href="aula5.pdf">⤓ Baixar esta aula em PDF (para imprimir)</a>
 </div>
 
 <main>
@@ -185,7 +195,7 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
   <div class="corpo"><figure class="midia"><div class="moldura"><img class="foto" src="fotos/c01_tela_inicial.jpg" alt="Tela do Roblox Studio no passo 1" loading="lazy"></div><p class="legenda">Foto da tela.</p></figure>
     <div class="texto"><p>Projeto novo, como sempre. <b>Role a página para baixo</b> até <span class=ui>Abrir um modelo</span> e clique no <span class=ui>Baseplate</span>.</p>
       <div class="certo"><b>Está certo se</b>Abriu o mundo cinza com a plataforma clara.</div>
-      <div class="socorro"><b>Não deu certo?</b><dl><dt>Abriu o projeto antigo</dt><dd>Feche a aba e volte para o Início.</dd></dl></div>
+      <div class="socorro"><b>Não deu certo?</b><dl><dt>Abriu o projeto antigo</dt><dd>Feche a aba e volte para o Início.</dd><dt>Apareceu uma janelinha de Boas-vindas por cima</dt><dd>Clique em <span class=ui>Voltar ao início</span>, o botão da esquerda — ou no <b>✕</b> do canto. Não clique em <span class=ui>Iniciar a introdução</span>.</dd></dl></div>
     </div></div></section>
 <section class="passo" id="passo2">
   <div class="cab"><div class="bolha">2</div><h2>Prepare o editor (uma vez em cada computador)</h2>
@@ -198,7 +208,7 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
 <section class="passo" id="passo3">
   <div class="cab"><div class="bolha">3</div><h2>Vá para a aba MODELO</h2>
   <label class="risca"><input type="checkbox" data-passo="3"> feito</label></div>
-  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/01_aba_modelo.gif" alt="Animação do passo 3" loading="lazy"><img hidden class="foto" src="fotos/s_aba_b.jpg" alt="Tela do Roblox Studio no passo 3" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
+  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/01_aba_modelo.gif" alt="Animação do passo 3" loading="lazy"><img hidden class="foto" src="fotos/s_aba_b.jpg" alt="Tela do Roblox Studio no passo 3" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p><p class="legenda so-papel">Foto da tela.</p></figure>
     <div class="texto"><p>Clique em <span class=ui>Modelo</span>.</p>
       <div class="certo"><b>Está certo se</b>Aparecem <span class=ui>Parte</span>, <span class=ui>Cor</span> e <span class=ui>Âncora</span>.</div>
       <div class="socorro"><b>Não deu certo?</b><dl><dt>Não acho</dt><dd>Fica entre <span class=ui>Script</span> e <span class=ui>Plugins</span>.</dd></dl></div>
@@ -214,7 +224,7 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
 <section class="passo" id="passo5">
   <div class="cab"><div class="bolha">5</div><h2>Coloque um Script nele</h2>
   <label class="risca"><input type="checkbox" data-passo="5"> feito</label></div>
-  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/02_script_placar.gif" alt="Animação do passo 5" loading="lazy"><img hidden class="foto" src="fotos/s_placar_c.jpg" alt="Tela do Roblox Studio no passo 5" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
+  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/02_script_placar.gif" alt="Animação do passo 5" loading="lazy"><img hidden class="foto" src="fotos/s_placar_c.jpg" alt="Tela do Roblox Studio no passo 5" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p><p class="legenda so-papel">Foto da tela.</p></figure>
     <div class="texto"><p>Clique uma vez em <span class=ui>ServerScriptService</span>. Aparece um <b>+</b> depois do nome. Clique no <b>+</b> e escolha <span class=ui>Script</span>.</p>
       <div class="certo"><b>Está certo se</b>Abriu o editor, e o <span class=ui>Script</span> aparece para dentro do <span class=ui>ServerScriptService</span>.</div>
       <div class="socorro"><b>Não deu certo?</b><dl><dt>Não aparece o +</dt><dd>Clique uma vez na linha primeiro.</dd><dt>O Script foi para outro lugar</dt><dd>Apague com <b>Delete</b> e refaça com o ServerScriptService selecionado.</dd></dl></div>
@@ -233,7 +243,7 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
   <div class="corpo"><figure class="midia"><div class="moldura"><img class="foto" src="fotos/p_placar_pronto.jpg" alt="Tela do Roblox Studio no passo 7" loading="lazy"></div><p class="legenda">Foto da tela.</p></figure>
     <div class="texto"><p>Este é o código que cria o placar. Nove linhas:</p><div class="codigo"><div class="titulo">⌨ digite você mesmo — não copie</div><ol><li>game.Players.PlayerAdded:Connect(function(jogador)</li><li>	local pasta = Instance.new(&quot;Folder&quot;)</li><li>	pasta.Name = &quot;leaderstats&quot;</li><li>	pasta.Parent = jogador</li><li> </li><li>	local moedas = Instance.new(&quot;IntValue&quot;)</li><li>	moedas.Name = &quot;Moedas&quot;</li><li>	moedas.Value = 0</li><li>	moedas.Parent = pasta</li><li class="auto">end)</li></ol><div class="rodape">as linhas em cinza o editor escreve sozinho — não digite elas</div><div class="rodape">teclado brasileiro: a aspa é <b>tecla muda</b> — ela não aparece na hora. Aperte a tecla da aspa e <b>logo a barra de espaço</b>: sai uma aspa sozinha, sem espaço nenhum. Faça isso com <b>todas</b> as aspas. Se você digitar a letra direto depois da aspa, ela vira trema (<code>&quot;I</code> sai <code>Ï</code>).</div></div><p>Cuidado com três coisas: <span class=ui>leaderstats</span> é tudo minúsculo e entre aspas; <span class=ui>IntValue</span> tem I e V maiúsculos; e o <span class=ui>Moedas</span> entre aspas é o nome que vai aparecer na tela.<br><br><b>Não digite as linhas em cinza.</b> O editor escreve os <span class=ui>end</span> sozinho quando você aperta Enter. E <b>não aperte Tab</b> — ele já empurra as linhas para dentro.</p>
       <div class="certo"><b>Está certo se</b>Nenhum risco vermelho.</div>
-      <div class="socorro"><b>Não deu certo?</b><dl><dt>Saiu <b>Ïnt</b> no lugar de <b>&quot;Int</b></dt><dd>No teclado brasileiro a aspa é <b>tecla muda</b>: ela só aparece depois da próxima tecla, e antes de vogal ela vira trema. Apague, aperte a <b>aspa</b>, depois a <b>barra de espaço</b> — a aspa aparece sozinha, sem espaço nenhum — e só então digite o <b>I</b>.</dd><dt>Sobraram end a mais</dt><dd>Você digitou os que o editor já tinha escrito. Apague os extras até o código ficar igual ao da aula.</dd><dt>Risco vermelho no fim</dt><dd>Falta o <span class=ui>end)</span> da última linha — com o parêntese.</dd><dt>Escrevi Leaderstats com L maiúsculo</dt><dd>Não funciona. Tem que ser <b>leaderstats</b>, tudo minúsculo. É a Roblox que exige esse nome exato.</dd><dt>O editor completa sozinho</dt><dd>Aperte <b>Esc</b> para dispensar a sugestão.</dd><dt>Apareceu uma caixinha cinza com sugestões</dt><dd>É o editor tentando adivinhar. Aperte <b>Esc</b> para fechá-la e continue digitando. Se você apertar <b>Enter</b> com ela aberta, ele escreve a sugestão no lugar do que você ia escrever.</dd></dl></div>
+      <div class="socorro"><b>Não deu certo?</b><dl><dt>A aspa saiu errada (Ï, ä, ou duas aspas juntas)</dt><dd>A aspa do teclado brasileiro é <b>tecla muda</b>. Antes de vogal ela vira trema; no fim da linha ela às vezes dobra. O conserto é sempre o mesmo: apague o que saiu errado e digite a aspa <b>seguida da barra de espaço</b>. Sai uma aspa limpa, sem espaço.</dd><dt>Sobraram end a mais</dt><dd>Você digitou os que o editor já tinha escrito. Apague os extras até o código ficar igual ao da aula.</dd><dt>Risco vermelho no fim</dt><dd>Falta o <span class=ui>end)</span> da última linha — com o parêntese.</dd><dt>Escrevi Leaderstats com L maiúsculo</dt><dd>Não funciona. Tem que ser <b>leaderstats</b>, tudo minúsculo. É a Roblox que exige esse nome exato.</dd><dt>O editor completa sozinho</dt><dd>Aperte <b>Esc</b> para dispensar a sugestão.</dd><dt>Apareceu uma caixinha cinza com sugestões</dt><dd>É o editor tentando adivinhar. Aperte <b>Esc</b> para fechá-la e continue digitando. Se você apertar <b>Enter</b> com ela aberta, ele escreve a sugestão no lugar do que você ia escrever.</dd></dl></div>
     </div></div></section>
 <section class="passo" id="passo8">
   <div class="cab"><div class="bolha">8</div><h2>Entenda o placar</h2>
@@ -246,7 +256,7 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
 <section class="passo" id="passo9">
   <div class="cab"><div class="bolha">9</div><h2>Volte para o mundo e jogue</h2>
   <label class="risca"><input type="checkbox" data-passo="9"> feito</label></div>
-  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/04_jogar_placar.gif" alt="Animação do passo 9" loading="lazy"><img hidden class="foto" src="fotos/s_jogo1_b.jpg" alt="Tela do Roblox Studio no passo 9" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
+  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/04_jogar_placar.gif" alt="Animação do passo 9" loading="lazy"><img hidden class="foto" src="fotos/s_jogo1_b.jpg" alt="Tela do Roblox Studio no passo 9" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p><p class="legenda so-papel">Foto da tela.</p></figure>
     <div class="texto"><p>Clique na aba <span class=ui>Place1</span> e depois no <b>▶</b>.<br><br>Olhe o canto superior direito da tela do jogo.</p>
       <div class="certo"><b>Está certo se</b>Apareceu um quadro escrito <b>Pessoas</b> e <b>Moedas</b>, com o seu nome e um <b>0</b>.</div>
       <div class="socorro"><b>Não deu certo?</b><dl><dt>Não apareceu o placar</dt><dd>Quase sempre é o nome: confira se está <b>leaderstats</b>, tudo minúsculo, entre aspas.</dd><dt>Apareceu só o nome, sem coluna</dt><dd>Faltou a parte do <span class=ui>IntValue</span>. Confira as quatro últimas linhas.</dd><dt>O quadro some</dt><dd>Clique no <b>x</b> dele sem querer fecha. Saia e entre no jogo de novo.</dd></dl></div>
@@ -262,7 +272,7 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
 <section class="passo" id="passo11">
   <div class="cab"><div class="bolha">11</div><h2>Crie a moeda</h2>
   <label class="risca"><input type="checkbox" data-passo="11"> feito</label></div>
-  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/05_criar_moeda.gif" alt="Animação do passo 11" loading="lazy"><img hidden class="foto" src="fotos/s_moeda_b.jpg" alt="Tela do Roblox Studio no passo 11" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
+  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/05_criar_moeda.gif" alt="Animação do passo 11" loading="lazy"><img hidden class="foto" src="fotos/s_moeda_b.jpg" alt="Tela do Roblox Studio no passo 11" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p><p class="legenda so-papel">Foto da tela.</p></figure>
     <div class="texto"><p>Clique no <b>desenho</b> do botão <span class=ui>Parte</span>.</p>
       <div class="certo"><b>Está certo se</b>Nasceu um bloco e apareceu <span class=ui>Part</span> na lista.</div>
       <div class="socorro"><b>Não deu certo?</b><dl><dt>Nada aconteceu</dt><dd>Você clicou na palavra, não no desenho.</dd></dl></div>
@@ -270,7 +280,7 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
 <section class="passo" id="passo12">
   <div class="cab"><div class="bolha">12</div><h2>Leve a câmera e ancore</h2>
   <label class="risca"><input type="checkbox" data-passo="12"> feito</label></div>
-  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/06_ancorar.gif" alt="Animação do passo 12" loading="lazy"><img hidden class="foto" src="fotos/s_anc_moeda_b.jpg" alt="Tela do Roblox Studio no passo 12" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
+  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/06_ancorar.gif" alt="Animação do passo 12" loading="lazy"><img hidden class="foto" src="fotos/s_anc_moeda_b.jpg" alt="Tela do Roblox Studio no passo 12" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p><p class="legenda so-papel">Foto da tela.</p></figure>
     <div class="texto"><p>Clique em <span class=ui>Part</span> na lista, mouse no mundo 3D, tecla <b>F</b>, depois <b>S</b> algumas vezes.<br><br>Com a peça selecionada, clique em <span class=ui>Âncora</span>. Moeda que cai não serve.</p>
       <div class="certo"><b>Está certo se</b>A peça está no meio da tela e o botão <span class=ui>Âncora</span> está aceso.</div>
       <div class="socorro"><b>Não deu certo?</b><dl><dt>F não fez nada</dt><dd>O mouse tem que estar sobre o mundo 3D.</dd></dl></div>
@@ -278,7 +288,7 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
 <section class="passo" id="passo13">
   <div class="cab"><div class="bolha">13</div><h2>Pinte de amarelo</h2>
   <label class="risca"><input type="checkbox" data-passo="13"> feito</label></div>
-  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/07_cor.gif" alt="Animação do passo 13" loading="lazy"><img hidden class="foto" src="fotos/s_cor_e.jpg" alt="Tela do Roblox Studio no passo 13" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
+  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/07_cor.gif" alt="Animação do passo 13" loading="lazy"><img hidden class="foto" src="fotos/s_cor_e.jpg" alt="Tela do Roblox Studio no passo 13" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p><p class="legenda so-papel">Foto da tela.</p></figure>
     <div class="texto"><p>Setinha do <span class=ui>Cor</span> → hexágono amarelo → clique no <b>círculo do botão Cor</b>.</p>
       <div class="certo"><b>Está certo se</b>A peça ficou amarela.</div>
       <div class="socorro"><b>Não deu certo?</b><dl><dt>Não pintou</dt><dd>Falta o clique no círculo do botão Cor.</dd></dl></div>
@@ -286,7 +296,7 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
 <section class="passo" id="passo14">
   <div class="cab"><div class="bolha">14</div><h2>Chame de MOEDA</h2>
   <label class="risca"><input type="checkbox" data-passo="14"> feito</label></div>
-  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/08_renomear.gif" alt="Animação do passo 14" loading="lazy"><img hidden class="foto" src="fotos/s_nome_b.jpg" alt="Tela do Roblox Studio no passo 14" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
+  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/08_renomear.gif" alt="Animação do passo 14" loading="lazy"><img hidden class="foto" src="fotos/s_nome_b.jpg" alt="Tela do Roblox Studio no passo 14" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p><p class="legenda so-papel">Foto da tela.</p></figure>
     <div class="texto"><p>Botão direito na peça, na lista → <span class=ui>Renomear</span> → <b>Moeda</b> → Enter.</p>
       <div class="certo"><b>Está certo se</b>Na lista está <span class=ui>Moeda</span>.</div>
       <div class="socorro"><b>Não deu certo?</b><dl><dt>Voltou o nome antigo</dt><dd>Termine com <b>Enter</b>.</dd></dl></div>
@@ -294,7 +304,7 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
 <section class="passo" id="passo15">
   <div class="cab"><div class="bolha">15</div><h2>Ponha um Script dentro da Moeda</h2>
   <label class="risca"><input type="checkbox" data-passo="15"> feito</label></div>
-  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/09_script_moeda.gif" alt="Animação do passo 15" loading="lazy"><img hidden class="foto" src="fotos/s_scriptmoeda_c.jpg" alt="Tela do Roblox Studio no passo 15" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
+  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/09_script_moeda.gif" alt="Animação do passo 15" loading="lazy"><img hidden class="foto" src="fotos/s_scriptmoeda_c.jpg" alt="Tela do Roblox Studio no passo 15" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p><p class="legenda so-papel">Foto da tela.</p></figure>
     <div class="texto"><p>Clique em <span class=ui>Moeda</span> na lista, clique no <b>+</b> e escolha <span class=ui>Script</span>.<br><br>Repare: este script é <b>da peça</b>. O outro era do jogo inteiro. São coisas diferentes.</p>
       <div class="certo"><b>Está certo se</b>O <span class=ui>Script</span> aparece para dentro de <span class=ui>Moeda</span>, e o editor abriu.</div>
       <div class="socorro"><b>Não deu certo?</b><dl><dt>Ficou fora da Moeda</dt><dd>Arraste-o por cima da palavra <span class=ui>Moeda</span> na lista.</dd><dt>Abriu o script errado</dt><dd>Feche as abas de script lá em cima e dê duplo clique no Script que está dentro da Moeda.</dd></dl></div>
@@ -318,10 +328,10 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
 <section class="passo" id="passo18">
   <div class="cab"><div class="bolha">18</div><h2>Jogue e pegue a moeda</h2>
   <label class="risca"><input type="checkbox" data-passo="18"> feito</label></div>
-  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/10_jogar_moeda.gif" alt="Animação do passo 18" loading="lazy"><img hidden class="foto" src="fotos/p_moeda_pega.jpg" alt="Tela do Roblox Studio no passo 18" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
+  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/10_jogar_moeda.gif" alt="Animação do passo 18" loading="lazy"><img hidden class="foto" src="fotos/p_moeda_pega.jpg" alt="Tela do Roblox Studio no passo 18" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p><p class="legenda so-papel">Foto da tela.</p></figure>
     <div class="texto"><p>Volte para <span class=ui>Place1</span> e aperte o <b>▶</b>.<br><br>Ande até a moeda amarela e encoste nela.</p>
       <div class="certo"><b>Está certo se</b>A moeda sumiu <b>e</b> o número do placar virou <b>1</b>.</div>
-      <div class="socorro"><b>Não deu certo?</b><dl><dt>A moeda some mas o número não muda</dt><dd>O placar não existe. Volte ao passo 9 e confira o <span class=ui>leaderstats</span>.</dd><dt>O número muda mas a moeda fica</dt><dd>Faltou o <span class=ui>moeda:Destroy()</span>.</dd><dt>Não acontece nada</dt><dd>Confira se o Script está <b>dentro</b> da Moeda, e se não sobrou risco vermelho.</dd></dl></div>
+      <div class="socorro"><b>Não deu certo?</b><dl><dt>A moeda some mas o número não muda</dt><dd>O placar não existe. Volte ao passo 7 e confira o <span class=ui>leaderstats</span>.</dd><dt>O número muda mas a moeda fica</dt><dd>Faltou o <span class=ui>moeda:Destroy()</span>.</dd><dt>Não acontece nada</dt><dd>Confira se o Script está <b>dentro</b> da Moeda, e se não sobrou risco vermelho.</dd></dl></div>
     </div></div></section>
 <section class="passo" id="passo19">
   <div class="cab"><div class="bolha">19</div><h2>Faça um monte de moedas</h2>

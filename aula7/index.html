@@ -133,6 +133,7 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
   background:color-mix(in srgb,var(--codigo-tinta) 12%,transparent);
   padding:1px 5px;border-radius:4px}
 .codigo .rodape+.rodape{padding-top:10px}
+.so-papel{display:none}
 
 .fim{max-width:1180px;margin:0 auto;padding:0 20px 40px;text-align:center;color:var(--tinta2);font-size:15px}
 .fim strong{color:var(--tinta)}
@@ -156,10 +157,18 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
 
 @media print{
   .barra,.abas,.risca,.baixar,.navega{display:none}
-  .passo{page-break-inside:avoid;box-shadow:none;border-color:#ccc}
   body{background:#fff}
   .gif{display:none!important}
   .foto{display:block!important}
+  /* quebrar DENTRO do passo e nao antes dele: com page-break-inside:avoid num
+     passo alto o Chrome pulava a folha inteira e sobravam paginas em branco. */
+  .passo{break-inside:auto;box-shadow:none;border-color:#ccc;margin:0 0 16px;padding:16px 18px}
+  .cab{break-after:avoid}
+  .midia,.certo,.socorro,.codigo{break-inside:avoid}
+  .legenda{display:none}
+  .legenda.so-papel{display:block}
+  .midia img{max-height:11cm;width:auto;margin:0 auto}
+  .capa{break-after:page}
 }
 </style>
 </head>
@@ -176,6 +185,7 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
   <p class="linha-fina">Uma barra que roda sem parar e derruba quem estiver na frente. Hoje o código aprende a repetir. São 20 passos, 50 minutos.
   Faça um de cada vez e só passe adiante depois de conferir o quadro verde.</p>
   <div class="avisos"><div class="aviso"><b>Antes de digitar</b>O <b>passo 2</b> desta aula prepara o editor: desligar o assistente de código e o fechamento automático. Não pule — sem isso o editor escreve linhas que você não pediu.</div><div class="aviso"><b>Projeto novo</b>Começa do zero, com uma peça só.</div><div class="aviso"><b>Cuidado com o laço</b><span class=ui>while true do</span> repete <b>para sempre</b>. Sem o <span class=ui>task.wait</span> lá dentro, o Studio trava. Essa linha não é opcional.</div><div class="aviso"><b>Atalhos</b>Este material usa <span class=ui>Ctrl</span>, do Windows. Num Mac, troque Ctrl por <span class=ui>⌘</span>.</div></div>
+  <a class="baixar" href="aula7.pdf">⤓ Baixar esta aula em PDF (para imprimir)</a>
 </div>
 
 <main>
@@ -185,7 +195,7 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
   <div class="corpo"><figure class="midia"><div class="moldura"><img class="foto" src="fotos/c01_tela_inicial.jpg" alt="Tela do Roblox Studio no passo 1" loading="lazy"></div><p class="legenda">Foto da tela.</p></figure>
     <div class="texto"><p>Projeto novo. <b>Role a página para baixo</b> até a fileira <span class=ui>Abrir um modelo</span> e clique no primeiro, o <span class=ui>Baseplate</span>.</p>
       <div class="certo"><b>Está certo se</b>Abriu o mundo cinza.</div>
-      <div class="socorro"><b>Não deu certo?</b><dl><dt>Abriu o projeto antigo</dt><dd>Feche a aba e volte para o Início.</dd></dl></div>
+      <div class="socorro"><b>Não deu certo?</b><dl><dt>Abriu o projeto antigo</dt><dd>Feche a aba e volte para o Início.</dd><dt>Apareceu uma janelinha de Boas-vindas por cima</dt><dd>Clique em <span class=ui>Voltar ao início</span>, o botão da esquerda — ou no <b>✕</b> do canto. Não clique em <span class=ui>Iniciar a introdução</span>.</dd></dl></div>
     </div></div></section>
 <section class="passo" id="passo2">
   <div class="cab"><div class="bolha">2</div><h2>Prepare o editor (uma vez em cada computador)</h2>
@@ -198,7 +208,7 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
 <section class="passo" id="passo3">
   <div class="cab"><div class="bolha">3</div><h2>Vá para a aba MODELO</h2>
   <label class="risca"><input type="checkbox" data-passo="3"> feito</label></div>
-  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/01_aba_modelo.gif" alt="Animação do passo 3" loading="lazy"><img hidden class="foto" src="fotos/s_aba_b.jpg" alt="Tela do Roblox Studio no passo 3" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
+  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/01_aba_modelo.gif" alt="Animação do passo 3" loading="lazy"><img hidden class="foto" src="fotos/s_aba_b.jpg" alt="Tela do Roblox Studio no passo 3" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p><p class="legenda so-papel">Foto da tela.</p></figure>
     <div class="texto"><p>Clique em <span class=ui>Modelo</span>.</p>
       <div class="certo"><b>Está certo se</b>Aparecem <span class=ui>Parte</span>, <span class=ui>Cor</span> e <span class=ui>Âncora</span>.</div>
       <div class="socorro"><b>Não deu certo?</b><dl><dt>Não acho</dt><dd>Fica entre <span class=ui>Script</span> e <span class=ui>Plugins</span>.</dd></dl></div>
@@ -206,7 +216,7 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
 <section class="passo" id="passo4">
   <div class="cab"><div class="bolha">4</div><h2>Crie a peça</h2>
   <label class="risca"><input type="checkbox" data-passo="4"> feito</label></div>
-  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/02_criar_peca.gif" alt="Animação do passo 4" loading="lazy"><img hidden class="foto" src="fotos/s_criar_b.jpg" alt="Tela do Roblox Studio no passo 4" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
+  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/02_criar_peca.gif" alt="Animação do passo 4" loading="lazy"><img hidden class="foto" src="fotos/s_criar_b.jpg" alt="Tela do Roblox Studio no passo 4" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p><p class="legenda so-papel">Foto da tela.</p></figure>
     <div class="texto"><p>Clique no <b>desenho</b> do <span class=ui>Parte</span>. Depois clique no nome na lista, ponha o mouse no mundo 3D e aperte <b>F</b>, depois <b>S</b> algumas vezes.</p>
       <div class="certo"><b>Está certo se</b>A peça está no meio da tela.</div>
       <div class="socorro"><b>Não deu certo?</b><dl><dt>Nada aconteceu</dt><dd>Você clicou na palavra, não no desenho.</dd></dl></div>
@@ -214,7 +224,7 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
 <section class="passo" id="passo5">
   <div class="cab"><div class="bolha">5</div><h2>Ancore</h2>
   <label class="risca"><input type="checkbox" data-passo="5"> feito</label></div>
-  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/03_ancorar.gif" alt="Animação do passo 5" loading="lazy"><img hidden class="foto" src="fotos/s_ancora_b.jpg" alt="Tela do Roblox Studio no passo 5" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
+  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/03_ancorar.gif" alt="Animação do passo 5" loading="lazy"><img hidden class="foto" src="fotos/s_ancora_b.jpg" alt="Tela do Roblox Studio no passo 5" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p><p class="legenda so-papel">Foto da tela.</p></figure>
     <div class="texto"><p>Clique em <span class=ui>Âncora</span>.<br><br>Hoje a âncora é ainda mais importante: a peça vai girar, e peça girando sem âncora sai voando.</p>
       <div class="certo"><b>Está certo se</b>O botão ficou aceso.</div>
       <div class="socorro"><b>Não deu certo?</b><dl><dt>Não sei se ancorou</dt><dd>Busque <b>anchor</b> nas Propriedades.</dd></dl></div>
@@ -222,7 +232,7 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
 <section class="passo" id="passo6">
   <div class="cab"><div class="bolha">6</div><h2>Faça uma barra comprida</h2>
   <label class="risca"><input type="checkbox" data-passo="6"> feito</label></div>
-  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/04_tamanho.gif" alt="Animação do passo 6" loading="lazy"><img hidden class="foto" src="fotos/s_tam_b.jpg" alt="Tela do Roblox Studio no passo 6" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
+  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/04_tamanho.gif" alt="Animação do passo 6" loading="lazy"><img hidden class="foto" src="fotos/s_tam_b.jpg" alt="Tela do Roblox Studio no passo 6" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p><p class="legenda so-papel">Foto da tela.</p></figure>
     <div class="texto"><p>Busca das <span class=ui>Propriedades</span> → <b>size</b> → duplo clique no valor → <b>Ctrl + A</b> → <b>26, 1, 2</b> → Enter.<br><br>Depois busque <b>position</b> e ponha <b>0, 4, -14</b>: a barra fica na altura da cintura, uns passos à frente de onde você nasce.</p>
       <div class="certo"><b>Está certo se</b>Tem uma barra comprida e fina flutuando na sua frente.</div>
       <div class="socorro"><b>Não deu certo?</b><dl><dt>Só mudou um número</dt><dd>Faltou o <b>Ctrl + A</b> antes de escrever.</dd><dt>A barra ficou no chão</dt><dd>O número do meio é a altura. Use <b>0, 4, -14</b>.</dd><dt>Aparecem três linhas Position</dt><dd>Use a primeira, embaixo de <span class=ui>CFrame</span>.</dd><dt>Sumiu tudo do meu mundo!</dt><dd><b>Ctrl + Z</b> várias vezes até tudo voltar. Isso acontece quando o <b>Ctrl + A</b> pega a <b>lista de peças</b> em vez do campo de texto, e aí o Delete apaga as peças. Depois do Ctrl + A, <b>digite</b> os números — nunca aperte Delete.</dd></dl></div>
@@ -230,7 +240,7 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
 <section class="passo" id="passo7">
   <div class="cab"><div class="bolha">7</div><h2>Pinte</h2>
   <label class="risca"><input type="checkbox" data-passo="7"> feito</label></div>
-  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/05_cor.gif" alt="Animação do passo 7" loading="lazy"><img hidden class="foto" src="fotos/s_cor_e.jpg" alt="Tela do Roblox Studio no passo 7" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
+  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/05_cor.gif" alt="Animação do passo 7" loading="lazy"><img hidden class="foto" src="fotos/s_cor_e.jpg" alt="Tela do Roblox Studio no passo 7" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p><p class="legenda so-papel">Foto da tela.</p></figure>
     <div class="texto"><p>Setinha do <span class=ui>Cor</span> → amarelo → clique no <b>círculo do botão Cor</b>.<br><br>Amarelo é cor de aviso. Combina com uma coisa que vai te derrubar.</p>
       <div class="certo"><b>Está certo se</b>A barra ficou amarela.</div>
       <div class="socorro"><b>Não deu certo?</b><dl><dt>Não pintou</dt><dd>Falta o clique no círculo do botão Cor.</dd></dl></div>
@@ -238,7 +248,7 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
 <section class="passo" id="passo8">
   <div class="cab"><div class="bolha">8</div><h2>Chame de MARTELO</h2>
   <label class="risca"><input type="checkbox" data-passo="8"> feito</label></div>
-  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/07_renomear.gif" alt="Animação do passo 8" loading="lazy"><img hidden class="foto" src="fotos/s_nome_b.jpg" alt="Tela do Roblox Studio no passo 8" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
+  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/07_renomear.gif" alt="Animação do passo 8" loading="lazy"><img hidden class="foto" src="fotos/s_nome_b.jpg" alt="Tela do Roblox Studio no passo 8" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p><p class="legenda so-papel">Foto da tela.</p></figure>
     <div class="texto"><p>Botão direito na peça, na lista → <span class=ui>Renomear</span> → <b>Martelo</b> → Enter.</p>
       <div class="certo"><b>Está certo se</b>Na lista está <span class=ui>Martelo</span>.</div>
       <div class="socorro"><b>Não deu certo?</b><dl><dt>Voltou o nome antigo</dt><dd>Termine com <b>Enter</b>.</dd></dl></div>
@@ -246,7 +256,7 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
 <section class="passo" id="passo9">
   <div class="cab"><div class="bolha">9</div><h2>Ponha o Script dentro dele</h2>
   <label class="risca"><input type="checkbox" data-passo="9"> feito</label></div>
-  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/08_inserir_script.gif" alt="Animação do passo 9" loading="lazy"><img hidden class="foto" src="fotos/s_script_c.jpg" alt="Tela do Roblox Studio no passo 9" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
+  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/08_inserir_script.gif" alt="Animação do passo 9" loading="lazy"><img hidden class="foto" src="fotos/s_script_c.jpg" alt="Tela do Roblox Studio no passo 9" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p><p class="legenda so-papel">Foto da tela.</p></figure>
     <div class="texto"><p>Clique em <span class=ui>Martelo</span> na lista, clique no <b>+</b> e escolha <span class=ui>Script</span>.</p>
       <div class="certo"><b>Está certo se</b>O <span class=ui>Script</span> está para dentro de <span class=ui>Martelo</span> e o editor abriu.</div>
       <div class="socorro"><b>Não deu certo?</b><dl><dt>Ficou fora</dt><dd>Arraste-o por cima da palavra <span class=ui>Martelo</span> na lista.</dd></dl></div>
@@ -286,7 +296,7 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
 <section class="passo" id="passo14">
   <div class="cab"><div class="bolha">14</div><h2>Jogue</h2>
   <label class="risca"><input type="checkbox" data-passo="14"> feito</label></div>
-  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/10_jogar.gif" alt="Animação do passo 14" loading="lazy"><img hidden class="foto" src="fotos/s_jogar_b.jpg" alt="Tela do Roblox Studio no passo 14" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
+  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/10_jogar.gif" alt="Animação do passo 14" loading="lazy"><img hidden class="foto" src="fotos/s_jogar_b.jpg" alt="Tela do Roblox Studio no passo 14" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p><p class="legenda so-papel">Foto da tela.</p></figure>
     <div class="texto"><p>Volte para <span class=ui>Place1</span> e aperte o <b>▶</b>.<br><br>A barra amarela começa a girar sozinha, sem você fazer nada.</p>
       <div class="certo"><b>Está certo se</b>A barra está girando em volta do próprio meio, sem parar.</div>
       <div class="socorro"><b>Não deu certo?</b><dl><dt>Não gira</dt><dd>Confira se o Script está dentro do Martelo e se não sobrou risco vermelho.</dd><dt>O Studio travou</dt><dd>Faltou o <span class=ui>task.wait</span>. Feche à força e refaça.</dd><dt>A barra caiu</dt><dd>Faltou ancorar.</dd></dl></div>

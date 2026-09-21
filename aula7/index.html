@@ -123,6 +123,10 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
 .codigo li{border-left:1px solid color-mix(in srgb,var(--codigo-tinta) 18%,transparent);
   padding:0 16px 0 10px;white-space:pre}
 .codigo li::marker{color:color-mix(in srgb,var(--codigo-tinta) 40%,transparent);font-size:12px}
+.codigo li.auto{color:color-mix(in srgb,var(--codigo-tinta) 42%,transparent);font-style:italic}
+.codigo .rodape{background:var(--codigo);color:color-mix(in srgb,var(--codigo-tinta) 55%,transparent);
+  font-family:"Atkinson Hyperlegible",sans-serif;font-size:12.5px;padding:8px 16px 12px;
+  border-top:1px solid color-mix(in srgb,var(--codigo-tinta) 15%,transparent)}
 
 .fim{max-width:1180px;margin:0 auto;padding:0 20px 40px;text-align:center;color:var(--tinta2);font-size:15px}
 .fim strong{color:var(--tinta)}
@@ -165,7 +169,7 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
   <h1>O martelo que gira</h1>
   <p class="linha-fina">Uma barra que roda sem parar e derruba quem estiver na frente. Hoje o código aprende a repetir. São 19 passos, 50 minutos.
   Faça um de cada vez e só passe adiante depois de conferir o quadro verde.</p>
-  <div class="avisos"><div class="aviso"><b>Projeto novo</b>Começa do zero, com uma peça só.</div><div class="aviso"><b>Cuidado com o laço</b><span class=ui>while true do</span> repete <b>para sempre</b>. Sem o <span class=ui>task.wait</span> lá dentro, o Studio trava. Essa linha não é opcional.</div><div class="aviso"><b>Atalhos</b>Este material usa <span class=ui>Ctrl</span>, do Windows. Num Mac, troque Ctrl por <span class=ui>⌘</span>.</div></div>
+  <div class="avisos"><div class="aviso"><b>Antes de digitar</b>Se este computador ainda não foi preparado, faça o <b>passo 2 da Aula 2</b> primeiro: desligar o assistente de código e o fechamento automático. Sem isso o editor escreve linhas que você não pediu.</div><div class="aviso"><b>Projeto novo</b>Começa do zero, com uma peça só.</div><div class="aviso"><b>Cuidado com o laço</b><span class=ui>while true do</span> repete <b>para sempre</b>. Sem o <span class=ui>task.wait</span> lá dentro, o Studio trava. Essa linha não é opcional.</div><div class="aviso"><b>Atalhos</b>Este material usa <span class=ui>Ctrl</span>, do Windows. Num Mac, troque Ctrl por <span class=ui>⌘</span>.</div></div>
 </div>
 
 <main>
@@ -173,7 +177,7 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
   <div class="cab"><div class="bolha">1</div><h2>Abra o Studio e escolha BASEPLATE</h2>
   <label class="risca"><input type="checkbox" data-passo="1"> feito</label></div>
   <div class="corpo"><figure class="midia"><div class="moldura"><img class="foto" src="fotos/c01_tela_inicial.jpg" alt="Tela do Roblox Studio no passo 1" loading="lazy"></div><p class="legenda">Foto da tela.</p></figure>
-    <div class="texto"><p>Projeto novo. Clique no modelo <span class=ui>Baseplate</span>.</p>
+    <div class="texto"><p>Projeto novo. <b>Role a página para baixo</b> até a fileira <span class=ui>Abrir um modelo</span> e clique no primeiro, o <span class=ui>Baseplate</span>.</p>
       <div class="certo"><b>Está certo se</b>Abriu o mundo cinza.</div>
       <div class="socorro"><b>Não deu certo?</b><dl><dt>Abriu o projeto antigo</dt><dd>Feche a aba e volte para o Início.</dd></dl></div>
     </div></div></section>
@@ -245,9 +249,9 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
   <div class="cab"><div class="bolha">10</div><h2>Escreva o laço</h2>
   <label class="risca"><input type="checkbox" data-passo="10"> feito</label></div>
   <div class="corpo"><figure class="midia"><div class="moldura"><img class="foto" src="fotos/p_codigo_pronto.jpg" alt="Tela do Roblox Studio no passo 10" loading="lazy"></div><p class="legenda">Foto da tela.</p></figure>
-    <div class="texto"><p>Seis linhas. Preste atenção na indentação: as duas do meio entram para dentro com <b>Tab</b>.</p><div class="codigo"><div class="titulo">⌨ digite você mesmo — não copie</div><ol><li>local martelo = script.Parent</li><li> </li><li>while true do</li><li>	martelo.CFrame = martelo.CFrame * CFrame.Angles(0, 0.05, 0)</li><li>	task.wait(0.03)</li><li>end</li></ol></div><p>Repare que este código <b>não tem Touched</b>. Ele não espera nada acontecer — ele age sozinho, o tempo todo.</p>
+    <div class="texto"><p>Seis linhas. As duas do meio entram para dentro — o editor faz isso sozinho.</p><div class="codigo"><div class="titulo">⌨ digite você mesmo — não copie</div><ol><li>local martelo = script.Parent</li><li> </li><li>while true do</li><li>	martelo.CFrame = martelo.CFrame * CFrame.Angles(0, 0.05, 0)</li><li>	task.wait(0.03)</li><li class="auto">end</li></ol><div class="rodape">as linhas em cinza o editor escreve sozinho — não digite elas</div></div><p>Repare que este código <b>não tem Touched</b>. Ele não espera nada acontecer — ele age sozinho, o tempo todo.<br><br><b>Não digite as linhas em cinza.</b> O editor escreve os <span class=ui>end</span> sozinho quando você aperta Enter. E <b>não aperte Tab</b> — ele já empurra as linhas para dentro.</p>
       <div class="certo"><b>Está certo se</b>Nenhum risco vermelho, e o editor desenhou a linha vertical ligando o <span class=ui>while</span> ao <span class=ui>end</span>.</div>
-      <div class="socorro"><b>Não deu certo?</b><dl><dt>Risco vermelho no fim</dt><dd>Falta o <span class=ui>end</span>. Este laço termina com <b>end</b> sozinho, sem parêntese — diferente dos anteriores.</dd><dt>Escrevi CFrame errado</dt><dd>São dois maiúsculos: <b>C</b> e <b>F</b>. <span class=ui>CFrame.Angles</span> também.</dd><dt>O editor completa sozinho</dt><dd>Aperte <b>Esc</b> para dispensar a sugestão.</dd></dl></div>
+      <div class="socorro"><b>Não deu certo?</b><dl><dt>Sobraram end a mais</dt><dd>Você digitou os que o editor já tinha escrito. Apague os extras até o código ficar igual ao da aula.</dd><dt>Risco vermelho no fim</dt><dd>Falta o <span class=ui>end</span>. Este laço termina com <b>end</b> sozinho, sem parêntese — diferente dos anteriores.</dd><dt>Escrevi CFrame errado</dt><dd>São dois maiúsculos: <b>C</b> e <b>F</b>. <span class=ui>CFrame.Angles</span> também.</dd><dt>O editor completa sozinho</dt><dd>Aperte <b>Esc</b> para dispensar a sugestão.</dd></dl></div>
     </div></div></section>
 <section class="passo" id="passo11">
   <div class="cab"><div class="bolha">11</div><h2>Entenda o laço</h2>

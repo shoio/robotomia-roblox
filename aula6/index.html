@@ -123,6 +123,10 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
 .codigo li{border-left:1px solid color-mix(in srgb,var(--codigo-tinta) 18%,transparent);
   padding:0 16px 0 10px;white-space:pre}
 .codigo li::marker{color:color-mix(in srgb,var(--codigo-tinta) 40%,transparent);font-size:12px}
+.codigo li.auto{color:color-mix(in srgb,var(--codigo-tinta) 42%,transparent);font-style:italic}
+.codigo .rodape{background:var(--codigo);color:color-mix(in srgb,var(--codigo-tinta) 55%,transparent);
+  font-family:"Atkinson Hyperlegible",sans-serif;font-size:12.5px;padding:8px 16px 12px;
+  border-top:1px solid color-mix(in srgb,var(--codigo-tinta) 15%,transparent)}
 
 .fim{max-width:1180px;margin:0 auto;padding:0 20px 40px;text-align:center;color:var(--tinta2);font-size:15px}
 .fim strong{color:var(--tinta)}
@@ -165,7 +169,7 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
   <h1>Botão e porta</h1>
   <p class="linha-fina">Você pisa num lugar e outra coisa, longe dali, acontece. É o primeiro script que mexe numa peça que não é a dele. São 19 passos, 50 minutos.
   Faça um de cada vez e só passe adiante depois de conferir o quadro verde.</p>
-  <div class="avisos"><div class="aviso"><b>Projeto novo</b>Começa do zero. Você vai fazer duas peças: uma porta e um botão.</div><div class="aviso"><b>O nome importa</b>A porta precisa se chamar exatamente <span class=ui>Porta</span>. O script procura por esse nome — errou a letra, não acha.</div><div class="aviso"><b>Atalhos</b>Este material usa <span class=ui>Ctrl</span>, do Windows. Num Mac, troque Ctrl por <span class=ui>⌘</span>.</div></div>
+  <div class="avisos"><div class="aviso"><b>Antes de digitar</b>Se este computador ainda não foi preparado, faça o <b>passo 2 da Aula 2</b> primeiro: desligar o assistente de código e o fechamento automático. Sem isso o editor escreve linhas que você não pediu.</div><div class="aviso"><b>Projeto novo</b>Começa do zero. Você vai fazer duas peças: uma porta e um botão.</div><div class="aviso"><b>O nome importa</b>A porta precisa se chamar exatamente <span class=ui>Porta</span>. O script procura por esse nome — errou a letra, não acha.</div><div class="aviso"><b>Atalhos</b>Este material usa <span class=ui>Ctrl</span>, do Windows. Num Mac, troque Ctrl por <span class=ui>⌘</span>.</div></div>
 </div>
 
 <main>
@@ -173,7 +177,7 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
   <div class="cab"><div class="bolha">1</div><h2>Abra o Studio e escolha BASEPLATE</h2>
   <label class="risca"><input type="checkbox" data-passo="1"> feito</label></div>
   <div class="corpo"><figure class="midia"><div class="moldura"><img class="foto" src="fotos/c01_tela_inicial.jpg" alt="Tela do Roblox Studio no passo 1" loading="lazy"></div><p class="legenda">Foto da tela.</p></figure>
-    <div class="texto"><p>Projeto novo. Clique no modelo <span class=ui>Baseplate</span>.</p>
+    <div class="texto"><p>Projeto novo. <b>Role a página para baixo</b> até a fileira <span class=ui>Abrir um modelo</span> e clique no primeiro, o <span class=ui>Baseplate</span>.</p>
       <div class="certo"><b>Está certo se</b>Abriu o mundo cinza.</div>
       <div class="socorro"><b>Não deu certo?</b><dl><dt>Abriu o projeto antigo</dt><dd>Feche a aba e volte para o Início.</dd></dl></div>
     </div></div></section>
@@ -269,9 +273,9 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
   <div class="cab"><div class="bolha">13</div><h2>Escreva o código</h2>
   <label class="risca"><input type="checkbox" data-passo="13"> feito</label></div>
   <div class="corpo"><figure class="midia"><div class="moldura"><img class="foto" src="fotos/p_codigo_pronto.jpg" alt="Tela do Roblox Studio no passo 13" loading="lazy"></div><p class="legenda">Foto da tela.</p></figure>
-    <div class="texto"><p>Apague a linha pronta e escreva:</p><div class="codigo"><div class="titulo">⌨ digite você mesmo — não copie</div><ol><li>local botao = script.Parent</li><li>local porta = workspace.Porta</li><li> </li><li>botao.Touched:Connect(function(parte)</li><li>	local humano = parte.Parent:FindFirstChild(&quot;Humanoid&quot;)</li><li>	if humano then</li><li>		porta.Transparency = 1</li><li>		porta.CanCollide = false</li><li>		task.wait(3)</li><li>		porta.Transparency = 0</li><li>		porta.CanCollide = true</li><li>	end</li><li>end)</li></ol></div><p>A novidade está na <b>linha 2</b>. Todo o resto você já viu na aula da lava.</p>
+    <div class="texto"><p>Apague a linha pronta e escreva:</p><div class="codigo"><div class="titulo">⌨ digite você mesmo — não copie</div><ol><li>local botao = script.Parent</li><li>local porta = workspace.Porta</li><li> </li><li>botao.Touched:Connect(function(parte)</li><li>	local humano = parte.Parent:FindFirstChild(&quot;Humanoid&quot;)</li><li>	if humano then</li><li>		porta.Transparency = 1</li><li>		porta.CanCollide = false</li><li>		task.wait(3)</li><li>		porta.Transparency = 0</li><li>		porta.CanCollide = true</li><li class="auto">	end</li><li class="auto">end)</li></ol><div class="rodape">as linhas em cinza o editor escreve sozinho — não digite elas</div></div><p>A novidade está na <b>linha 2</b>. Todo o resto você já viu na aula da lava.<br><br><b>Não digite as linhas em cinza.</b> O editor escreve os <span class=ui>end</span> sozinho quando você aperta Enter. E <b>não aperte Tab</b> — ele já empurra as linhas para dentro.</p>
       <div class="certo"><b>Está certo se</b>Nenhum risco vermelho.</div>
-      <div class="socorro"><b>Não deu certo?</b><dl><dt>Risco vermelho na linha 2</dt><dd>Confira: <span class=ui>workspace</span> é minúsculo, e <span class=ui>Porta</span> tem P maiúsculo — igualzinho ao nome que você deu.</dd><dt>Risco vermelho no fim</dt><dd>Faltou um <span class=ui>end</span> ou o <span class=ui>)</span>.</dd><dt>Diz que Porta não existe</dt><dd>O nome da peça está diferente do nome no código. Um dos dois está errado.</dd></dl></div>
+      <div class="socorro"><b>Não deu certo?</b><dl><dt>Sobraram end a mais</dt><dd>Você digitou os que o editor já tinha escrito. Apague os extras até o código ficar igual ao da aula.</dd><dt>Risco vermelho na linha 2</dt><dd>Confira: <span class=ui>workspace</span> é minúsculo, e <span class=ui>Porta</span> tem P maiúsculo — igualzinho ao nome que você deu.</dd><dt>Risco vermelho no fim</dt><dd>Faltou um <span class=ui>end</span> ou o <span class=ui>)</span>.</dd><dt>Diz que Porta não existe</dt><dd>O nome da peça está diferente do nome no código. Um dos dois está errado.</dd></dl></div>
     </div></div></section>
 <section class="passo" id="passo14">
   <div class="cab"><div class="bolha">14</div><h2>Entenda a linha nova</h2>

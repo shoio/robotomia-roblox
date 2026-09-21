@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>A lava que mata — Robotomia</title>
+<meta name="description" content="Hoje você escreve o seu primeiro código: uma peça que tira a vida de quem encosta.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>&#129302;</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+:root{
+  --papel:#FBFAF7; --carta:#FFFFFF; --tinta:#14161C; --tinta2:#4E525C;
+  --linha:#E3E0D8; --azul:#1B62DC; --azul-fraco:#EAF0FC;
+  --verde:#147A38; --verde-fraco:#E7F4EC;
+  --laranja:#C2560A; --laranja-fraco:#FDF0E4;
+  --roxo:#5B2E9E; --roxo-fraco:#F2ECFB;
+  --codigo:#12151C; --codigo-tinta:#E8EBF0;
+  --sombra:0 1px 2px rgba(20,22,28,.05), 0 8px 24px rgba(20,22,28,.06);
+  --raio:14px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-tema="claro"]){
+    --papel:#12141A; --carta:#1A1D25; --tinta:#ECEEF2; --tinta2:#A4AAB6;
+    --linha:#2C313C; --azul:#6C9BF0; --azul-fraco:#1B2436;
+    --verde:#5CC183; --verde-fraco:#15271C;
+    --laranja:#F0964E; --laranja-fraco:#2A1E14;
+    --roxo:#B995F0; --roxo-fraco:#221A33;
+    --codigo:#0D1016; --codigo-tinta:#E8EBF0;
+    --sombra:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:68px}
+body{margin:0;background:var(--papel);color:var(--tinta);
+  font-family:"Atkinson Hyperlegible","Helvetica Neue",Arial,sans-serif;
+  font-size:17px;line-height:1.6;-webkit-text-size-adjust:100%}
+h1,h2,h3{font-family:Archivo,"Helvetica Neue",Arial,sans-serif;
+  font-weight:800;letter-spacing:-.015em;text-wrap:balance}
+img{max-width:100%;display:block}
+[hidden]{display:none!important}
+a{color:var(--azul)}
+
+.barra{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--papel) 88%,transparent);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--linha)}
+.barra-in{max-width:1180px;margin:0 auto;padding:11px 20px;display:flex;align-items:center;gap:14px}
+.marca{font-family:Archivo,sans-serif;font-weight:800;font-size:15px;white-space:nowrap}
+.marca a{color:inherit;text-decoration:none}
+.marca span{color:var(--azul)}
+.conta{margin-left:auto;font-size:13px;color:var(--tinta2);font-variant-numeric:tabular-nums;white-space:nowrap}
+.trilho{position:absolute;left:0;bottom:-1px;height:3px;width:100%;background:transparent}
+.trilho i{display:block;height:100%;width:0;background:var(--azul);transition:width .25s ease}
+
+.capa{max-width:1180px;margin:0 auto;padding:46px 20px 10px}
+.etiqueta{display:inline-block;background:var(--azul);color:#fff;font-family:Archivo,sans-serif;
+  font-weight:700;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;
+  padding:5px 13px;border-radius:99px}
+.capa h1{font-size:clamp(34px,6.2vw,58px);margin:16px 0 10px;line-height:1.02}
+.capa .linha-fina{font-size:19px;color:var(--tinta2);max-width:62ch;margin:0}
+.avisos{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));margin:26px 0 8px}
+.aviso{background:var(--carta);border:1px solid var(--linha);border-radius:var(--raio);
+  padding:14px 16px;font-size:15px;box-shadow:var(--sombra)}
+.aviso b{font-family:Archivo,sans-serif;display:block;font-size:12px;letter-spacing:.09em;
+  text-transform:uppercase;margin-bottom:5px;color:var(--azul)}
+.baixar{display:inline-flex;align-items:center;gap:8px;margin-top:6px;font-size:14.5px;
+  text-decoration:none;border:1px solid var(--linha);background:var(--carta);
+  padding:9px 15px;border-radius:99px;color:var(--tinta);font-weight:700}
+.baixar:hover{border-color:var(--azul);color:var(--azul)}
+
+main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
+.passo{background:var(--carta);border:1px solid var(--linha);border-radius:var(--raio);
+  padding:20px;margin:22px 0;box-shadow:var(--sombra);scroll-margin-top:70px}
+.passo.feito{border-color:var(--verde)}
+.cab{display:flex;align-items:flex-start;gap:13px;padding-bottom:13px;border-bottom:2px solid var(--linha)}
+.passo.feito .cab{border-bottom-color:var(--verde)}
+.bolha{flex:none;width:40px;height:40px;border-radius:11px;background:var(--azul);color:#fff;
+  font-family:Archivo,sans-serif;font-weight:800;font-size:19px;
+  display:flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums}
+.passo.feito .bolha{background:var(--verde)}
+.cab h2{font-size:clamp(20px,2.7vw,26px);margin:3px 0 0;flex:1}
+.risca{display:flex;align-items:center;gap:7px;font-size:13.5px;color:var(--tinta2);
+  cursor:pointer;user-select:none;flex:none;padding-top:8px;white-space:nowrap}
+.risca input{width:19px;height:19px;accent-color:var(--verde);cursor:pointer}
+
+.corpo{display:grid;gap:20px;grid-template-columns:1fr;margin-top:16px}
+@media (min-width:920px){ .corpo{grid-template-columns:1.35fr 1fr;align-items:start} }
+.midia{margin:0}
+.moldura{border:1px solid var(--linha);border-radius:10px;overflow:hidden;background:var(--papel)}
+.abas{display:flex;gap:6px;margin-bottom:9px}
+.aba{font-family:Archivo,sans-serif;font-size:12.5px;font-weight:700;letter-spacing:.04em;
+  border:1px solid var(--linha);background:var(--carta);color:var(--tinta2);
+  padding:6px 13px;border-radius:99px;cursor:pointer}
+.aba[aria-pressed="true"]{background:var(--roxo-fraco);border-color:var(--roxo);color:var(--roxo)}
+.legenda{font-size:13px;color:var(--tinta2);margin:8px 2px 0}
+
+.texto>p{margin:0 0 14px}
+.ui{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:.86em;
+  background:var(--azul-fraco);border:1px solid color-mix(in srgb,var(--azul) 25%,transparent);
+  border-radius:5px;padding:1px 6px;white-space:nowrap;color:var(--tinta)}
+.certo,.socorro{border-radius:0 10px 10px 0;padding:12px 15px;margin-top:14px;font-size:15.5px}
+.certo{background:var(--verde-fraco);border-left:5px solid var(--verde)}
+.socorro{background:var(--laranja-fraco);border-left:5px solid var(--laranja)}
+.certo>b:first-child,.socorro>b:first-child{font-family:Archivo,sans-serif;display:block;
+  font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+.certo>b:first-child{color:var(--verde)}
+.socorro>b:first-child{color:var(--laranja)}
+.socorro dl{margin:0}
+.socorro dt{font-weight:700;margin-top:10px}
+.socorro dt:first-of-type{margin-top:2px}
+.socorro dd{margin:2px 0 0;color:var(--tinta2)}
+
+.codigo{margin:14px 0;border-radius:10px;overflow:hidden;border:1px solid var(--linha)}
+.codigo .titulo{display:flex;align-items:center;gap:8px;background:var(--roxo-fraco);
+  color:var(--roxo);font-family:Archivo,sans-serif;font-weight:700;font-size:11.5px;
+  letter-spacing:.1em;text-transform:uppercase;padding:7px 13px;border-bottom:1px solid var(--linha)}
+.codigo pre{margin:0;background:var(--codigo);color:var(--codigo-tinta);padding:14px 16px;
+  overflow-x:auto;font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:14.5px;line-height:1.7}
+.codigo ol{margin:0;padding:0 0 0 46px;background:var(--codigo);color:var(--codigo-tinta);
+  font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:14.5px;line-height:1.75;
+  overflow-x:auto}
+.codigo li{border-left:1px solid color-mix(in srgb,var(--codigo-tinta) 18%,transparent);
+  padding:0 16px 0 10px;white-space:pre}
+.codigo li::marker{color:color-mix(in srgb,var(--codigo-tinta) 40%,transparent);font-size:12px}
+
+.fim{max-width:1180px;margin:0 auto;padding:0 20px 40px;text-align:center;color:var(--tinta2);font-size:15px}
+.fim strong{color:var(--tinta)}
+.navega{max-width:1180px;margin:0 auto;padding:0 20px 80px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.navega a{text-decoration:none;border:1px solid var(--linha);background:var(--carta);
+  padding:11px 18px;border-radius:99px;color:var(--tinta);font-weight:700;font-size:15px}
+.navega a:hover{border-color:var(--azul);color:var(--azul)}
+
+/* indice */
+.grade{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  max-width:1180px;margin:0 auto;padding:10px 20px 80px}
+.cartao{display:block;text-decoration:none;color:inherit;background:var(--carta);
+  border:1px solid var(--linha);border-radius:var(--raio);padding:18px 20px;box-shadow:var(--sombra)}
+.cartao:hover{border-color:var(--azul)}
+.cartao .num{font-family:Archivo,sans-serif;font-weight:800;font-size:12px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--azul)}
+.cartao h3{margin:6px 0 6px;font-size:21px}
+.cartao p{margin:0;color:var(--tinta2);font-size:15px}
+.cartao.embreve{opacity:.55}
+.cartao.embreve .num{color:var(--tinta2)}
+
+@media print{
+  .barra,.abas,.risca,.baixar,.navega{display:none}
+  .passo{page-break-inside:avoid;box-shadow:none;border-color:#ccc}
+  body{background:#fff}
+  .gif{display:none!important}
+  .foto{display:block!important}
+}
+</style>
+</head>
+<body data-aula="aula2">
+
+<header class="barra"><div class="barra-in">
+  <div class="marca"><a href="../">Robotomia</a> <span>· Roblox · Aula 2</span></div>
+  <div class="conta" id="conta">0 de 19 passos prontos</div>
+</div><div class="trilho"><i id="trilho"></i></div></header>
+
+<div class="capa">
+  <span class="etiqueta">Aula 2 · primeiro código</span>
+  <h1>A lava que mata</h1>
+  <p class="linha-fina">Hoje você escreve o seu primeiro código: uma peça que tira a vida de quem encosta. São 19 passos, 50 minutos.
+  Faça um de cada vez e só passe adiante depois de conferir o quadro verde.</p>
+  <div class="avisos"><div class="aviso"><b>Projeto novo</b>Esta aula começa do zero, num projeto novo. Você não precisa do obby da aula passada.</div><div class="aviso"><b>Atalhos</b>Este material usa <span class=ui>Ctrl</span>, do Windows. Num Mac, troque Ctrl por <span class=ui>⌘</span>.</div><div class="aviso"><b>Travou?</b>Todo passo tem um quadro laranja embaixo com o conserto dos erros mais comuns. Procure lá antes de chamar o professor.</div></div>
+</div>
+
+<main>
+<section class="passo" id="passo1">
+  <div class="cab"><div class="bolha">1</div><h2>Abra o Roblox Studio e escolha BASEPLATE</h2>
+  <label class="risca"><input type="checkbox" data-passo="1"> feito</label></div>
+  <div class="corpo"><figure class="midia"><div class="moldura"><img class="foto" src="fotos/c01_tela_inicial.png" alt="Tela do Roblox Studio no passo 1" loading="lazy"></div><p class="legenda">Foto da tela.</p></figure>
+    <div class="texto"><p>Abra o Roblox Studio. Na tela que aparece, procure a fileira <b>Abrir um modelo</b> e clique no primeiro quadradinho, o <span class=ui>Baseplate</span>.<br><br>É o mundo mais vazio que existe: só um chão quadriculado. É isso que queremos.</p>
+      <div class="certo"><b>Está certo se</b>Abriu uma tela cinza grande com chão quadriculado e uma plataforma clara no meio. Pode demorar alguns segundos.</div>
+      <div class="socorro"><b>Não deu certo?</b><dl><dt>Não aparece a tela de modelos</dt><dd>Clique em <b>Início</b> na barra da esquerda.</dd><dt>Abriu o projeto da aula passada</dt><dd>Feche a aba dele no <b>x</b> e volte para o Início. Hoje é projeto novo.</dd></dl></div>
+    </div></div></section>
+<section class="passo" id="passo2">
+  <div class="cab"><div class="bolha">2</div><h2>Abra a lista do mundo</h2>
+  <label class="risca"><input type="checkbox" data-passo="2"> feito</label></div>
+  <div class="corpo"><figure class="midia"><div class="moldura"><img class="foto" src="fotos/p02_workspace_aberto.png" alt="Tela do Roblox Studio no passo 2" loading="lazy"></div><p class="legenda">Foto da tela.</p></figure>
+    <div class="texto"><p>Na direita fica o <span class=ui>Explorador</span> — a lista de tudo que existe no seu mundo.<br><br>Clique na <b>setinha</b> à esquerda da palavra <span class=ui>Workspace</span> para abrir a lista.</p>
+      <div class="certo"><b>Está certo se</b>Abaixo de Workspace apareceram <span class=ui>Camera</span>, <span class=ui>Terrain</span>, <span class=ui>SpawnLocation</span> e <span class=ui>Baseplate</span>.</div>
+      <div class="socorro"><b>Não deu certo?</b><dl><dt>Não tenho o Explorador</dt><dd>Clique na aba <span class=ui>Início</span> lá em cima e depois no botão <span class=ui>Explorador</span>.</dd><dt>Cliquei e fechou de novo</dt><dd>Você clicou duas vezes. Clique uma só.</dd></dl></div>
+    </div></div></section>
+<section class="passo" id="passo3">
+  <div class="cab"><div class="bolha">3</div><h2>Vá para a aba MODELO</h2>
+  <label class="risca"><input type="checkbox" data-passo="3"> feito</label></div>
+  <div class="corpo"><figure class="midia"><div class="moldura"><img class="foto" src="fotos/s03_b.png" alt="Tela do Roblox Studio no passo 3" loading="lazy"></div><p class="legenda">Foto da tela.</p></figure>
+    <div class="texto"><p>Na linha de cima existem abas. Clique em <span class=ui>Modelo</span>.<br><br><b>Isto é obrigatório.</b> Cada aba mostra botões diferentes. Se você ficar na aba errada, os botões desta aula simplesmente não existem na sua tela.</p>
+      <div class="certo"><b>Está certo se</b>A faixa mudou e agora aparecem as palavras <span class=ui>Parte</span>, <span class=ui>Material</span>, <span class=ui>Cor</span> e <span class=ui>Âncora</span>.</div>
+      <div class="socorro"><b>Não deu certo?</b><dl><dt>Não acho a aba Modelo</dt><dd>Ela fica entre <span class=ui>Script</span> e <span class=ui>Plugins</span>.</dd><dt>Cliquei e nada mudou</dt><dd>Você já estava nela. Pode seguir.</dd></dl></div>
+    </div></div></section>
+<section class="passo" id="passo4">
+  <div class="cab"><div class="bolha">4</div><h2>Crie a peça que vai virar lava</h2>
+  <label class="risca"><input type="checkbox" data-passo="4"> feito</label></div>
+  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/01_criar_peca.gif" alt="Animação do passo 4" loading="lazy"><img hidden class="foto" src="fotos/s04_b.png" alt="Tela do Roblox Studio no passo 4" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
+    <div class="texto"><p>Clique em <span class=ui>Parte</span> — <b>no desenho, não na palavra embaixo dele</b>.<br><br>Clicar na palavra não faz absolutamente nada. É o erro mais comum.</p>
+      <div class="certo"><b>Está certo se</b>Nasceu um bloco cinza no meio do mundo <b>e</b> a palavra <span class=ui>Part</span> apareceu na lista da direita.</div>
+      <div class="socorro"><b>Não deu certo?</b><dl><dt>Cliquei e não aconteceu nada</dt><dd>Você clicou na palavra. Clique no <b>desenho</b> acima dela.</dd><dt>Apareceu Part na lista mas eu não vejo a peça</dt><dd>É o próximo passo. Calma.</dd><dt>Criei duas sem querer</dt><dd>Aperte <b>Ctrl + Z</b>. Desfaz a última coisa.</dd></dl></div>
+    </div></div></section>
+<section class="passo" id="passo5">
+  <div class="cab"><div class="bolha">5</div><h2>Leve a câmera até a peça</h2>
+  <label class="risca"><input type="checkbox" data-passo="5"> feito</label></div>
+  <div class="corpo"><figure class="midia"><div class="moldura"><img class="foto" src="fotos/p05_camera.png" alt="Tela do Roblox Studio no passo 5" loading="lazy"></div><p class="legenda">Foto da tela.</p></figure>
+    <div class="texto"><p>Clique na palavra <span class=ui>Part</span> na lista da direita e aperte a tecla <b>F</b>.<br><br>A câmera voa até a peça. Depois use a tecla <b>S</b> algumas vezes para afastar um pouco — a peça fica grande demais logo depois do F.</p>
+      <div class="certo"><b>Está certo se</b>A peça está no meio da tela, num tamanho que dá para ver o chão em volta.</div>
+      <div class="socorro"><b>Não deu certo?</b><dl><dt>Apertei F e nada</dt><dd>O mouse precisa estar em cima do mundo 3D quando você aperta F, não em cima da lista.</dd><dt>A peça virou um nome escrito na lista</dt><dd>Você apertou F com a lista selecionada e começou a renomear. Aperte <b>Esc</b> e tente de novo.</dd></dl></div>
+    </div></div></section>
+<section class="passo" id="passo6">
+  <div class="cab"><div class="bolha">6</div><h2>Ancore a peça</h2>
+  <label class="risca"><input type="checkbox" data-passo="6"> feito</label></div>
+  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/02_ancorar.gif" alt="Animação do passo 6" loading="lazy"><img hidden class="foto" src="fotos/s06_b.png" alt="Tela do Roblox Studio no passo 6" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
+    <div class="texto"><p>Com a peça ainda selecionada, clique em <span class=ui>Âncora</span>.<br><br><b>Âncora prende a peça no ar.</b> Peça sem âncora despenca no segundo em que o jogo começa.<br><br>A regra do dia: <b>criou, ancorou.</b></p>
+      <div class="certo"><b>Está certo se</b>O botão <span class=ui>Âncora</span> ficou aceso, com um fundo mais claro que os outros.</div>
+      <div class="socorro"><b>Não deu certo?</b><dl><dt>Como sei se ancorou?</dt><dd>Na lista de <span class=ui>Propriedades</span>, embaixo à direita, digite <b>anchor</b> na caixa de busca. A caixinha <span class=ui>Anchored</span> fica marcada.</dd><dt>A peça não está selecionada</dt><dd>Clique no nome <span class=ui>Part</span> na lista da direita. Selecionada = com borda azul em volta.</dd></dl></div>
+    </div></div></section>
+<section class="passo" id="passo7">
+  <div class="cab"><div class="bolha">7</div><h2>Pinte de vermelho</h2>
+  <label class="risca"><input type="checkbox" data-passo="7"> feito</label></div>
+  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/03_cor.gif" alt="Animação do passo 7" loading="lazy"><img hidden class="foto" src="fotos/s07_e.png" alt="Tela do Roblox Studio no passo 7" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
+    <div class="texto"><p>São <b>dois cliques</b>, nesta ordem:<br><br><b>1.</b> Clique na <b>setinha</b> ao lado do círculo colorido do botão <span class=ui>Cor</span>. Abre um painel de hexágonos.<br><b>2.</b> Clique num hexágono vermelho. O painel fecha.<br><b>3.</b> Clique <b>no círculo do botão Cor</b>. É esse clique que pinta.</p>
+      <div class="certo"><b>Está certo se</b>A peça ficou vermelha.</div>
+      <div class="socorro"><b>Não deu certo?</b><dl><dt>Escolhi a cor e a peça não mudou</dt><dd>Falta o clique no círculo do botão Cor. Escolher no painel só separa a cor; quem pinta é o botão.</dd><dt>Cliquei no círculo e mesmo assim não pinta</dt><dd>No rodapé do painel de cores existe um interruptor <i>“Clique no objeto para aplicar a cor”</i>. Ele precisa ficar <b>desligado</b> (cinza).</dd><dt>Pintou a peça errada</dt><dd><b>Ctrl + Z</b>, clique na peça certa e repita.</dd></dl></div>
+    </div></div></section>
+<section class="passo" id="passo8">
+  <div class="cab"><div class="bolha">8</div><h2>Deixe a lava brilhando</h2>
+  <label class="risca"><input type="checkbox" data-passo="8"> feito</label></div>
+  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/04_material_neon.gif" alt="Animação do passo 8" loading="lazy"><img hidden class="foto" src="fotos/s08_e.png" alt="Tela do Roblox Studio no passo 8" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
+    <div class="texto"><p>Clique na <b>setinha</b> ao lado do botão <span class=ui>Material</span>.<br><br>No alto do painel tem a caixa <span class=ui>Pesquisar materiais</span>. Clique dentro dela — fica com <b>borda azul</b> — e escreva <b>neon</b>. Sobra uma bolinha só. Clique nela.</p>
+      <div class="certo"><b>Está certo se</b>A peça passou a brilhar, como se tivesse luz por dentro.</div>
+      <div class="socorro"><b>Não deu certo?</b><dl><dt>Escrevi e não filtrou nada</dt><dd>A caixa já tinha texto guardado. Clique no <b>⊗</b> do lado direito para limpar e escreva de novo.</dd><dt>Escrevi e a tela se mexeu sozinha</dt><dd>A caixa não estava com o foco, então as letras foram para o mundo 3D (a letra <b>e</b> sobe a câmera). Clique <b>dentro</b> da caixa, veja a borda azul, e só então escreva.</dd></dl></div>
+    </div></div></section>
+<section class="passo" id="passo9">
+  <div class="cab"><div class="bolha">9</div><h2>Dê o nome de LAVA para a peça</h2>
+  <label class="risca"><input type="checkbox" data-passo="9"> feito</label></div>
+  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/05_renomear.gif" alt="Animação do passo 9" loading="lazy"><img hidden class="foto" src="fotos/s09_b.png" alt="Tela do Roblox Studio no passo 9" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
+    <div class="texto"><p>Na lista da direita, clique com o <b>botão direito</b> em cima de <span class=ui>Part</span> e escolha <span class=ui>Renomear</span>.<br><br>Escreva <b>Lava</b> e aperte <b>Enter</b>.<br><br>O nome não muda nada no jogo — muda tudo para você, que daqui a pouco vai ter várias peças.</p>
+      <div class="certo"><b>Está certo se</b>Na lista está escrito <span class=ui>Lava</span> no lugar de <span class=ui>Part</span>.</div>
+      <div class="socorro"><b>Não deu certo?</b><dl><dt>O nome voltou para Part</dt><dd>Você apertou Esc em vez de Enter. Repita e termine com <b>Enter</b>.</dd><dt>Escrevi errado</dt><dd>Botão direito no nome, <span class=ui>Renomear</span> de novo.</dd></dl></div>
+    </div></div></section>
+<section class="passo" id="passo10">
+  <div class="cab"><div class="bolha">10</div><h2>Coloque um SCRIPT dentro da lava</h2>
+  <label class="risca"><input type="checkbox" data-passo="10"> feito</label></div>
+  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/06_inserir_script.gif" alt="Animação do passo 10" loading="lazy"><img hidden class="foto" src="fotos/s10_c.png" alt="Tela do Roblox Studio no passo 10" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
+    <div class="texto"><p>Clique uma vez em <span class=ui>Lava</span> na lista. Aparece um <b>+</b> logo depois do nome. Clique nesse <b>+</b>.<br><br>Abre uma listinha. Clique em <span class=ui>Script</span>.<br><br>Um <b>script</b> é um papel com instruções. O Roblox lê esse papel e faz o que está escrito.</p>
+      <div class="certo"><b>Está certo se</b>Abriu uma tela escura cheia de texto, e na lista apareceu <span class=ui>Script</span> <b>logo abaixo e um pouco para dentro</b> de <span class=ui>Lava</span>.</div>
+      <div class="socorro"><b>Não deu certo?</b><dl><dt>O Script apareceu fora da Lava</dt><dd>Ele precisa estar <b>dentro</b> dela. Arraste o <span class=ui>Script</span> por cima da palavra <span class=ui>Lava</span> na lista, ou apague e refaça com a Lava selecionada.</dd><dt>Não aparece o +</dt><dd>Clique uma vez na linha da Lava primeiro. O + só aparece na linha selecionada.</dd><dt>Entrou outra coisa (Decal, Folder…)</dt><dd>Você clicou no item errado da listinha. Apague com <b>Delete</b> e faça de novo.</dd></dl></div>
+    </div></div></section>
+<section class="passo" id="passo11">
+  <div class="cab"><div class="bolha">11</div><h2>Olhe o que veio escrito</h2>
+  <label class="risca"><input type="checkbox" data-passo="11"> feito</label></div>
+  <div class="corpo"><figure class="midia"><div class="moldura"><img class="foto" src="fotos/p11_editor_nasce.png" alt="Tela do Roblox Studio no passo 11" loading="lazy"></div><p class="legenda">Foto da tela.</p></figure>
+    <div class="texto"><p>Todo script novo já vem com uma linha pronta:<br><br><span class=ui>print("Hello world!")</span><br><br>Isso só escreve um texto para o programador ver. Não serve para nós.<br><br><b>Apague essa linha inteira.</b> Clique no fim dela e segure <b>Backspace</b> até a linha 1 ficar vazia.</p>
+      <div class="certo"><b>Está certo se</b>A linha 1 está vazia. Não sobrou nenhuma letra.</div>
+      <div class="socorro"><b>Não deu certo?</b><dl><dt>Apaguei demais e sumiu tudo</dt><dd>Tudo bem — era para ficar vazio mesmo.</dd><dt>Não acho a tela do script</dt><dd>Lá em cima, do lado da aba <span class=ui>Place1</span>, tem outra aba escrita <span class=ui>Script</span>. Clique nela.</dd></dl></div>
+    </div></div></section>
+<section class="passo" id="passo12">
+  <div class="cab"><div class="bolha">12</div><h2>Escreva a primeira linha</h2>
+  <label class="risca"><input type="checkbox" data-passo="12"> feito</label></div>
+  <div class="corpo"><figure class="midia"><div class="moldura"><img class="foto" src="fotos/p12_linha1.png" alt="Tela do Roblox Studio no passo 12" loading="lazy"></div><p class="legenda">Foto da tela.</p></figure>
+    <div class="texto"><p>Escreva exatamente isto na linha 1:</p><div class="codigo"><div class="titulo">⌨ digite você mesmo — não copie</div><ol><li>local lava = script.Parent</li></ol></div><p><b>O que essa linha faz:</b> ela dá o apelido <b>lava</b> para a peça onde o script mora. <span class=ui>script.Parent</span> quer dizer “a peça que está segurando este papel”.<br><br>Daqui para a frente, escrever <b>lava</b> é a mesma coisa que escrever “a peça vermelha”.</p>
+      <div class="certo"><b>Está certo se</b>A palavra <span class=ui>local</span> ficou de outra cor e não apareceu nenhum risco vermelho embaixo.</div>
+      <div class="socorro"><b>Não deu certo?</b><dl><dt>Apareceu um risco vermelho</dt><dd>Alguma letra está errada. Confira: <b>l</b> minúsculo em local, ponto entre script e Parent, <b>P</b> maiúsculo em Parent.</dd><dt>O editor completou sozinho</dt><dd>O Studio sugere palavras enquanto você digita. Aperte <b>Esc</b> para dispensar a sugestão e continue.</dd></dl></div>
+    </div></div></section>
+<section class="passo" id="passo13">
+  <div class="cab"><div class="bolha">13</div><h2>Escreva o resto do código</h2>
+  <label class="risca"><input type="checkbox" data-passo="13"> feito</label></div>
+  <div class="corpo"><figure class="midia"><div class="moldura"><img class="foto" src="fotos/p13_codigo_pronto.png" alt="Tela do Roblox Studio no passo 13" loading="lazy"></div><p class="legenda">Foto da tela.</p></figure>
+    <div class="texto"><p>Pule uma linha e escreva o resto. O código inteiro fica assim:</p><div class="codigo"><div class="titulo">⌨ digite você mesmo — não copie</div><ol><li>local lava = script.Parent</li><li> </li><li>lava.Touched:Connect(function(parte)</li><li>	local humano = parte.Parent:FindFirstChild(&quot;Humanoid&quot;)</li><li>	if humano then</li><li>		humano.Health = 0</li><li>	end</li><li>end)</li></ol></div><p>Para as linhas que começam mais para dentro, aperte <b>Tab</b> no começo da linha. Isso não é enfeite: é assim que se lê um programa.</p>
+      <div class="certo"><b>Está certo se</b>Nenhum risco vermelho, e o editor desenhou linhas verticais ligando o <span class=ui>function</span> ao <span class=ui>end</span>.</div>
+      <div class="socorro"><b>Não deu certo?</b><dl><dt>Aparece um risco vermelho no fim</dt><dd>Quase sempre falta um <span class=ui>end</span> ou o parêntese final <span class=ui>)</span>. Conte: são dois <b>end</b> e o último termina com <b>)</b>.</dd><dt>Escrevi Humanoid errado</dt><dd>Tem que ser exatamente <span class=ui>"Humanoid"</span>, com H maiúsculo e entre aspas.</dd><dt>O Studio fechou as aspas sozinho</dt><dd>Ele faz isso. Se ficarem aspas sobrando, apague as extras.</dd></dl></div>
+    </div></div></section>
+<section class="passo" id="passo14">
+  <div class="cab"><div class="bolha">14</div><h2>Entenda o que você escreveu</h2>
+  <label class="risca"><input type="checkbox" data-passo="14"> feito</label></div>
+  <div class="corpo"><figure class="midia"><div class="moldura"><img class="foto" src="fotos/p13_codigo_pronto.png" alt="Tela do Roblox Studio no passo 14" loading="lazy"></div><p class="legenda">Foto da tela.</p></figure>
+    <div class="texto"><p>Leia em voz alta, linha por linha:<br><br><b>lava.Touched:Connect(...)</b> — “quando alguém <b>encostar</b> na lava, faça isto”.<br><br><b>function(parte)</b> — “isto” começa aqui. <span class=ui>parte</span> é o pedaço que encostou (um pé, uma mão).<br><br><b>parte.Parent:FindFirstChild("Humanoid")</b> — “procure, no dono desse pedaço, uma coisa chamada Humanoid”. Humanoid é o que faz um boneco ser um boneco vivo.<br><br><b>if humano then</b> — “se achou mesmo um boneco…”<br><br><b>humano.Health = 0</b> — “…a vida dele vira zero”.<br><br>Essa procura existe por um motivo: se uma pedra cair na lava, não tem Humanoid nenhum, e o código não quebra.</p>
+      <div class="certo"><b>Está certo se</b>Você consegue explicar para o colega do lado o que a linha <span class=ui>humano.Health = 0</span> faz.</div>
+      <div class="socorro"><b>Não deu certo?</b><dl><dt>Não entendi o Parent</dt><dd><span class=ui>Parent</span> é “quem está segurando”. O pé está dentro do boneco: o Parent do pé é o boneco.</dd><dt>Por que não é só parte.Health = 0?</dt><dd>Porque quem tem vida é o boneco inteiro, não o pé.</dd></dl></div>
+    </div></div></section>
+<section class="passo" id="passo15">
+  <div class="cab"><div class="bolha">15</div><h2>Volte para o mundo</h2>
+  <label class="risca"><input type="checkbox" data-passo="15"> feito</label></div>
+  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/07_voltar_ao_mundo.gif" alt="Animação do passo 15" loading="lazy"><img hidden class="foto" src="fotos/s14_b.png" alt="Tela do Roblox Studio no passo 15" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
+    <div class="texto"><p>Lá em cima, do lado esquerdo, existem duas abas: <span class=ui>Place1</span> e <span class=ui>Script</span>.<br><br>Clique em <span class=ui>Place1</span> para voltar a ver o mundo 3D. O script continua lá, salvo, mesmo com a aba fechada.</p>
+      <div class="certo"><b>Está certo se</b>Você está vendo o chão e a peça vermelha de novo.</div>
+      <div class="socorro"><b>Não deu certo?</b><dl><dt>Fechei a aba do Script sem querer</dt><dd>Não perdeu nada. Clique duas vezes em <span class=ui>Script</span> na lista da direita para abrir de novo.</dd></dl></div>
+    </div></div></section>
+<section class="passo" id="passo16">
+  <div class="cab"><div class="bolha">16</div><h2>Jogue</h2>
+  <label class="risca"><input type="checkbox" data-passo="16"> feito</label></div>
+  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/08_jogar.gif" alt="Animação do passo 16" loading="lazy"><img hidden class="foto" src="fotos/s15_b.png" alt="Tela do Roblox Studio no passo 16" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
+    <div class="texto"><p>Aperte o <b>▶</b> azul, no canto superior esquerdo.<br><br>O Studio vira o jogo: nasce um boneco e você anda com <b>W A S D</b>, pula com <b>espaço</b>.</p>
+      <div class="certo"><b>Está certo se</b>Apareceu um boneco no mundo e as abas de cima mudaram para <span class=ui>Cliente</span> e <span class=ui>Servidor</span>.</div>
+      <div class="socorro"><b>Não deu certo?</b><dl><dt>Não acho o botão ▶</dt><dd>É o triângulo azul no alto à esquerda, ao lado da palavra <span class=ui>Teste</span>. Não é a palavra Teste — é o triângulo.</dd><dt>Demora muito</dt><dd>Na primeira vez leva uns 10 segundos. É normal.</dd></dl></div>
+    </div></div></section>
+<section class="passo" id="passo17">
+  <div class="cab"><div class="bolha">17</div><h2>Encoste na lava</h2>
+  <label class="risca"><input type="checkbox" data-passo="17"> feito</label></div>
+  <div class="corpo"><figure class="midia"><div class="moldura"><img class="foto" src="fotos/p16_no_jogo.png" alt="Tela do Roblox Studio no passo 17" loading="lazy"></div><p class="legenda">Foto da tela.</p></figure>
+    <div class="texto"><p>Ande com <b>W</b> até pisar na peça vermelha.<br><br>No instante em que o seu pé encosta, o boneco morre e nasce de novo.</p>
+      <div class="certo"><b>Está certo se</b>O boneco caiu no chão e voltou a nascer. Se você ficar em cima da lava, ele morre de novo, sem parar.</div>
+      <div class="socorro"><b>Não deu certo?</b><dl><dt>Encostei e não morri</dt><dd>Três coisas para conferir, nessa ordem: <b>1)</b> o Script está <b>dentro</b> da Lava na lista? <b>2)</b> sobrou algum risco vermelho no código? <b>3)</b> você parou o jogo e voltou a jogar depois de escrever o código?</dd><dt>Morri antes de encostar</dt><dd>Você nasceu em cima da lava. Pare o jogo, arraste a lava para longe da plataforma clara e jogue de novo.</dd><dt>O boneco não anda</dt><dd>Clique uma vez dentro da tela do jogo antes de usar W A S D.</dd></dl></div>
+    </div></div></section>
+<section class="passo" id="passo18">
+  <div class="cab"><div class="bolha">18</div><h2>Pare o jogo</h2>
+  <label class="risca"><input type="checkbox" data-passo="18"> feito</label></div>
+  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/09_parar.gif" alt="Animação do passo 18" loading="lazy"><img hidden class="foto" src="fotos/s17_b.png" alt="Tela do Roblox Studio no passo 18" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
+    <div class="texto"><p>Aperte o <b>quadrado vermelho</b>, do lado do ▶.<br><br><b>Isto é importante:</b> tudo o que você construir com o jogo rodando some quando o jogo para. Só vale o que você faz com o jogo <b>parado</b>.</p>
+      <div class="certo"><b>Está certo se</b>Voltou a tela de montar, com a lista da direita mostrando <span class=ui>Workspace</span> de novo.</div>
+      <div class="socorro"><b>Não deu certo?</b><dl><dt>Continuo no jogo</dt><dd>Aperte o quadrado vermelho, não o ▶.</dd><dt>Sumiu a minha lava!</dt><dd>Você a criou com o jogo rodando. Refaça com o jogo parado — é a regra que mais pega gente.</dd></dl></div>
+    </div></div></section>
+<section class="passo" id="passo19">
+  <div class="cab"><div class="bolha">19</div><h2>Salve</h2>
+  <label class="risca"><input type="checkbox" data-passo="19"> feito</label></div>
+  <div class="corpo"><figure class="midia"><div class="moldura"><img class="foto" src="fotos/s17_b.png" alt="Tela do Roblox Studio no passo 19" loading="lazy"></div><p class="legenda">Foto da tela.</p></figure>
+    <div class="texto"><p>Aperte <b>Ctrl + S</b> e salve no computador, com o nome <b>lava</b>.<br><br>Guarde numa pasta que você lembre. Na próxima aula começamos outro projeto do zero, mas este é seu.</p>
+      <div class="certo"><b>Está certo se</b>O nome da aba lá em cima deixou de ter um pontinho de “não salvo”.</div>
+      <div class="socorro"><b>Não deu certo?</b><dl><dt>Pediu para publicar na Roblox</dt><dd>Escolha <b>Salvar em arquivo</b>, não “Salvar na Roblox”. Publicar é assunto da Aula 4.</dd><dt>Não sei onde salvei</dt><dd>Salve de novo em <b>Área de Trabalho</b>. Fica fácil de achar.</dd></dl></div>
+    </div></div></section>
+</main>
+
+<p class="fim"><strong>Acabou a Aula 2. Você escreveu o seu primeiro programa: o Roblox agora reage sozinho a uma coisa que acontece no jogo.</strong></p>
+<div class="navega"><a href="../">⌂ Todas as aulas</a><a href="../aula1/">← Aula 1</a><a href="../aula3/">Aula 3 →</a></div>
+<script>
+(function(){
+  var chave = "robotomia-roblox-" + (document.body.dataset.aula || "x");
+  function ler(){ try{ return JSON.parse(localStorage.getItem(chave)||"[]"); }catch(e){ return []; } }
+  function gravar(v){ try{ localStorage.setItem(chave, JSON.stringify(v)); }catch(e){} }
+  var caixas = [].slice.call(document.querySelectorAll(".risca input"));
+  var conta  = document.getElementById("conta");
+  var trilho = document.getElementById("trilho");
+  if (!caixas.length) return;
+  var feitos = ler();
+  function pinta(){
+    var n = 0;
+    caixas.forEach(function(c){
+      var p = c.closest(".passo");
+      if (c.checked){ n++; p.classList.add("feito"); } else { p.classList.remove("feito"); }
+    });
+    if (conta)  conta.textContent = n + " de " + caixas.length + " passos prontos";
+    if (trilho) trilho.style.width = (100*n/caixas.length) + "%";
+  }
+  caixas.forEach(function(c){
+    c.checked = feitos.indexOf(c.dataset.passo) >= 0;
+    c.addEventListener("change", function(){
+      var v = ler().filter(function(x){ return x !== c.dataset.passo; });
+      if (c.checked) v.push(c.dataset.passo);
+      gravar(v); pinta();
+    });
+  });
+  pinta();
+  [].slice.call(document.querySelectorAll(".abas")).forEach(function(g){
+    g.addEventListener("click", function(e){
+      var b = e.target.closest(".aba"); if(!b) return;
+      var caixa = g.parentNode;
+      [].slice.call(g.children).forEach(function(x){ x.setAttribute("aria-pressed", x===b ? "true":"false"); });
+      caixa.querySelector(".gif").hidden  = (b.dataset.ver !== "clipe");
+      caixa.querySelector(".foto").hidden = (b.dataset.ver !== "foto");
+      caixa.querySelector(".legenda").textContent = b.dataset.legenda;
+    });
+  });
+})();
+</script>
+</body></html>

@@ -127,6 +127,12 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
 .codigo .rodape{background:var(--codigo);color:color-mix(in srgb,var(--codigo-tinta) 55%,transparent);
   font-family:"Atkinson Hyperlegible",sans-serif;font-size:12.5px;padding:8px 16px 12px;
   border-top:1px solid color-mix(in srgb,var(--codigo-tinta) 15%,transparent)}
+.codigo .rodape b{color:color-mix(in srgb,var(--codigo-tinta) 85%,transparent)}
+.codigo .rodape code{font-family:ui-monospace,"SF Mono",Menlo,monospace;font-size:13px;
+  color:color-mix(in srgb,var(--codigo-tinta) 92%,transparent);
+  background:color-mix(in srgb,var(--codigo-tinta) 12%,transparent);
+  padding:1px 5px;border-radius:4px}
+.codigo .rodape+.rodape{padding-top:10px}
 
 .fim{max-width:1180px;margin:0 auto;padding:0 20px 40px;text-align:center;color:var(--tinta2);font-size:15px}
 .fim strong{color:var(--tinta)}
@@ -161,15 +167,15 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
 
 <header class="barra"><div class="barra-in">
   <div class="marca"><a href="../">Robotomia</a> <span>· Roblox · Aula 6</span></div>
-  <div class="conta" id="conta">0 de 19 passos prontos</div>
+  <div class="conta" id="conta">0 de 20 passos prontos</div>
 </div><div class="trilho"><i id="trilho"></i></div></header>
 
 <div class="capa">
   <span class="etiqueta">Aula 6 · uma peça controla outra</span>
   <h1>Botão e porta</h1>
-  <p class="linha-fina">Você pisa num lugar e outra coisa, longe dali, acontece. É o primeiro script que mexe numa peça que não é a dele. São 19 passos, 50 minutos.
+  <p class="linha-fina">Você pisa num lugar e outra coisa, longe dali, acontece. É o primeiro script que mexe numa peça que não é a dele. São 20 passos, 50 minutos.
   Faça um de cada vez e só passe adiante depois de conferir o quadro verde.</p>
-  <div class="avisos"><div class="aviso"><b>Antes de digitar</b>Se este computador ainda não foi preparado, faça o <b>passo 2 da Aula 2</b> primeiro: desligar o assistente de código e o fechamento automático. Sem isso o editor escreve linhas que você não pediu.</div><div class="aviso"><b>Projeto novo</b>Começa do zero. Você vai fazer duas peças: uma porta e um botão.</div><div class="aviso"><b>O nome importa</b>A porta precisa se chamar exatamente <span class=ui>Porta</span>. O script procura por esse nome — errou a letra, não acha.</div><div class="aviso"><b>Atalhos</b>Este material usa <span class=ui>Ctrl</span>, do Windows. Num Mac, troque Ctrl por <span class=ui>⌘</span>.</div></div>
+  <div class="avisos"><div class="aviso"><b>Antes de digitar</b>O <b>passo 2</b> desta aula prepara o editor: desligar o assistente de código e o fechamento automático. Não pule — sem isso o editor escreve linhas que você não pediu.</div><div class="aviso"><b>Projeto novo</b>Começa do zero. Você vai fazer duas peças: uma porta e um botão.</div><div class="aviso"><b>O nome importa</b>A porta precisa se chamar exatamente <span class=ui>Porta</span>. O script procura por esse nome — errou a letra, não acha.</div><div class="aviso"><b>Atalhos</b>Este material usa <span class=ui>Ctrl</span>, do Windows. Num Mac, troque Ctrl por <span class=ui>⌘</span>.</div></div>
 </div>
 
 <main>
@@ -182,145 +188,153 @@ main{max-width:1180px;margin:0 auto;padding:10px 20px 70px}
       <div class="socorro"><b>Não deu certo?</b><dl><dt>Abriu o projeto antigo</dt><dd>Feche a aba e volte para o Início.</dd></dl></div>
     </div></div></section>
 <section class="passo" id="passo2">
-  <div class="cab"><div class="bolha">2</div><h2>Vá para a aba MODELO</h2>
+  <div class="cab"><div class="bolha">2</div><h2>Prepare o editor (uma vez em cada computador)</h2>
   <label class="risca"><input type="checkbox" data-passo="2"> feito</label></div>
-  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/01_aba_modelo.gif" alt="Animação do passo 2" loading="lazy"><img hidden class="foto" src="fotos/s_aba_b.jpg" alt="Tela do Roblox Studio no passo 2" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
+  <div class="corpo"><figure class="midia"><div class="moldura"><img class="foto" src="fotos/c06_preparar_editor.jpg" alt="Tela do Roblox Studio no passo 2" loading="lazy"></div><p class="legenda">Foto da tela.</p></figure>
+    <div class="texto"><p>Hoje você vai <b>digitar código</b>. O Studio vem com duas ajudas que atrapalham quem está aprendendo: ele sugere linhas inteiras e fecha parênteses e aspas sozinho. Vamos desligar as duas.<br><br>No Windows: <span class=ui>Arquivo → Configurações do Studio</span>. No Mac: <span class=ui>Roblox Studio → Configurações do Studio</span>.<br><br><b>1.</b> Na busca escreva <b>assist</b> e desmarque <span class=ui>Ativar assistente de código</span>.<br><b>2.</b> Apague a busca, escreva <b>fechamento</b> e desmarque <span class=ui>Colchetes de fechamento automáticos</span> e <span class=ui>Aspas de fechamento automáticas</span>.<br><br>Feche a janela. Fica guardado no computador — se você já fez isto numa aula passada <b>neste mesmo computador</b>, é só conferir que as caixinhas continuam vazias.</p>
+      <div class="certo"><b>Está certo se</b>As três caixinhas estão <b>vazias</b>: assistente de código, colchetes e aspas.</div>
+      <div class="socorro"><b>Não deu certo?</b><dl><dt>Não acho Configurações do Studio</dt><dd>No Windows é o menu <span class=ui>Arquivo</span>, bem no canto de cima à esquerda da janela.</dd><dt>A busca não acha nada</dt><dd>Escreva só <b>assist</b>, sem acento e sem mais nada.</dd><dt>Já está tudo desmarcado</dt><dd>Ótimo — este computador já foi preparado. Feche a janela e siga.</dd><dt>Por que desligar?</dt><dd>Ligado, o editor escreve linhas que você não pediu, e o <b>Tab</b> aceita a sugestão em vez de recuar. Desligado, o que está escrito na aula é exatamente o que você digita.</dd></dl></div>
+    </div></div></section>
+<section class="passo" id="passo3">
+  <div class="cab"><div class="bolha">3</div><h2>Vá para a aba MODELO</h2>
+  <label class="risca"><input type="checkbox" data-passo="3"> feito</label></div>
+  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/01_aba_modelo.gif" alt="Animação do passo 3" loading="lazy"><img hidden class="foto" src="fotos/s_aba_b.jpg" alt="Tela do Roblox Studio no passo 3" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
     <div class="texto"><p>Clique em <span class=ui>Modelo</span>.</p>
       <div class="certo"><b>Está certo se</b>Aparecem <span class=ui>Parte</span>, <span class=ui>Cor</span> e <span class=ui>Âncora</span>.</div>
       <div class="socorro"><b>Não deu certo?</b><dl><dt>Não acho</dt><dd>Fica entre <span class=ui>Script</span> e <span class=ui>Plugins</span>.</dd></dl></div>
     </div></div></section>
-<section class="passo" id="passo3">
-  <div class="cab"><div class="bolha">3</div><h2>Crie a porta</h2>
-  <label class="risca"><input type="checkbox" data-passo="3"> feito</label></div>
-  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/02_criar_porta.gif" alt="Animação do passo 3" loading="lazy"><img hidden class="foto" src="fotos/s_porta_b.jpg" alt="Tela do Roblox Studio no passo 3" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
+<section class="passo" id="passo4">
+  <div class="cab"><div class="bolha">4</div><h2>Crie a porta</h2>
+  <label class="risca"><input type="checkbox" data-passo="4"> feito</label></div>
+  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/02_criar_porta.gif" alt="Animação do passo 4" loading="lazy"><img hidden class="foto" src="fotos/s_porta_b.jpg" alt="Tela do Roblox Studio no passo 4" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
     <div class="texto"><p>Clique no <b>desenho</b> do botão <span class=ui>Parte</span>. Leve a câmera até ela (clique no nome na lista, mouse no mundo 3D, tecla <b>F</b>, depois <b>S</b> para afastar).</p>
       <div class="certo"><b>Está certo se</b>A peça está no meio da tela.</div>
       <div class="socorro"><b>Não deu certo?</b><dl><dt>Nada aconteceu</dt><dd>Você clicou na palavra, não no desenho.</dd></dl></div>
     </div></div></section>
-<section class="passo" id="passo4">
-  <div class="cab"><div class="bolha">4</div><h2>Ancore</h2>
-  <label class="risca"><input type="checkbox" data-passo="4"> feito</label></div>
-  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/03_ancorar.gif" alt="Animação do passo 4" loading="lazy"><img hidden class="foto" src="fotos/s_anc_porta_b.jpg" alt="Tela do Roblox Studio no passo 4" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
+<section class="passo" id="passo5">
+  <div class="cab"><div class="bolha">5</div><h2>Ancore</h2>
+  <label class="risca"><input type="checkbox" data-passo="5"> feito</label></div>
+  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/03_ancorar.gif" alt="Animação do passo 5" loading="lazy"><img hidden class="foto" src="fotos/s_anc_porta_b.jpg" alt="Tela do Roblox Studio no passo 5" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
     <div class="texto"><p>Clique em <span class=ui>Âncora</span>. Criou, ancorou.</p>
       <div class="certo"><b>Está certo se</b>O botão ficou aceso.</div>
       <div class="socorro"><b>Não deu certo?</b><dl><dt>Não sei se ancorou</dt><dd>Busque <b>anchor</b> nas Propriedades.</dd></dl></div>
     </div></div></section>
-<section class="passo" id="passo5">
-  <div class="cab"><div class="bolha">5</div><h2>Deixe com cara de porta</h2>
-  <label class="risca"><input type="checkbox" data-passo="5"> feito</label></div>
-  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/04_tamanho.gif" alt="Animação do passo 5" loading="lazy"><img hidden class="foto" src="fotos/s_tam_porta_b.jpg" alt="Tela do Roblox Studio no passo 5" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
+<section class="passo" id="passo6">
+  <div class="cab"><div class="bolha">6</div><h2>Deixe com cara de porta</h2>
+  <label class="risca"><input type="checkbox" data-passo="6"> feito</label></div>
+  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/04_tamanho.gif" alt="Animação do passo 6" loading="lazy"><img hidden class="foto" src="fotos/s_tam_porta_b.jpg" alt="Tela do Roblox Studio no passo 6" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
     <div class="texto"><p>Na busca das <span class=ui>Propriedades</span> escreva <b>size</b>. Duplo clique no valor, <b>Ctrl + A</b>, escreva <b>12, 14, 1</b> e <b>Enter</b>.<br><br>Alta, larga e fininha — uma parede com buraco de passagem.<br><br>Depois apague a busca.</p>
       <div class="certo"><b>Está certo se</b>A peça virou uma placa alta e fina, em pé.</div>
-      <div class="socorro"><b>Não deu certo?</b><dl><dt>Só mudou um número</dt><dd>Faltou o <b>Ctrl + A</b>.</dd><dt>Ficou deitada</dt><dd>Você trocou a ordem. São <b>largura, altura, espessura</b>: 12, 14, 1.</dd></dl></div>
+      <div class="socorro"><b>Não deu certo?</b><dl><dt>Só mudou um número</dt><dd>Faltou o <b>Ctrl + A</b>.</dd><dt>Ficou deitada</dt><dd>Você trocou a ordem. São <b>largura, altura, espessura</b>: 12, 14, 1.</dd><dt>Sumiu tudo do meu mundo!</dt><dd><b>Ctrl + Z</b> várias vezes até tudo voltar. Isso acontece quando o <b>Ctrl + A</b> pega a <b>lista de peças</b> em vez do campo de texto, e aí o Delete apaga as peças. Depois do Ctrl + A, <b>digite</b> os números — nunca aperte Delete.</dd></dl></div>
     </div></div></section>
-<section class="passo" id="passo6">
-  <div class="cab"><div class="bolha">6</div><h2>Pinte de vermelho</h2>
-  <label class="risca"><input type="checkbox" data-passo="6"> feito</label></div>
-  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/05_cor_porta.gif" alt="Animação do passo 6" loading="lazy"><img hidden class="foto" src="fotos/s_cor_porta_e.jpg" alt="Tela do Roblox Studio no passo 6" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
+<section class="passo" id="passo7">
+  <div class="cab"><div class="bolha">7</div><h2>Pinte de vermelho</h2>
+  <label class="risca"><input type="checkbox" data-passo="7"> feito</label></div>
+  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/05_cor_porta.gif" alt="Animação do passo 7" loading="lazy"><img hidden class="foto" src="fotos/s_cor_porta_e.jpg" alt="Tela do Roblox Studio no passo 7" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
     <div class="texto"><p>Setinha do <span class=ui>Cor</span> → hexágono vermelho → clique no <b>círculo do botão Cor</b>.</p>
       <div class="certo"><b>Está certo se</b>A porta ficou vermelha.</div>
       <div class="socorro"><b>Não deu certo?</b><dl><dt>Não pintou</dt><dd>Falta o clique no círculo do botão Cor.</dd></dl></div>
     </div></div></section>
-<section class="passo" id="passo7">
-  <div class="cab"><div class="bolha">7</div><h2>Chame de PORTA — com P maiúsculo</h2>
-  <label class="risca"><input type="checkbox" data-passo="7"> feito</label></div>
-  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/06_renomear_porta.gif" alt="Animação do passo 7" loading="lazy"><img hidden class="foto" src="fotos/s_nome_porta_b.jpg" alt="Tela do Roblox Studio no passo 7" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
+<section class="passo" id="passo8">
+  <div class="cab"><div class="bolha">8</div><h2>Chame de PORTA — com P maiúsculo</h2>
+  <label class="risca"><input type="checkbox" data-passo="8"> feito</label></div>
+  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/06_renomear_porta.gif" alt="Animação do passo 8" loading="lazy"><img hidden class="foto" src="fotos/s_nome_porta_b.jpg" alt="Tela do Roblox Studio no passo 8" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
     <div class="texto"><p>Botão direito na peça, na lista → <span class=ui>Renomear</span> → <b>Porta</b> → Enter.<br><br><b>Este nome é levado a sério.</b> Daqui a pouco o script vai procurar uma peça chamada exatamente <span class=ui>Porta</span>. Com <i>porta</i> minúsculo, ou <i>Porta1</i>, ele não acha.</p>
       <div class="certo"><b>Está certo se</b>Na lista está escrito <span class=ui>Porta</span>, com P maiúsculo.</div>
       <div class="socorro"><b>Não deu certo?</b><dl><dt>Escrevi errado</dt><dd>Botão direito → Renomear de novo. Vale a pena conferir letra por letra.</dd></dl></div>
     </div></div></section>
-<section class="passo" id="passo8">
-  <div class="cab"><div class="bolha">8</div><h2>Afaste a porta</h2>
-  <label class="risca"><input type="checkbox" data-passo="8"> feito</label></div>
-  <div class="corpo"><figure class="midia"><div class="moldura"><img class="foto" src="fotos/p_cena.jpg" alt="Tela do Roblox Studio no passo 8" loading="lazy"></div><p class="legenda">Foto da tela.</p></figure>
+<section class="passo" id="passo9">
+  <div class="cab"><div class="bolha">9</div><h2>Afaste a porta</h2>
+  <label class="risca"><input type="checkbox" data-passo="9"> feito</label></div>
+  <div class="corpo"><figure class="midia"><div class="moldura"><img class="foto" src="fotos/p_cena.jpg" alt="Tela do Roblox Studio no passo 9" loading="lazy"></div><p class="legenda">Foto da tela.</p></figure>
     <div class="texto"><p>Na busca das <span class=ui>Propriedades</span> escreva <b>position</b>. Na primeira linha <span class=ui>Position</span>, duplo clique no valor, <b>Ctrl + A</b>, escreva <b>0, 7, -20</b> e <b>Enter</b>.<br><br>Isso põe a porta a vinte passos de distância do lugar onde você nasce.</p>
       <div class="certo"><b>Está certo se</b>A porta pulou para longe, e você continua vendo a plataforma clara de nascimento.</div>
-      <div class="socorro"><b>Não deu certo?</b><dl><dt>Aparecem três linhas Position</dt><dd>Use a <b>primeira</b>, a que está embaixo de <span class=ui>CFrame</span>.</dd><dt>A porta sumiu da tela</dt><dd>Ela foi para longe mesmo. Clique nela na lista e aperte <b>F</b>, depois <b>S</b> algumas vezes.</dd><dt>Ela ficou enterrada no chão</dt><dd>O número do meio é a altura. Aumente: <b>0, 7, -20</b>.</dd></dl></div>
+      <div class="socorro"><b>Não deu certo?</b><dl><dt>Aparecem três linhas Position</dt><dd>Use a <b>primeira</b>, a que está embaixo de <span class=ui>CFrame</span>.</dd><dt>A porta sumiu da tela</dt><dd>Ela foi para longe mesmo. Clique nela na lista e aperte <b>F</b>, depois <b>S</b> algumas vezes.</dd><dt>Ela ficou enterrada no chão</dt><dd>O número do meio é a altura. Aumente: <b>0, 7, -20</b>.</dd><dt>Sumiu tudo do meu mundo!</dt><dd><b>Ctrl + Z</b> várias vezes até tudo voltar. Isso acontece quando o <b>Ctrl + A</b> pega a <b>lista de peças</b> em vez do campo de texto, e aí o Delete apaga as peças. Depois do Ctrl + A, <b>digite</b> os números — nunca aperte Delete.</dd></dl></div>
     </div></div></section>
-<section class="passo" id="passo9">
-  <div class="cab"><div class="bolha">9</div><h2>Crie o botão</h2>
-  <label class="risca"><input type="checkbox" data-passo="9"> feito</label></div>
-  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/07_criar_botao.gif" alt="Animação do passo 9" loading="lazy"><img hidden class="foto" src="fotos/s_botao_b.jpg" alt="Tela do Roblox Studio no passo 9" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
+<section class="passo" id="passo10">
+  <div class="cab"><div class="bolha">10</div><h2>Crie o botão</h2>
+  <label class="risca"><input type="checkbox" data-passo="10"> feito</label></div>
+  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/07_criar_botao.gif" alt="Animação do passo 10" loading="lazy"><img hidden class="foto" src="fotos/s_botao_b.jpg" alt="Tela do Roblox Studio no passo 10" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
     <div class="texto"><p>Clique de novo no <b>desenho</b> do <span class=ui>Parte</span>. Ancore.<br><br>Depois, pelas <span class=ui>Propriedades</span>: <b>size</b> = <b>5, 1, 5</b> e <b>position</b> = <b>0, 0.5, -8</b>.<br><br>Fica uma plaquinha baixa no chão, entre você e a porta.</p>
       <div class="certo"><b>Está certo se</b>Tem uma peça baixa e quadrada no caminho, e a porta vermelha mais adiante.</div>
       <div class="socorro"><b>Não deu certo?</b><dl><dt>A peça nova ficou dentro da porta</dt><dd>Confira o position: <b>0, 0.5, -8</b>. O -8 é mais perto que o -20 da porta.</dd><dt>Esqueci de ancorar</dt><dd>Clique nela e em <span class=ui>Âncora</span>. Botão que cai não funciona.</dd></dl></div>
     </div></div></section>
-<section class="passo" id="passo10">
-  <div class="cab"><div class="bolha">10</div><h2>Pinte o botão de verde</h2>
-  <label class="risca"><input type="checkbox" data-passo="10"> feito</label></div>
-  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/08_cor_botao.gif" alt="Animação do passo 10" loading="lazy"><img hidden class="foto" src="fotos/s_cor_botao_e.jpg" alt="Tela do Roblox Studio no passo 10" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
+<section class="passo" id="passo11">
+  <div class="cab"><div class="bolha">11</div><h2>Pinte o botão de verde</h2>
+  <label class="risca"><input type="checkbox" data-passo="11"> feito</label></div>
+  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/08_cor_botao.gif" alt="Animação do passo 11" loading="lazy"><img hidden class="foto" src="fotos/s_cor_botao_e.jpg" alt="Tela do Roblox Studio no passo 11" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
     <div class="texto"><p>Mesma coisa: setinha do <span class=ui>Cor</span> → verde → círculo do botão Cor.<br><br>Verde porque ele convida a pisar.</p>
       <div class="certo"><b>Está certo se</b>A plaquinha ficou verde.</div>
       <div class="socorro"><b>Não deu certo?</b><dl><dt>Pintei a porta sem querer</dt><dd><b>Ctrl + Z</b>, clique na peça certa e repita.</dd></dl></div>
     </div></div></section>
-<section class="passo" id="passo11">
-  <div class="cab"><div class="bolha">11</div><h2>Chame de BOTAO</h2>
-  <label class="risca"><input type="checkbox" data-passo="11"> feito</label></div>
-  <div class="corpo"><figure class="midia"><div class="moldura"><img class="foto" src="fotos/s_nome_botao_b.jpg" alt="Tela do Roblox Studio no passo 11" loading="lazy"></div><p class="legenda">Foto da tela.</p></figure>
+<section class="passo" id="passo12">
+  <div class="cab"><div class="bolha">12</div><h2>Chame de BOTAO</h2>
+  <label class="risca"><input type="checkbox" data-passo="12"> feito</label></div>
+  <div class="corpo"><figure class="midia"><div class="moldura"><img class="foto" src="fotos/s_nome_botao_b.jpg" alt="Tela do Roblox Studio no passo 12" loading="lazy"></div><p class="legenda">Foto da tela.</p></figure>
     <div class="texto"><p>Botão direito → <span class=ui>Renomear</span> → <b>Botao</b> (sem acento) → Enter.<br><br>Sem acento porque nome de peça com acento dá problema em algumas partes do Roblox. Fica a dica para a vida.</p>
       <div class="certo"><b>Está certo se</b>Na lista estão os dois: <span class=ui>Porta</span> e <span class=ui>Botao</span>.</div>
       <div class="socorro"><b>Não deu certo?</b><dl><dt>Posso pôr acento?</dt><dd>Melhor não. Use <b>Botao</b>.</dd></dl></div>
     </div></div></section>
-<section class="passo" id="passo12">
-  <div class="cab"><div class="bolha">12</div><h2>Coloque o Script dentro do BOTÃO</h2>
-  <label class="risca"><input type="checkbox" data-passo="12"> feito</label></div>
-  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/09_inserir_script.gif" alt="Animação do passo 12" loading="lazy"><img hidden class="foto" src="fotos/s_script_c.jpg" alt="Tela do Roblox Studio no passo 12" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
+<section class="passo" id="passo13">
+  <div class="cab"><div class="bolha">13</div><h2>Coloque o Script dentro do BOTÃO</h2>
+  <label class="risca"><input type="checkbox" data-passo="13"> feito</label></div>
+  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/09_inserir_script.gif" alt="Animação do passo 13" loading="lazy"><img hidden class="foto" src="fotos/s_script_c.jpg" alt="Tela do Roblox Studio no passo 13" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
     <div class="texto"><p>Clique em <span class=ui>Botao</span> na lista, clique no <b>+</b> e escolha <span class=ui>Script</span>.<br><br><b>Repare bem:</b> o script vai no <b>botão</b>, não na porta. Quem sente o pé é o botão; a porta só obedece.</p>
       <div class="certo"><b>Está certo se</b>O <span class=ui>Script</span> está para dentro de <span class=ui>Botao</span> e o editor abriu.</div>
       <div class="socorro"><b>Não deu certo?</b><dl><dt>Pus na porta sem querer</dt><dd>Apague com <b>Delete</b> e refaça com o Botao selecionado.</dd><dt>Não aparece o +</dt><dd>Clique uma vez na linha primeiro.</dd></dl></div>
     </div></div></section>
-<section class="passo" id="passo13">
-  <div class="cab"><div class="bolha">13</div><h2>Escreva o código</h2>
-  <label class="risca"><input type="checkbox" data-passo="13"> feito</label></div>
-  <div class="corpo"><figure class="midia"><div class="moldura"><img class="foto" src="fotos/p_codigo_pronto.jpg" alt="Tela do Roblox Studio no passo 13" loading="lazy"></div><p class="legenda">Foto da tela.</p></figure>
-    <div class="texto"><p>Apague a linha pronta e escreva:</p><div class="codigo"><div class="titulo">⌨ digite você mesmo — não copie</div><ol><li>local botao = script.Parent</li><li>local porta = workspace.Porta</li><li> </li><li>botao.Touched:Connect(function(parte)</li><li>	local humano = parte.Parent:FindFirstChild(&quot;Humanoid&quot;)</li><li>	if humano then</li><li>		porta.Transparency = 1</li><li>		porta.CanCollide = false</li><li>		task.wait(3)</li><li>		porta.Transparency = 0</li><li>		porta.CanCollide = true</li><li class="auto">	end</li><li class="auto">end)</li></ol><div class="rodape">as linhas em cinza o editor escreve sozinho — não digite elas</div></div><p>A novidade está na <b>linha 2</b>. Todo o resto você já viu na aula da lava.<br><br><b>Não digite as linhas em cinza.</b> O editor escreve os <span class=ui>end</span> sozinho quando você aperta Enter. E <b>não aperte Tab</b> — ele já empurra as linhas para dentro.</p>
-      <div class="certo"><b>Está certo se</b>Nenhum risco vermelho.</div>
-      <div class="socorro"><b>Não deu certo?</b><dl><dt>Sobraram end a mais</dt><dd>Você digitou os que o editor já tinha escrito. Apague os extras até o código ficar igual ao da aula.</dd><dt>Risco vermelho na linha 2</dt><dd>Confira: <span class=ui>workspace</span> é minúsculo, e <span class=ui>Porta</span> tem P maiúsculo — igualzinho ao nome que você deu.</dd><dt>Risco vermelho no fim</dt><dd>Faltou um <span class=ui>end</span> ou o <span class=ui>)</span>.</dd><dt>Diz que Porta não existe</dt><dd>O nome da peça está diferente do nome no código. Um dos dois está errado.</dd></dl></div>
-    </div></div></section>
 <section class="passo" id="passo14">
-  <div class="cab"><div class="bolha">14</div><h2>Entenda a linha nova</h2>
+  <div class="cab"><div class="bolha">14</div><h2>Escreva o código</h2>
   <label class="risca"><input type="checkbox" data-passo="14"> feito</label></div>
   <div class="corpo"><figure class="midia"><div class="moldura"><img class="foto" src="fotos/p_codigo_pronto.jpg" alt="Tela do Roblox Studio no passo 14" loading="lazy"></div><p class="legenda">Foto da tela.</p></figure>
+    <div class="texto"><p>Apague a linha pronta (clique no fim dela e segure <b>Backspace</b>) e escreva:</p><div class="codigo"><div class="titulo">⌨ digite você mesmo — não copie</div><ol><li>local botao = script.Parent</li><li>local porta = workspace.Porta</li><li> </li><li>botao.Touched:Connect(function(parte)</li><li>	local humano = parte.Parent:FindFirstChild(&quot;Humanoid&quot;)</li><li>	if humano then</li><li>		porta.Transparency = 1</li><li>		porta.CanCollide = false</li><li>		task.wait(3)</li><li>		porta.Transparency = 0</li><li>		porta.CanCollide = true</li><li class="auto">	end</li><li class="auto">end)</li></ol><div class="rodape">as linhas em cinza o editor escreve sozinho — não digite elas</div><div class="rodape">teclado brasileiro: a aspa é <b>tecla muda</b> — ela não aparece na hora. Aperte a tecla da aspa e <b>logo a barra de espaço</b>: sai uma aspa sozinha, sem espaço nenhum. Faça isso com <b>todas</b> as aspas. Se você digitar a letra direto depois da aspa, ela vira trema (<code>&quot;I</code> sai <code>Ï</code>).</div></div><p>A novidade está na <b>linha 2</b>. Todo o resto você já viu na aula da lava.<br><br><b>Não digite as linhas em cinza.</b> O editor escreve os <span class=ui>end</span> sozinho quando você aperta Enter. E <b>não aperte Tab</b> — ele já empurra as linhas para dentro.</p>
+      <div class="certo"><b>Está certo se</b>Nenhum risco vermelho.</div>
+      <div class="socorro"><b>Não deu certo?</b><dl><dt>Sobraram end a mais</dt><dd>Você digitou os que o editor já tinha escrito. Apague os extras até o código ficar igual ao da aula.</dd><dt>Risco vermelho na linha 2</dt><dd>Confira: <span class=ui>workspace</span> é minúsculo, e <span class=ui>Porta</span> tem P maiúsculo — igualzinho ao nome que você deu.</dd><dt>Risco vermelho no fim</dt><dd>Faltou um <span class=ui>end</span> ou o <span class=ui>)</span>.</dd><dt>Diz que Porta não existe</dt><dd>O nome da peça está diferente do nome no código. Um dos dois está errado.</dd><dt>Apareceu uma caixinha cinza com sugestões</dt><dd>É o editor tentando adivinhar. Aperte <b>Esc</b> para fechá-la e continue digitando. Se você apertar <b>Enter</b> com ela aberta, ele escreve a sugestão no lugar do que você ia escrever.</dd><dt>A aspa saiu errada (Ï, ä, ou duas aspas juntas)</dt><dd>A aspa do teclado brasileiro é <b>tecla muda</b>. Antes de vogal ela vira trema; no fim da linha ela às vezes dobra. O conserto é sempre o mesmo: apague o que saiu errado e digite a aspa <b>seguida da barra de espaço</b>. Sai uma aspa limpa, sem espaço.</dd></dl></div>
+    </div></div></section>
+<section class="passo" id="passo15">
+  <div class="cab"><div class="bolha">15</div><h2>Entenda a linha nova</h2>
+  <label class="risca"><input type="checkbox" data-passo="15"> feito</label></div>
+  <div class="corpo"><figure class="midia"><div class="moldura"><img class="foto" src="fotos/p_codigo_pronto.jpg" alt="Tela do Roblox Studio no passo 15" loading="lazy"></div><p class="legenda">Foto da tela.</p></figure>
     <div class="texto"><p><b>local porta = workspace.Porta</b><br><br><span class=ui>workspace</span> é o mundo inteiro — tudo que existe no seu jogo. O ponto quer dizer “de dentro dele”. Então a linha lê assim: <b>“procure no mundo a peça chamada Porta e chame ela de porta”</b>.<br><br>Antes você só usava <span class=ui>script.Parent</span>, que é “a peça onde eu moro”. Agora você consegue pegar <b>qualquer</b> peça, esteja onde estiver.<br><br>É por isso que o nome tem que bater exatamente. O Roblox procura pelo nome, não adivinha.</p>
       <div class="certo"><b>Está certo se</b>Você consegue explicar a diferença entre <span class=ui>script.Parent</span> e <span class=ui>workspace.Porta</span>.</div>
       <div class="socorro"><b>Não deu certo?</b><dl><dt>E se eu tiver duas peças chamadas Porta?</dt><dd>Ele pega uma só, e você não escolhe qual. Nomes repetidos dão confusão — use Porta1, Porta2.</dd></dl></div>
     </div></div></section>
-<section class="passo" id="passo15">
-  <div class="cab"><div class="bolha">15</div><h2>Jogue e pise no botão</h2>
-  <label class="risca"><input type="checkbox" data-passo="15"> feito</label></div>
-  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/10_jogar.gif" alt="Animação do passo 15" loading="lazy"><img hidden class="foto" src="fotos/p_porta_aberta.jpg" alt="Tela do Roblox Studio no passo 15" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
+<section class="passo" id="passo16">
+  <div class="cab"><div class="bolha">16</div><h2>Jogue e pise no botão</h2>
+  <label class="risca"><input type="checkbox" data-passo="16"> feito</label></div>
+  <div class="corpo"><figure class="midia"><div class="abas"><button class="aba" data-ver="clipe" aria-pressed="true" data-legenda="O clipe repete sozinho. Repare onde o cursor vai antes de clicar.">▶ Clipe</button><button class="aba" data-ver="foto" aria-pressed="false" data-legenda="Foto da tela.">Foto</button></div><div class="moldura"><img class="gif" src="clipes/10_jogar.gif" alt="Animação do passo 16" loading="lazy"><img hidden class="foto" src="fotos/p_porta_aberta.jpg" alt="Tela do Roblox Studio no passo 16" loading="lazy"></div><p class="legenda">O clipe repete sozinho. Repare onde o cursor vai antes de clicar.</p></figure>
     <div class="texto"><p>Volte para <span class=ui>Place1</span>, aperte o <b>▶</b> e ande até a plaquinha verde.<br><br>No instante em que você pisa, a porta vermelha lá na frente desaparece. Três segundos depois ela volta.</p>
       <div class="certo"><b>Está certo se</b>A porta sumiu enquanto você estava no botão, e voltou sozinha.</div>
       <div class="socorro"><b>Não deu certo?</b><dl><dt>Piso e não acontece nada</dt><dd>Três conferências: o Script está dentro do <b>Botao</b>? O nome da porta é <b>Porta</b>? Sobrou risco vermelho?</dd><dt>A porta some mas eu não consigo atravessar</dt><dd>Faltou <span class=ui>porta.CanCollide = false</span>. Transparente ainda barra.</dd><dt>A porta some e não volta</dt><dd>Faltam as duas últimas linhas, que desfazem.</dd><dt>Erro escrito em vermelho na tela</dt><dd>Leia o nome que ele reclama. Quase sempre é a peça Porta com o nome diferente.</dd></dl></div>
     </div></div></section>
-<section class="passo" id="passo16">
-  <div class="cab"><div class="bolha">16</div><h2>Atravesse</h2>
-  <label class="risca"><input type="checkbox" data-passo="16"> feito</label></div>
-  <div class="corpo"><figure class="midia"><div class="moldura"><img class="foto" src="fotos/p_porta_aberta.jpg" alt="Tela do Roblox Studio no passo 16" loading="lazy"></div><p class="legenda">Foto da tela.</p></figure>
+<section class="passo" id="passo17">
+  <div class="cab"><div class="bolha">17</div><h2>Atravesse</h2>
+  <label class="risca"><input type="checkbox" data-passo="17"> feito</label></div>
+  <div class="corpo"><figure class="midia"><div class="moldura"><img class="foto" src="fotos/p_porta_aberta.jpg" alt="Tela do Roblox Studio no passo 17" loading="lazy"></div><p class="legenda">Foto da tela.</p></figure>
     <div class="texto"><p>Agora o desafio de verdade: pise no botão e <b>corra</b> até passar pela porta antes dos três segundos acabarem.<br><br>Se não der tempo, é só mudar o <span class=ui>task.wait(3)</span> para <span class=ui>task.wait(5)</span>.</p>
       <div class="certo"><b>Está certo se</b>Você passou para o outro lado com a porta fechando atrás.</div>
       <div class="socorro"><b>Não deu certo?</b><dl><dt>Impossível, é muito rápido</dt><dd>Aumente o tempo, ou ponha o botão mais perto da porta.</dd><dt>Fiquei preso dentro da porta</dt><dd>Ela voltou com você em cima. Não é bug, é o jogo. Saia e tente de novo.</dd></dl></div>
     </div></div></section>
-<section class="passo" id="passo17">
-  <div class="cab"><div class="bolha">17</div><h2>Faça o contrário</h2>
-  <label class="risca"><input type="checkbox" data-passo="17"> feito</label></div>
-  <div class="corpo"><figure class="midia"><div class="moldura"><img class="foto" src="fotos/p_cena.jpg" alt="Tela do Roblox Studio no passo 17" loading="lazy"></div><p class="legenda">Foto da tela.</p></figure>
-    <div class="texto"><p>Troque uma coisa só no código: no lugar de <span class=ui>porta.Transparency = 1</span> e <span class=ui>false</span>, escreva <b>0</b> e <b>true</b> nas duas primeiras, e <b>1</b> e <b>false</b> nas duas últimas.<br><br>Agora a porta <b>aparece</b> quando você pisa, em vez de sumir. Vira armadilha.</p>
+<section class="passo" id="passo18">
+  <div class="cab"><div class="bolha">18</div><h2>Faça o contrário</h2>
+  <label class="risca"><input type="checkbox" data-passo="18"> feito</label></div>
+  <div class="corpo"><figure class="midia"><div class="moldura"><img class="foto" src="fotos/p_cena.jpg" alt="Tela do Roblox Studio no passo 18" loading="lazy"></div><p class="legenda">Foto da tela.</p></figure>
+    <div class="texto"><p>Troque só os quatro valores das linhas de dentro do <span class=ui>if</span>. Elas ficam assim, nesta ordem:<br><br><span class=ui>porta.Transparency = 0</span><br><span class=ui>porta.CanCollide = true</span><br><span class=ui>task.wait(3)</span><br><span class=ui>porta.Transparency = 1</span><br><span class=ui>porta.CanCollide = false</span><br><br>Ou seja: onde estava <b>1</b> ponha <b>0</b>, onde estava <b>0</b> ponha <b>1</b>, e troque cada <b>false</b> por <b>true</b> e cada <b>true</b> por <b>false</b>.<br><br>Antes de jogar, a porta precisa começar invisível: clique nela na lista e, na busca das <span class=ui>Propriedades</span>, ponha <b>Transparency</b> = <b>1</b> e desmarque <b>CanCollide</b>.<br><br>Agora a porta <b>aparece</b> quando você pisa, em vez de sumir. Vira armadilha.</p>
       <div class="certo"><b>Está certo se</b>A porta começa invisível e aparece quando você pisa no botão.</div>
       <div class="socorro"><b>Não deu certo?</b><dl><dt>Me perdi nos números</dt><dd>0 é sólida e visível, 1 é invisível. true é “dá para esbarrar”, false é “atravessa”.</dd><dt>Quero voltar como estava</dt><dd><b>Ctrl + Z</b> no editor desfaz o que você digitou.</dd></dl></div>
     </div></div></section>
-<section class="passo" id="passo18">
-  <div class="cab"><div class="bolha">18</div><h2>Coloque uma segunda porta</h2>
-  <label class="risca"><input type="checkbox" data-passo="18"> feito</label></div>
-  <div class="corpo"><figure class="midia"><div class="moldura"><img class="foto" src="fotos/p_cena.jpg" alt="Tela do Roblox Studio no passo 18" loading="lazy"></div><p class="legenda">Foto da tela.</p></figure>
-    <div class="texto"><p>Duplique a porta (botão direito → <span class=ui>Duplicar</span>), renomeie a cópia para <b>Porta2</b> e mova-a para outro lugar.<br><br>No script, acrescente <span class=ui>local porta2 = workspace.Porta2</span> na linha 3, e repita as linhas de dentro para a <span class=ui>porta2</span>.<br><br>Um botão, duas portas.</p>
+<section class="passo" id="passo19">
+  <div class="cab"><div class="bolha">19</div><h2>Coloque uma segunda porta</h2>
+  <label class="risca"><input type="checkbox" data-passo="19"> feito</label></div>
+  <div class="corpo"><figure class="midia"><div class="moldura"><img class="foto" src="fotos/p_cena.jpg" alt="Tela do Roblox Studio no passo 19" loading="lazy"></div><p class="legenda">Foto da tela.</p></figure>
+    <div class="texto"><p>Duplique a porta (botão direito na <span class=ui>Porta</span> da lista → <span class=ui>Duplicar</span>), renomeie a cópia para <b>Porta2</b> e mude a <b>position</b> dela para <b>10, 7, -20</b>, para ficar ao lado da primeira.<br><br>No script, clique no fim da <b>linha 2</b>, aperte <b>Enter</b> e escreva:<br><br><span class=ui>local porta2 = workspace.Porta2</span><br><br>Depois, dentro do <span class=ui>if</span>, escreva uma linha da <span class=ui>porta2</span> embaixo de cada linha da <span class=ui>porta</span> — quatro linhas novas no total:<br><br><span class=ui>porta2.Transparency = 1</span>, <span class=ui>porta2.CanCollide = false</span>, e depois do <span class=ui>task.wait(3)</span> as duas que desfazem: <span class=ui>porta2.Transparency = 0</span> e <span class=ui>porta2.CanCollide = true</span>.<br><br>Um botão, duas portas.</p>
       <div class="certo"><b>Está certo se</b>As duas portas somem juntas quando você pisa no botão.</div>
       <div class="socorro"><b>Não deu certo?</b><dl><dt>Só uma some</dt><dd>Você esqueceu de repetir alguma linha para a porta2.</dd><dt>Diz que Porta2 não existe</dt><dd>O nome da cópia na lista tem que ser exatamente <b>Porta2</b>.</dd></dl></div>
     </div></div></section>
-<section class="passo" id="passo19">
-  <div class="cab"><div class="bolha">19</div><h2>Salve</h2>
-  <label class="risca"><input type="checkbox" data-passo="19"> feito</label></div>
-  <div class="corpo"><figure class="midia"><div class="moldura"><img class="foto" src="fotos/s_parar_b.jpg" alt="Tela do Roblox Studio no passo 19" loading="lazy"></div><p class="legenda">Foto da tela.</p></figure>
+<section class="passo" id="passo20">
+  <div class="cab"><div class="bolha">20</div><h2>Salve</h2>
+  <label class="risca"><input type="checkbox" data-passo="20"> feito</label></div>
+  <div class="corpo"><figure class="midia"><div class="moldura"><img class="foto" src="fotos/s_parar_b.jpg" alt="Tela do Roblox Studio no passo 20" loading="lazy"></div><p class="legenda">Foto da tela.</p></figure>
     <div class="texto"><p><b>Ctrl + S</b> → <b>Salvar em arquivo</b> → nome <b>porta</b>.<br><br>E publique, se quiser: <span class=ui>Arquivo → Publicar na Roblox</span>.</p>
       <div class="certo"><b>Está certo se</b>Salvou sem erro.</div>
       <div class="socorro"><b>Não deu certo?</b><dl><dt>Esqueci como publica</dt><dd>Aula 4, passo 9.</dd></dl></div>

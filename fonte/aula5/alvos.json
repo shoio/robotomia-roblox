@@ -1,0 +1,128 @@
+{
+ "aba_modelo": {
+  "antes": "s_aba_a.jpg",
+  "depois": "s_aba_b.jpg",
+  "alvo": [
+   1639,
+   36
+  ]
+ },
+ "script_s_placar": {
+  "antes": "s_placar_a.jpg",
+  "menu": "s_placar_b.jpg",
+  "depois": "s_placar_c.jpg",
+  "alvo_mais": [
+   2903,
+   367
+  ],
+  "alvo_item": [
+   2521,
+   522
+  ]
+ },
+ "codigo_placar": {
+  "nasce": "p_editor_nasce.jpg",
+  "pronto": "p_placar_pronto.jpg"
+ },
+ "voltar": {
+  "antes": "s_volta_a.jpg",
+  "depois": "s_volta_b.jpg",
+  "alvo": [
+   70,
+   213
+  ]
+ },
+ "jogar_placar": {
+  "antes": "s_jogo1_a.jpg",
+  "depois": "s_jogo1_b.jpg",
+  "alvo": [
+   225,
+   28
+  ]
+ },
+ "criar": {
+  "antes": "s_moeda_a.jpg",
+  "depois": "s_moeda_b.jpg",
+  "alvo": [
+   1269,
+   118
+  ]
+ },
+ "ancorar": {
+  "antes": "s_anc_moeda_a.jpg",
+  "depois": "s_anc_moeda_b.jpg",
+  "alvo": [
+   2361,
+   118
+  ]
+ },
+ "cor": {
+  "antes": "s_cor_a.jpg",
+  "paleta": "s_cor_b.jpg",
+  "armada": "s_cor_c.jpg",
+  "depois": "s_cor_d.jpg",
+  "limpo": "s_cor_e.jpg",
+  "alvo_seta": [
+   1990,
+   118
+  ],
+  "alvo_hex": [
+   1884,
+   512
+  ],
+  "alvo_aplicar": [
+   1946,
+   118
+  ]
+ },
+ "renomear": {
+  "antes": "s_nome_a.jpg",
+  "depois": "s_nome_b.jpg",
+  "alvo": [
+   2693,
+   517
+  ]
+ },
+ "inserir_script": {
+  "antes": "s_scriptmoeda_a.jpg",
+  "menu": "s_scriptmoeda_b.jpg",
+  "depois": "s_scriptmoeda_c.jpg",
+  "alvo_mais": [
+   2774,
+   516
+  ],
+  "alvo_item": [
+   2393,
+   674
+  ]
+ },
+ "codigo_moeda": {
+  "nasce": "p_editor_moeda.jpg",
+  "pronto": "p_moeda_pronto.jpg"
+ },
+ "script_s_scriptmoeda": {
+  "antes": "s_scriptmoeda_a.jpg",
+  "menu": "s_scriptmoeda_b.jpg",
+  "depois": "s_scriptmoeda_c.jpg",
+  "alvo_mais": [
+   2773,
+   404
+  ],
+  "alvo_item": [
+   2393,
+   562
+  ]
+ },
+ "jogar_moeda": {
+  "antes": "s_jogo2_a.jpg",
+  "depois": "s_jogo2_b.jpg",
+  "quadros": [
+   "s_jogo2_b.jpg",
+   "s_jogo2_c.jpg"
+  ],
+  "alvo": [
+   225,
+   28
+  ]
+ }
+}

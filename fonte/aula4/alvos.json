@@ -1,0 +1,67 @@
+{
+ "aba_modelo": {
+  "antes": "s_aba_a.jpg",
+  "depois": "s_aba_b.jpg",
+  "alvo": [
+   1639,
+   36
+  ]
+ },
+ "criar": {
+  "antes": "s_criar_a.jpg",
+  "depois": "s_criar_b.jpg",
+  "alvo": [
+   1269,
+   118
+  ]
+ },
+ "ancorar": {
+  "antes": "s_ancora_a.jpg",
+  "depois": "s_ancora_b.jpg",
+  "alvo": [
+   2361,
+   118
+  ]
+ },
+ "tamanho": {
+  "antes": "s_tam_a.jpg",
+  "depois": "s_tam_b.jpg",
+  "valor": "20,1,20"
+ },
+ "cor": {
+  "antes": "s_cor_a.jpg",
+  "paleta": "s_cor_b.jpg",
+  "armada": "s_cor_c.jpg",
+  "depois": "s_cor_d.jpg",
+  "limpo": "s_cor_e.jpg",
+  "alvo_seta": [
+   1990,
+   118
+  ],
+  "alvo_hex": [
+   2006,
+   370
+  ],
+  "alvo_aplicar": [
+   1946,
+   118
+  ]
+ },
+ "renomear": {
+  "antes": "s_nome_a.jpg",
+  "depois": "s_nome_b.jpg",
+  "alvo": [
+   2693,
+   597
+  ]
+ },
+ "publicar": {
+  "antes": "s_pub_a.jpg",
+  "dialogo": "s_pub_b.jpg",
+  "preenchido": "s_pub_c.jpg",
+  "alvo_criar": [
+   2215,
+   1561
+  ]
+ }
+}

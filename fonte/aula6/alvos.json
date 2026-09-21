@@ -1,0 +1,83 @@
+{
+ "aba_modelo": {
+  "antes": "s_aba_a.jpg",
+  "depois": "s_aba_b.jpg",
+  "alvo": [
+   1639,
+   36
+  ]
+ },
+ "criar": {
+  "antes": "s_botao_a.jpg",
+  "depois": "s_botao_b.jpg",
+  "alvo": [
+   1269,
+   118
+  ]
+ },
+ "ancorar": {
+  "antes": "s_anc_botao_a.jpg",
+  "depois": "s_anc_botao_b.jpg",
+  "alvo": [
+   2361,
+   118
+  ]
+ },
+ "tamanho": {
+  "antes": "s_tam_botao_a.jpg",
+  "depois": "s_tam_botao_b.jpg",
+  "valor": "5,1,5"
+ },
+ "cor": {
+  "antes": "s_cor_botao_a.jpg",
+  "paleta": "s_cor_botao_b.jpg",
+  "armada": "s_cor_botao_c.jpg",
+  "depois": "s_cor_botao_d.jpg",
+  "limpo": "s_cor_botao_e.jpg",
+  "alvo_seta": [
+   1990,
+   118
+  ],
+  "alvo_hex": [
+   2110,
+   370
+  ],
+  "alvo_aplicar": [
+   1946,
+   118
+  ]
+ },
+ "renomear": {
+  "antes": "s_nome_botao_a.jpg",
+  "depois": "s_nome_botao_b.jpg",
+  "alvo": [
+   2693,
+   517
+  ]
+ },
+ "inserir_script": {
+  "antes": "s_script_a.jpg",
+  "menu": "s_script_b.jpg",
+  "depois": "s_script_c.jpg",
+  "alvo_mais": [
+   2766,
+   517
+  ],
+  "alvo_item": [
+   2383,
+   674
+  ]
+ },
+ "jogar": {
+  "antes": "s_jogar_a.jpg",
+  "depois": "s_jogar_b.jpg",
+  "quadros": [
+   "s_jogar_b.jpg",
+   "s_jogar_c.jpg"
+  ],
+  "alvo": [
+   225,
+   28
+  ]
+ }
+}

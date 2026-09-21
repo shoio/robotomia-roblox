@@ -1,0 +1,142 @@
+{
+ "criar_peca": {
+  "antes": "p01_a.jpg",
+  "depois": "p01_b.jpg",
+  "alvo": [
+   1269,
+   118
+  ]
+ },
+ "ancorar": {
+  "antes": "p02_a.jpg",
+  "depois": "p02_b.jpg",
+  "alvo": [
+   2361,
+   118
+  ]
+ },
+ "ferramenta_mover": {
+  "antes": "p03_a.jpg",
+  "depois": "p03_b.jpg",
+  "alvo": [
+   173,
+   118
+  ],
+  "mudou": [
+   1291,
+   918,
+   1002,
+   617,
+   1581,
+   1220
+  ]
+ },
+ "arrastar": {
+  "antes": "p04_a.jpg",
+  "depois": "p04_b.jpg",
+  "de": [
+   1291,
+   677
+  ],
+  "ate": [
+   1291,
+   417
+  ],
+  "mudou": [
+   1293,
+   771,
+   1002,
+   323,
+   1584,
+   1220
+  ]
+ },
+ "duplicar": {
+  "antes": "p05_a.jpg",
+  "menu": "p05_b.jpg",
+  "depois": "p05_c.jpg",
+  "alvo_direito": [
+   1293,
+   513
+  ],
+  "alvo_menu": [
+   1410,
+   385
+  ]
+ },
+ "cor": {
+  "antes": "p07_a.jpg",
+  "paleta": "p07_b.jpg",
+  "armada": "p07_c.jpg",
+  "depois": "p07_d.jpg",
+  "limpo": "p07_e.jpg",
+  "alvo_seta": [
+   1990,
+   118
+  ],
+  "alvo_hex": [
+   2440,
+   512
+  ],
+  "alvo_aplicar": [
+   1946,
+   118
+  ]
+ },
+ "material": {
+  "antes": "p08_a.jpg",
+  "picker": "p08_b.jpg",
+  "busca": "p08_c.jpg",
+  "depois": "p08_d.jpg",
+  "limpo": "p08_e.jpg",
+  "alvo_seta": [
+   1885,
+   118
+  ],
+  "alvo_busca": [
+   2074,
+   220
+  ],
+  "alvo_neon": [
+   1882,
+   408
+  ]
+ },
+ "dimensionar": {
+  "antes": "p09_a.jpg",
+  "depois": "p09_b.jpg",
+  "alvo": [
+   290,
+   118
+  ],
+  "mudou": [
+   1305,
+   966,
+   1086,
+   833,
+   1524,
+   1100
+  ]
+ },
+ "jogar": {
+  "antes": "p10_a.jpg",
+  "depois": "p10_b.jpg",
+  "quadros": [
+   "p10_b.jpg",
+   "p10_c.jpg",
+   "p10_d.jpg"
+  ],
+  "alvo": [
+   225,
+   28
+  ]
+ },
+ "parar": {
+  "antes": "p10_d.jpg",
+  "depois": "p11_b.jpg",
+  "alvo": [
+   377,
+   28
+  ]
+ }
+}

@@ -1,0 +1,408 @@
+[
+ {
+  "n": 1,
+  "titulo": "Abra o Roblox Studio",
+  "img": "p01.jpg",
+  "corpo": "Abra o Roblox Studio.<br><br>Na <b>primeira vez</b> em cada computador ele abre uma janelinha por cima de tudo, <i>Boas-vindas ao Roblox Studio!</i>, com dois botões. Clique no da <b>esquerda</b>, <span class=ui>Voltar ao início</span> — é o que está circulado na foto. <b>Não clique em <span class=ui>Iniciar a introdução</span></b>: aquilo é uma aula da própria Roblox, não é a nossa. (Se a janelinha não aparecer, melhor ainda: alguém já fechou ela nesse computador.)<br><br>Atrás dela fica a tela <b>Início</b>, com uma barra de menus na esquerda: <span class=ui>Nova experiência</span>, <span class=ui>Recentes</span>, <span class=ui>Início</span>, <span class=ui>Experiências</span>, <span class=ui>Modelos</span> e <span class=ui>Arquivo</span>.",
+  "ck": "A janelinha sumiu e você está vendo <b>Boas-vindas</b> com o seu nome, e a barra de menus na esquerda.",
+  "sos": [
+   [
+    "Cliquei em Iniciar a introdução sem querer",
+    "Feche a aba que abriu, no <b>x</b> ao lado do nome dela. Você volta para esta tela."
+   ],
+   [
+    "A janelinha não tem o botão Voltar ao início",
+    "Então feche pelo <b>✕</b> no canto de cima à direita dela. Dá no mesmo."
+   ],
+   [
+    "Abriu direto um projeto",
+    "Feche a aba dele no <b>x</b> ao lado do nome. Você volta para esta tela."
+   ],
+   [
+    "Não aparece o meu nome",
+    "Você não está conectado. Clique em <b>Entrar</b> no canto superior direito."
+   ],
+   [
+    "A tela está diferente da foto",
+    "Pode ter mais ou menos fileiras, dependendo do que você já fez. A barra da esquerda é sempre igual."
+   ]
+  ],
+  "clipe": null
+ },
+ {
+  "n": 2,
+  "titulo": "Escolha o modelo BASEPLATE",
+  "img": "p02.jpg",
+  "corpo": "<b>Role a página para baixo</b> até a fileira <span class=ui>Abrir um modelo</span>. São projetos prontos para começar: <span class=ui>Baseplate</span>, <span class=ui>Classic Baseplate</span>, <span class=ui>Flat Terrain</span>, <span class=ui>Platformer</span>, <span class=ui>Laser Tag</span>.<br><br>Clique no primeiro, o <b>Baseplate</b>. Ele é o mais vazio de todos, e é isso que queremos: o mundo vai ser seu, não de um modelo pronto.",
+  "ck": "Abriu uma tela cinza grande com um chão quadriculado. Pode demorar alguns segundos.",
+  "sos": [
+   [
+    "Não acho a fileira dos modelos",
+    "Clique em <span class=ui>Modelos</span> na barra da esquerda: abre uma página só com eles."
+   ],
+   [
+    "Demora muito para abrir",
+    "Na primeira vez leva uns 20 segundos. É normal."
+   ],
+   [
+    "Cliquei no modelo errado",
+    "Feche a aba no <b>x</b> e comece de novo pelo Baseplate."
+   ]
+  ],
+  "clipe": null
+ },
+ {
+  "n": 3,
+  "titulo": "Abra a lista e veja o que já veio pronto",
+  "img": "p03.jpg",
+  "corpo": "A lista da direita chama-se <span class=ui>Explorador</span> — é tudo que existe no seu mundo. Ela vem <b>fechada</b>.<br><br>Clique na <b>setinha</b> à esquerda da palavra <span class=ui>Workspace</span> para abrir.<br><br>Aparecem duas coisas que interessam: <span class=ui>Baseplate</span>, que é o chão quadriculado, e <span class=ui>SpawnLocation</span>, o círculo onde o seu bonequinho nasce. Tudo que você criar hoje vai entrar nessa mesma lista.",
+  "ck": "Abaixo de <span class=ui>Workspace</span> apareceram <span class=ui>Camera</span>, <span class=ui>Terrain</span>, <span class=ui>SpawnLocation</span> e <span class=ui>Baseplate</span>.",
+  "sos": [
+   [
+    "Cliquei e fechou de novo",
+    "Você clicou duas vezes. Clique uma só na setinha."
+   ],
+   [
+    "Não tenho o Explorador",
+    "Aba <span class=ui>Início</span> lá em cima, botão <span class=ui>Explorador</span>."
+   ],
+   [
+    "Só aparece Workspace, Players, Lighting…",
+    "É a lista fechada. Falta clicar na setinha do Workspace."
+   ]
+  ],
+  "clipe": null
+ },
+ {
+  "n": 4,
+  "titulo": "Clique na aba MODELO",
+  "img": "p04.jpg",
+  "corpo": "Na linha bem de cima existem abas. Clique em <b>Modelo</b>.<br><br><b>Isto é obrigatório.</b> Cada aba mostra botões diferentes. Se você ficar na aba errada, os botões desta aula simplesmente não existem na sua tela — e você vai procurar por nada.",
+  "ck": "A faixa mudou e agora aparecem as palavras <span class=ui>Parte</span>, <span class=ui>Material</span>, <span class=ui>Cor</span> e <span class=ui>Âncora</span>.",
+  "sos": [
+   [
+    "Não acho a aba Modelo",
+    "Ela fica entre <span class=ui>Script</span> e <span class=ui>Plugins</span>."
+   ],
+   [
+    "Cliquei e nada mudou",
+    "Você já estava nela. Pode seguir."
+   ]
+  ],
+  "clipe": null
+ },
+ {
+  "n": 5,
+  "titulo": "Crie a sua primeira peça",
+  "img": "p05.jpg",
+  "corpo": "Clique em <span class=ui>Parte</span> — <b>no desenho, não na palavra embaixo dele</b>.<br><br>Clicar na palavra não faz absolutamente nada. É o erro mais comum desta aula inteira.",
+  "ck": "Nasceu um bloco cinza no meio do mundo <b>e</b> a palavra <span class=ui>Part</span> apareceu na lista da direita, logo abaixo de <span class=ui>Baseplate</span>.",
+  "sos": [
+   [
+    "Cliquei e não aconteceu nada",
+    "Você clicou na palavra. Clique no <b>desenho</b> acima dela."
+   ],
+   [
+    "Apareceu Part na lista mas eu não vejo a peça",
+    "Clique em <span class=ui>Part</span> na lista e aperte a tecla <b>F</b>. A câmera vai até ela."
+   ],
+   [
+    "Criei duas sem querer",
+    "Aperte <b>Ctrl + Z</b>. Desfaz a última coisa."
+   ]
+  ],
+  "clipe": "01_criar_peca.gif"
+ },
+ {
+  "n": 6,
+  "titulo": "Ancore a peça",
+  "img": "p06.jpg",
+  "corpo": "Com a peça ainda selecionada, clique em <span class=ui>Âncora</span>.<br><br><b>Âncora prende a peça no ar.</b> Peça sem âncora despenca no segundo em que o jogo começa.<br><br>A regra do dia: <b>criou, ancorou.</b> Toda peça, toda vez.",
+  "ck": "Você vai conferir isso mais adiante, quando entrar no jogo: se a peça continuar no ar, ancorou.",
+  "sos": [
+   [
+    "Como sei se ancorou?",
+    "Na lista de <span class=ui>Propriedades</span>, digite <b>anchor</b> na caixa de busca. A caixinha <span class=ui>Anchored</span> fica marcada."
+   ],
+   [
+    "A peça não está selecionada",
+    "Clique no nome <span class=ui>Part</span> na lista da direita. Selecionada = com borda azul em volta."
+   ]
+  ],
+  "clipe": "02_ancorar.gif"
+ },
+ {
+  "n": 7,
+  "titulo": "Ligue a ferramenta MOVER",
+  "img": "p07.jpg",
+  "corpo": "Clique em <span class=ui>Mover</span>, no canto esquerdo da faixa.<br><br>Aparecem <b>três setas coloridas</b> na peça:<br><b>vermelha</b> e <b>azul</b> movem para os lados<br><b>verde</b> move para cima e para baixo",
+  "ck": "As setas coloridas apareceram grudadas na sua peça.",
+  "sos": [
+   [
+    "Não aparece seta nenhuma",
+    "A peça não está selecionada. Clique no nome dela na lista."
+   ],
+   [
+    "Aparecem bolinhas em vez de setas",
+    "Você clicou em <span class=ui>Dimensionar</span>. Clique em <span class=ui>Mover</span>."
+   ]
+  ],
+  "clipe": "03_ferramenta_mover.gif"
+ },
+ {
+  "n": 8,
+  "titulo": "Arraste pela seta, nunca pela peça",
+  "img": "p08.jpg",
+  "corpo": "Segure o botão do mouse <b>em cima da seta</b> e arraste.<br><br>Se você arrastar pelo meio da peça, ela vai para onde você não quer.<br><br>Leve a peça para perto do círculo onde o bonequinho nasce.",
+  "ck": "A peça andou na direção da seta que você puxou.",
+  "sos": [
+   [
+    "Arrastei e foi para o lugar errado",
+    "<b>Ctrl + Z</b> desfaz. Tente pegando exatamente em cima da seta."
+   ],
+   [
+    "Depois de arrastar as setas sumiram",
+    "É normal — arrastar solta a seleção. Clique na peça de novo."
+   ]
+  ],
+  "clipe": "04_arrastar.gif"
+ },
+ {
+  "n": 9,
+  "titulo": "Copie a peça",
+  "img": "p09.jpg",
+  "corpo": "Clique no nome da peça na lista da direita para selecionar.\nDepois clique nela com o <b>botão direito</b> do mouse e escolha <b>Duplicar</b>.<br><br>\nQuem preferir atalho: <b>Ctrl + D</b>.<br><br>\nA cópia nasce <b>exatamente em cima</b> da original — por isso parece que nada aconteceu.\nUse as setas do Mover para puxar a cópia para a frente e um pouco mais alto.<br><br>\nA cópia já vem ancorada, porque herda tudo da original.",
+  "ck": "Na lista da direita, <span class=ui>Part</span> aparece <b>duas vezes</b>.",
+  "sos": [
+   [
+    "Apertei Ctrl + D e nada aconteceu",
+    "Nenhuma peça estava selecionada. Clique no nome dela na lista <b>antes</b>."
+   ],
+   [
+    "O menu do botão direito não abriu",
+    "Clique com o botão direito <b>em cima do nome</b> na lista, não no espaço vazio."
+   ],
+   [
+    "Só vejo uma peça",
+    "A cópia está dentro da original. Arraste pela seta que ela sai de lá."
+   ],
+   [
+    "Fiz cópias demais",
+    "<b>Ctrl + Z</b> desfaz uma por vez."
+   ]
+  ],
+  "clipe": "05_duplicar.gif"
+ },
+ {
+  "n": 10,
+  "titulo": "Abra a paleta de cores",
+  "img": "p10.jpg",
+  "corpo": "Com a peça selecionada, procure na faixa de cima o botão <span class=ui>Cor</span> — é um <b>círculo colorido</b>. Do lado direito dele há uma <b>setinha</b> pequena.<br><br>Clique <b>na setinha</b>, não no círculo.",
+  "ck": "Abriu um painel cheio de hexágonos coloridos, com a frase <i>“Clique no objeto para aplicar a cor”</i> no rodapé.",
+  "sos": [
+   [
+    "Cliquei e a peça mudou de cor sozinha",
+    "Você clicou no <b>círculo</b>. O círculo aplica a cor que já estava escolhida. Aperte <b>Ctrl + Z</b> e clique na <b>setinha</b> ao lado dele."
+   ],
+   [
+    "Não abriu nada",
+    "Você clicou na palavra <span class=ui>Cor</span> embaixo. Clique na setinha à direita do desenho."
+   ],
+   [
+    "Não acho o botão Cor",
+    "Confira lá em cima se a aba <span class=ui>Modelo</span> está aberta. O botão Cor só existe nessa aba."
+   ]
+  ],
+  "clipe": "06_cor.gif"
+ },
+ {
+  "n": 11,
+  "titulo": "Escolha a cor e aplique",
+  "img": "p11.jpg",
+  "corpo": "Clique no hexágono da cor que você quiser. O painel <b>fecha sozinho</b> e o círculo do botão <span class=ui>Cor</span> passa a ter essa cor.<br><br>Agora clique <b>no círculo do botão Cor</b>. <b>É esse segundo clique que pinta a peça.</b>",
+  "ck": "A peça ficou da cor que você escolheu.",
+  "sos": [
+   [
+    "Escolhi a cor e a peça não mudou",
+    "Falta o segundo clique. Escolher no painel só <b>separa</b> a cor; quem pinta é o clique no círculo do botão Cor."
+   ],
+   [
+    "Cliquei no círculo e mesmo assim não pinta",
+    "No rodapé do painel de cores tem um interruptor <i>“Clique no objeto para aplicar a cor”</i>. Ele precisa ficar <b>desligado</b> (cinza). Ligado, o botão Cor para de funcionar."
+   ],
+   [
+    "Pintou a peça errada",
+    "<b>Ctrl + Z</b>, clique na peça certa e repita."
+   ]
+  ],
+  "clipe": "06_cor.gif"
+ },
+ {
+  "n": 12,
+  "titulo": "Abra a lista de materiais",
+  "img": "p12.jpg",
+  "corpo": "Ainda na aba <span class=ui>Modelo</span>, ao lado do botão <span class=ui>Material</span> existe outra <b>setinha</b>. Clique nela.",
+  "ck": "Abriu um painel com bolinhas de material — pedra, tijolo, madeira, asfalto.",
+  "sos": [
+   [
+    "Abriu e fechou na hora",
+    "Clique uma vez só e não arraste o mouse."
+   ],
+   [
+    "Não acho o botão Material",
+    "Fica na mesma faixa, à esquerda do botão Cor, ainda na aba <span class=ui>Modelo</span>."
+   ]
+  ],
+  "clipe": "07_material_neon.gif"
+ },
+ {
+  "n": 13,
+  "titulo": "Escolha NEON",
+  "img": "p13.jpg",
+  "corpo": "No alto do painel tem a caixa <span class=ui>Pesquisar materiais</span>. Clique dentro dela — ela fica com <b>borda azul</b> — e escreva <b>neon</b>.<br><br>Vai sobrar uma bolinha branca só. Clique nela.",
+  "ck": "A peça passou a brilhar, como se tivesse luz por dentro, e em <span class=ui>Propriedades</span> o <span class=ui>Material</span> virou <span class=ui>Neon</span>.",
+  "sos": [
+   [
+    "Escrevi e não filtrou nada",
+    "A caixa já tinha texto guardado de antes e virou <i>neonneon</i>. Clique no <b>⊗</b> no lado direito da caixa para limpar e escreva de novo."
+   ],
+   [
+    "Escrevi e a tela se mexeu sozinha",
+    "A caixa não estava com o foco, então as letras foram para o mundo 3D (a letra <b>e</b> sobe a câmera). Clique <b>dentro</b> da caixa, confira a borda azul, e só então escreva."
+   ],
+   [
+    "Não vejo diferença",
+    "Em peça pequena o material muda pouco. Neon é o mais visível de todos — confira na lista de Propriedades se está escrito Neon."
+   ]
+  ],
+  "clipe": "07_material_neon.gif"
+ },
+ {
+  "n": 14,
+  "titulo": "Mude o tamanho de uma peça",
+  "img": "p14.jpg",
+  "corpo": "Selecione uma peça e clique em <span class=ui>Dimensionar</span> na faixa.<br><br>Aparecem <b>bolinhas</b> nos cantos e no meio dos lados. Arraste uma bolinha para esticar ou encolher.<br><br>Faça uma plataforma <b>bem estreita</b> — o pulo fica muito mais difícil.",
+  "ck": "A peça mudou de tamanho e as bolinhas continuam nela.",
+  "sos": [
+   [
+    "Aparecem setas em vez de bolinhas",
+    "Você está em <span class=ui>Mover</span>. Clique em <span class=ui>Dimensionar</span>."
+   ],
+   [
+    "Ficou fina demais e sumiu",
+    "<b>Ctrl + Z</b> e puxe menos."
+   ],
+   [
+    "Estiquei para o lado errado",
+    "Cada bolinha estica num sentido. Solte, <b>Ctrl + Z</b>, e pegue outra."
+   ]
+  ],
+  "clipe": "08_dimensionar.gif"
+ },
+ {
+  "n": 15,
+  "titulo": "Faça a terceira plataforma",
+  "img": "p15.jpg",
+  "corpo": "Mesma receita de antes: clique no nome da peça na lista, botão direito, <b>Duplicar</b>, e arraste a cópia com as setas.<br><br>Ponha a terceira <b>mais à frente e mais alta</b> que a segunda. Agora você tem degraus subindo.",
+  "ck": "Três plataformas em alturas diferentes, formando um caminho.",
+  "sos": [
+   [
+    "Ficaram muito longe uma da outra",
+    "Aproxime. Se o bonequinho não alcança pulando, ninguém atravessa."
+   ],
+   [
+    "Ficaram muito altas",
+    "Cada degrau deve subir pouco — mais ou menos a altura do próprio bonequinho."
+   ]
+  ],
+  "clipe": null
+ },
+ {
+  "n": 16,
+  "titulo": "Olhe o seu percurso",
+  "img": "p16.jpg",
+  "corpo": "Antes de testar, dê uma olhada geral. Este é o seu obby.<br><br>Confira: todas as peças estão <b>ancoradas</b>? Os pulos parecem possíveis? As cores ajudam a enxergar o caminho?",
+  "ck": "Você consegue ver o caminho inteiro, do nascimento até a última plataforma.",
+  "sos": [
+   [
+    "Não consigo ver tudo de uma vez",
+    "Role a rodinha do mouse para trás — a câmera afasta."
+   ],
+   [
+    "Alguma peça está solta no ar sem sentido",
+    "Arraste com as setas para o lugar certo, ou <b>Ctrl + Z</b>."
+   ]
+  ],
+  "clipe": null
+ },
+ {
+  "n": 17,
+  "titulo": "Entre no seu jogo",
+  "img": "p17.jpg",
+  "corpo": "No canto superior esquerdo, ao lado do botão Teste, existe um <b>triângulo ▶</b>.<br><br>Clique nele. O Studio carrega o seu mundo e você vira o bonequinho, nascendo no círculo.<br><br>Pode demorar alguns segundos.",
+  "ck": "A lista da direita ganhou um item novo chamado <span class=ui>NetworkClient</span> — é o sinal de que o jogo está rodando.",
+  "sos": [
+   [
+    "Não acho o triângulo",
+    "Fica na barra de cima, à esquerda de tudo, perto da palavra Teste."
+   ],
+   [
+    "Cliquei e não aconteceu nada",
+    "Espere. Na primeira vez pode levar até um minuto."
+   ],
+   [
+    "Nasci embaixo do chão",
+    "Sua peça pode estar tapando o círculo de nascimento. Pare, mova a peça e teste de novo."
+   ]
+  ],
+  "clipe": "09_jogar.gif"
+ },
+ {
+  "n": 18,
+  "titulo": "Teste o percurso",
+  "img": "p18.jpg",
+  "corpo": "Ande com <b>W A S D</b> e pule com a <b>barra de espaço</b>.<br><br>Tente atravessar da primeira plataforma até a última.<br><br><b>Se alguma peça cair quando o jogo começa, ela não estava ancorada.</b> É agora que você descobre.",
+  "ck": "Você conseguiu subir nas plataformas e elas <b>continuaram no ar</b>.",
+  "sos": [
+   [
+    "Uma peça caiu",
+    "Faltou a âncora nela. Pare, selecione a peça e clique em <span class=ui>Âncora</span>."
+   ],
+   [
+    "Não consigo pular tão alto",
+    "Pare e abaixe a plataforma. O bonequinho pula pouco mais que a própria altura."
+   ],
+   [
+    "Caí e nasci no começo",
+    "É assim mesmo por hoje. Checkpoint é assunto da próxima aula."
+   ]
+  ],
+  "clipe": null
+ },
+ {
+  "n": 19,
+  "titulo": "Pare o jogo e salve o que fez",
+  "img": "p19.jpg",
+  "corpo": "Clique no botão de <b>parar</b> (o quadradinho ao lado do triângulo). Você volta ao modo de construir. Tudo que você mudou <b>durante</b> o jogo não é guardado — só o que você construiu antes de apertar ▶.<br><br>Agora <b>salve</b>: aperte <span class=ui>Ctrl + S</span>. Ele pergunta onde — escolha <span class=ui>Salvar em arquivo</span>, dê o nome <b>obby</b> e guarde numa pasta que você lembre.<br><br>Pronto. Agora vá jogar o obby do colega do lado, e conte para ele qual foi o pulo mais difícil.",
+  "ck": "Sumiu o <span class=ui>NetworkClient</span> da lista, as setas de construir voltaram, e o pontinho de “não salvo” sumiu do nome da aba lá em cima.",
+  "sos": [
+   [
+    "O jogo não para",
+    "O botão de parar é o quadradinho ao lado do triângulo."
+   ],
+   [
+    "Perdi o que fiz durante o jogo",
+    "É o normal do Studio: mudanças feitas jogando não ficam. Construa sempre com o jogo parado."
+   ],
+   [
+    "O Ctrl + S quer publicar na Roblox",
+    "Escolha <span class=ui>Salvar em arquivo</span>. Publicar é assunto da Aula 4."
+   ],
+   [
+    "Não consigo salvar com o jogo rodando",
+    "Pare o jogo primeiro, no quadradinho vermelho."
+   ]
+  ],
+  "clipe": "10_parar.gif"
+ }
+]

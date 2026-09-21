@@ -1,0 +1,118 @@
+{
+ "aba_modelo": {
+  "antes": "s03_a.jpg",
+  "depois": "s03_b.jpg",
+  "alvo": [
+   1639,
+   36
+  ]
+ },
+ "criar": {
+  "antes": "s04_a.jpg",
+  "depois": "s04_b.jpg",
+  "alvo": [
+   1269,
+   118
+  ]
+ },
+ "ancorar": {
+  "antes": "s06_a.jpg",
+  "depois": "s06_b.jpg",
+  "alvo": [
+   2361,
+   118
+  ]
+ },
+ "cor": {
+  "antes": "s07_a.jpg",
+  "paleta": "s07_b.jpg",
+  "armada": "s07_c.jpg",
+  "depois": "s07_d.jpg",
+  "limpo": "s07_e.jpg",
+  "alvo_seta": [
+   1990,
+   118
+  ],
+  "alvo_hex": [
+   2440,
+   512
+  ],
+  "alvo_aplicar": [
+   1946,
+   118
+  ]
+ },
+ "material": {
+  "antes": "s08_a.jpg",
+  "picker": "s08_b.jpg",
+  "busca": "s08_c.jpg",
+  "depois": "s08_d.jpg",
+  "limpo": "s08_e.jpg",
+  "alvo_seta": [
+   1885,
+   118
+  ],
+  "alvo_busca": [
+   2074,
+   220
+  ],
+  "alvo_neon": [
+   1882,
+   408
+  ]
+ },
+ "renomear": {
+  "antes": "s09_a.jpg",
+  "depois": "s09_b.jpg",
+  "alvo": [
+   2693,
+   517
+  ]
+ },
+ "inserir_script": {
+  "antes": "s10_a.jpg",
+  "menu": "s10_b.jpg",
+  "depois": "s10_c.jpg",
+  "alvo_mais": [
+   2750,
+   517
+  ],
+  "alvo_item": [
+   2369,
+   674
+  ]
+ },
+ "codigo": {
+  "nasce": "p11_editor_nasce.jpg",
+  "linha1": "p12_linha1.jpg",
+  "pronto": "p13_codigo_pronto.jpg"
+ },
+ "voltar": {
+  "antes": "s14_a.jpg",
+  "depois": "s14_b.jpg",
+  "alvo": [
+   70,
+   213
+  ]
+ },
+ "jogar": {
+  "antes": "s15_a.jpg",
+  "depois": "s15_b.jpg",
+  "quadros": [
+   "s15_b.jpg",
+   "s15_c.jpg"
+  ],
+  "alvo": [
+   225,
+   28
+  ]
+ },
+ "parar": {
+  "antes": "s17_a.jpg",
+  "depois": "s17_b.jpg",
+  "alvo": [
+   377,
+   28
+  ]
+ }
+}

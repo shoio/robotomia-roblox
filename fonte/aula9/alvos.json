@@ -1,0 +1,115 @@
+{
+ "aba_modelo": {
+  "antes": "s_aba_a.jpg",
+  "depois": "s_aba_b.jpg",
+  "alvo": [
+   1639,
+   36
+  ]
+ },
+ "script_s_placar": {
+  "antes": "s_placar_a.jpg",
+  "menu": "s_placar_b.jpg",
+  "depois": "s_placar_c.jpg",
+  "alvo_mais": [
+   2857,
+   719
+  ],
+  "alvo_item": [
+   2505,
+   874
+  ]
+ },
+ "criar": {
+  "antes": "s_moeda_a.jpg",
+  "depois": "s_moeda_b.jpg",
+  "alvo": [
+   1269,
+   115
+  ]
+ },
+ "ancorar": {
+  "antes": "s_anc_moeda_a.jpg",
+  "depois": "s_anc_moeda_b.jpg",
+  "alvo": [
+   2361,
+   111
+  ]
+ },
+ "tamanho": {
+  "antes": "s_tam_lava_a.jpg",
+  "depois": "s_tam_lava_b.jpg",
+  "valor": "14,1,14"
+ },
+ "cor": {
+  "antes": "s_cor_moeda_a.jpg",
+  "paleta": "s_cor_moeda_b.jpg",
+  "armada": "s_cor_moeda_c.jpg",
+  "depois": "s_cor_moeda_d.jpg",
+  "limpo": "s_cor_moeda_e.jpg",
+  "alvo_seta": [
+   1990,
+   115
+  ],
+  "alvo_hex": [
+   1884,
+   512
+  ],
+  "alvo_aplicar": [
+   1946,
+   115
+  ]
+ },
+ "material": {
+  "antes": "s_mat_lava_a.jpg",
+  "picker": "s_mat_lava_b.jpg",
+  "busca": "s_mat_lava_c.jpg",
+  "depois": "s_mat_lava_d.jpg",
+  "limpo": "s_mat_lava_e.jpg",
+  "alvo_seta": [
+   1885,
+   115
+  ],
+  "alvo_busca": [
+   2074,
+   220
+  ],
+  "alvo_neon": [
+   1882,
+   408
+  ]
+ },
+ "renomear": {
+  "antes": "s_nome_moeda_a.jpg",
+  "depois": "s_nome_moeda_b.jpg",
+  "alvo": [
+   2693,
+   597
+  ]
+ },
+ "inserir_script": {
+  "antes": "s_script_moeda_a.jpg",
+  "menu": "s_script_moeda_b.jpg",
+  "depois": "s_script_moeda_c.jpg",
+  "alvo_mais": [
+   2774,
+   596
+  ],
+  "alvo_item": [
+   2393,
+   754
+  ]
+ },
+ "jogar": {
+  "antes": "s_jogar_a.jpg",
+  "depois": "s_jogar_b.jpg",
+  "quadros": [
+   "s_jogar_b.jpg",
+   "s_jogar_c.jpg"
+  ],
+  "alvo": [
+   198,
+   36
+  ]
+ }
+}

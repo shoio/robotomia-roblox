@@ -132,6 +132,23 @@ def confere():
                 erra(f"aula {i} passo {p['n']}: o clipe {p['clipe']} insere um Script "
                      f"e o texto nunca fala em Script ('{p['titulo']}')")
 
+        # 7e. todo nome que o CODIGO procura no mundo tem de ser um nome que
+        #     a aula mandou criar. "workspace.Largada" sem um passo que diga
+        #     para renomear a peca para Largada e a forma mais comum de uma
+        #     aula plausivel nao funcionar na mao do aluno.
+        texto_aula = " ".join(_texto(p) for p in a["passos"]).lower()
+        for p in a["passos"]:
+            cod = p.get("codigo")
+            if not cod:
+                continue
+            procurados = set(re.findall(r"workspace\.([A-Z]\w+)", cod))
+            procurados |= {m for m in re.findall(r"\.Parent\.(\w+)", cod)
+                           if m not in ("Humanoid", "Parent", "Name")}
+            for nome in procurados:
+                if nome.lower() not in texto_aula:
+                    erra(f"aula {i} passo {p['n']}: o codigo procura '{nome}' "
+                         f"e nenhum passo manda criar uma peca com esse nome")
+
         # 8. toda foto existe no disco. Aula ainda NAO capturada fica de
         #    fora desta regra — mas nunca em silencio: ela e LISTADA no fim,
         #    porque pular calado e o jeito mais facil de um guarda mentir.

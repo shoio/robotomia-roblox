@@ -1,0 +1,63 @@
+{
+ "aba_modelo": {
+  "antes": "s_aba_a.png",
+  "depois": "s_aba_b.png",
+  "alvo": [
+   1639,
+   36
+  ]
+ },
+ "renomear": {
+  "antes": "s_nome_a.png",
+  "depois": "s_nome_b.png",
+  "alvo": [
+   2693,
+   517
+  ]
+ },
+ "criar": {
+  "antes": "s_criar_a.png",
+  "depois": "s_criar_b.png",
+  "alvo": [
+   1269,
+   115
+  ]
+ },
+ "tamanho": {
+  "antes": "s_criar_b.png",
+  "depois": "s_tam_b.png",
+  "valor": "60, 1, 4"
+ },
+ "cor": {
+  "antes": "s_cor_a.png",
+  "paleta": "s_cor_b.png",
+  "armada": "s_cor_c.png",
+  "depois": "s_cor_d.png",
+  "limpo": "s_cor_e.png",
+  "alvo_seta": [
+   1990,
+   115
+  ],
+  "alvo_hex": [
+   2440,
+   512
+  ],
+  "alvo_aplicar": [
+   1946,
+   115
+  ]
+ },
+ "inserir_script": {
+  "antes": "s_script_a.png",
+  "menu": "s_script_b.png",
+  "depois": "s_script_c.png",
+  "alvo_mais": [
+   2750,
+   517
+  ],
+  "alvo_item": [
+   2369,
+   674
+  ]
+ }
+}

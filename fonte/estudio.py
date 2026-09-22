@@ -804,3 +804,36 @@ def limpa_saida(J):
         if not sobrou:
             return True
     return False
+
+def menu_do_mais(J, pai, n=0):
+    """Abre o menu do '+' de uma linha do Explorador e devolve (linha, janela).
+       O '+' fica logo depois do nome, mas o OCR as vezes o engole: varrer."""
+    l = seleciona(J, pai, n)
+    for dx in (30, -15, 60, 5):
+        ids = {j["id"] for j in rs.janelas()}
+        rs.confere(); rs.clique_img(l[2] + dx, l[1], escala=2.0, janela=J); time.sleep(2.2)
+        achados = [j for j in rs.janelas()
+                   if j["id"] not in ids and j["w"] > 150 and j["h"] > 150]
+        if achados:
+            return l, achados[0], l[2] + dx
+        rs.tecla(ESC); time.sleep(0.5)
+    raise RuntimeError(f"o menu do '+' de {pai} nao abriu")
+
+
+def insere_buscando(J, pai, objeto, n=0):
+    """Insere um objeto que NAO esta na lista curta do '+': escreve o nome na
+       caixa 'Pesquisar objeto' do menu e clica no resultado. E assim que o
+       aluno acha o SpawnLocation."""
+    antes = [t for t, *_ in explorador(J)]
+    l, m, usado = menu_do_mais(J, pai, n)
+    # a caixa de busca e a primeira linha do menu
+    rs.confere(); rs.clique_tela(m["x"] + m["w"] / 2, m["y"] + 14); time.sleep(0.8)
+    rs.digita_teclas(objeto.lower()[:9]); time.sleep(1.6)
+    alvo = item_do_menu(m, objeto)
+    if not alvo:
+        raise RuntimeError(f"a busca do menu nao achou '{objeto}'")
+    rs.confere(); rs.clique_tela(*alvo); time.sleep(2.6)
+    depois = [t for t, *_ in explorador(J)]
+    if depois.count(objeto) <= antes.count(objeto):
+        raise RuntimeError(f"'{objeto}' nao apareceu no Explorador")
+    return True

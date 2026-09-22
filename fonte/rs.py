@@ -463,3 +463,99 @@ def tecla_rapida(codigo, cmd=False, shift=False):
         Quartz.CGEventSetFlags(e, flags)
         Quartz.CGEventPost(Quartz.kCGHIDEventTap, e)
         time.sleep(0.004)
+
+def _botao_correr(janela, arquivo="/tmp/_correr.png"):
+    """Acha o botao 'Correr' da barra de comando POR PIXEL, nao por OCR: o
+       texto branco dele se le uma vez e some na seguinte, e a altura da barra
+       muda com o numero de linhas que ela tem. O que nao muda e ser a mancha
+       clara mais a direita do rodape."""
+    import numpy as _np
+    from PIL import Image as _I
+    a, _ = captura(janela["id"], arquivo)
+    im = _I.open(a).convert("L")
+    L, A = im.size
+    x0, y0 = int(L * 0.90), A - 220
+    q = _np.asarray(im.crop((x0, y0, L, A)), dtype=int)
+    claro = q > 185
+    linhas = claro.sum(axis=1)
+    if linhas.max() < 8:
+        return None
+    ys = _np.flatnonzero(linhas >= max(4, linhas.max() // 3))
+    cy = int((ys[0] + ys[-1]) / 2) + y0
+    faixa = claro[ys[0]:ys[-1] + 1]
+    xs = _np.flatnonzero(faixa.sum(axis=0) > 0)
+    if len(xs) == 0:
+        return None
+    # ha tres manchas claras no rodape (marcador, historico e Correr). A do
+    # Correr e a MAIS LARGA, porque tem o triangulo mais a palavra.
+    grupos, atual = [], [xs[0]]
+    for x in xs[1:]:
+        (atual.append(x) if x - atual[-1] <= 25 else (grupos.append(atual), atual := [x]))
+    grupos.append(atual)
+    g = max(grupos, key=len)
+    cx = int((g[0] + g[-1]) / 2) + x0
+    return (cx, cy)
+
+
+def comando_lua(janela, lua, espera=2.0, tentativas=3):
+    """Roda Lua pela barra de comando do Studio. E ANDAIME meu: o aluno nunca
+       ve a barra de comando.
+
+       Tres armadilhas medidas na tela:
+       - a barra virou MULTILINHA: o Enter quebra linha, quem executa e o
+         botao 'Correr' (achado por pixel, porque o OCR do rotulo e intermitente);
+       - se o clique erra a barra, o Cmd+A seguinte seleciona os OBJETOS da
+         cena — por isso o foco se PROVA antes, digitando um selo curto;
+       - conferir o comando inteiro pelo OCR nao funciona: numa linha longa a
+         barra rola, e mesmo numa curta o OCR come a cauda.
+    """
+    lua1 = " ".join(l.strip() for l in lua.strip().split("\n") if l.strip())
+    correr = _botao_correr(janela)
+    if not correr:
+        raise RuntimeError("nao achei o botao Correr da barra de comando")
+
+    def _le_barra():
+        b, _ = captura(janela["id"], "/tmp/_bcv.png")
+        from PIL import Image as _I
+        A = _I.open(b).size[1]
+        return "".join(t for t, *_ in ocr("/tmp/_bcv.png",
+                                          regiao=(0, max(0.0, 1 - 150 / A), 0.95, 1.0),
+                                          psm="6", escala=2)).lower()
+
+    for dy in (-14, 0, -28, 14, -42):
+        ativa(); time.sleep(0.3)
+        confere(); clique_img(600, correr[1] + dy, escala=2.0, janela=janela); time.sleep(0.5)
+        # o selo prova o FOCO: se ele aparece, o teclado esta indo para a barra
+        digita_teclas("zzq"); time.sleep(0.5)
+        if "zzq" not in _le_barra().replace(" ", ""):
+            print(f"   (barra de comando: sem foco com dy={dy})")
+            continue
+        tecla(0, cmd=True); time.sleep(0.2)          # agora o Cmd+A e seguro
+        area_de_transferencia(lua1)
+        tecla(9, cmd=True); time.sleep(0.8)
+        if "zzq" in _le_barra().replace(" ", ""):
+            print("   (barra de comando: o selo nao saiu, a colagem falhou)")
+            continue
+        confere(); clique_img(correr[0], correr[1], escala=2.0, janela=janela)
+        time.sleep(espera)
+        return True
+    raise RuntimeError("nao consegui escrever na barra de comando")
+
+def linha_da_saida(janela, alvo, arquivo="/tmp/_saidal.png"):
+    """Devolve a LINHA inteira do painel Saida que contem o alvo. O
+       saida_contem devolve so a palavra, e eu preciso ler os numeros ao lado."""
+    captura(janela["id"], arquivo)
+    itens = ocr(arquivo, regiao=(0, 0.58, 1, 0.97), psm="6", escala=2)
+    linhas = {}
+    for t, x, y, w, h in itens:
+        if not t.strip():
+            continue
+        chave = min(linhas, key=lambda k: abs(k - y)) if linhas else None
+        if chave is None or abs(chave - y) > 14:
+            chave = y; linhas[chave] = []
+        linhas[chave].append((x, t.strip()))
+    for y in sorted(linhas):
+        linha = " ".join(t for _, t in sorted(linhas[y]))
+        if alvo.lower() in linha.lower():
+            return linha
+    return None

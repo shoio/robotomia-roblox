@@ -108,8 +108,8 @@ o quadro laranja do próprio passo tem o conserto.</p>
 def monta():
     # o guarda roda ANTES de gerar: toda regra dele nasceu de um defeito
     # que passou pela leitura e so apareceu seguindo a aula como aluno.
-    import confere_aulas
-    problemas = confere_aulas.confere()
+    import confere_aulas, confere_lua
+    problemas = confere_aulas.confere() + confere_lua.confere()
     if problemas:
         for m in problemas:
             print("  !!", m)

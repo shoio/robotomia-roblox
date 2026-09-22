@@ -27,6 +27,7 @@ Um repositório só: `github.com/shoio/robotomia-roblox`.
   gera_curso.py          o HTML, o CSS e o JS de uma página de aula
   faz_pdfs.py            imprime cada página em PDF (roda dentro do build)
   confere_aulas.py       o GUARDA do conteúdo (roda no começo do build)
+  confere_lua.py         roda o Lua em todo bloco de código: erro de sintaxe
   confere_clipes.py      confere o alvo do cursor de cada clipe
   confere_alvos.py       o OCR que o confere_clipes usa
 
@@ -228,6 +229,7 @@ reprovar. Regras, e o defeito que cada uma tapa:
 | termo marcado numa referência existe no passo apontado | «Volte ao passo 9 e confira o `leaderstats`» apontando para outro assunto |
 | passo que insere Script diz que código vai dentro | Script vazio |
 | se o clipe insere Script, a **instrução** fala em Script | a palavra estava só no quadro laranja |
+| todo código **compila** (`confere_lua.py`, com o Lua de verdade) | `end` faltando e parêntese aberto em código escrito sem rodar |
 
 **Toda regra nova se sabota uma vez** para ver reprovar. Duas das regras acima
 nasceram verdes por engano: uma lia a página inteira quando devia ler só a
@@ -266,13 +268,36 @@ reimplemente:
   nelas manda o clique para a janela de trás. `janela_de_verdade()` detecta.
 - **`F` enquadra a câmera só com o mouse em cima do mundo 3D.** Na lista, o
   `F` começa a renomear a peça.
+- **A barra de comando** (`rs.comando_lua`) é o andaime para PROVAR mecânica
+  antes de escrever a aula — o aluno nunca a vê. Ela virou **multilinha**: o
+  Enter quebra a linha, quem executa é o botão **Correr**, achado por **pixel**
+  (o OCR do rótulo aparece numa leitura e some na seguinte). E o foco se
+  **prova** com um selo curto antes do `Cmd+A`: se o clique errar a barra, o
+  `Cmd+A` seleciona os objetos da cena.
+
+⛔ **A captura não roda com a tela do Mac bloqueada.** `CGWindowListCreateImage`
+devolve uma imagem **toda preta**, o OCR lê vazio e o robô fica cego sem dizer
+por quê. Confira antes de uma sessão longa:
+
+```bash
+python3 -c "import Quartz; print(Quartz.CGSessionCopyCurrentDictionary()['CGSSessionScreenIsLocked'])"
+```
+
+Se der `True`, só a pessoa destrava. Antes de deixar uma captura rodando
+sozinha, desligue o bloqueio automático da tela.
 
 ---
 
 ## 7. Fazer uma aula nova, do zero
 
-1. **Escrever o roteiro** antes de tocar no Studio: os 19–20 passos em uma
-   linha cada, com o que cada um constrói e o que o aluno vê.
+0. **Provar a mecânica** no Studio, pela barra de comando, **antes** de
+   escrever uma linha da aula. Foi assim que a Aula 10 nasceu certa: medindo,
+   descobri que o `RespawnLocation` é ignorado se a `SpawnLocation` estiver
+   com `Enabled=false`, e que com duas ligadas o Roblox **sorteia** onde o
+   jogador nasce (2 de 7 nascimentos na bandeira). Os dois viraram passos da
+   aula. Escrever primeiro e medir depois produz material plausível e errado.
+1. **Escrever o roteiro**: os 19–20 passos em uma linha cada, com o que cada
+   um constrói e o que o aluno vê.
 2. **Copiar o `conteudo_aN.py` mais parecido** e trocar o conteúdo. Nunca
    começar de um arquivo vazio — o formato inteiro vem de graça.
 3. **Gravar no Studio**: `motor.Aula` num Baseplate novo, seguindo os passos

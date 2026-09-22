@@ -18,13 +18,17 @@ def aulas():
     todas = {}
     J = json.load(open("aula1/passos.json", encoding="utf-8"))
     todas[1] = {"passos": [dict(p, sos=[tuple(s) for s in p["sos"]]) for p in J]}
-    for i in range(2, 10):
-        todas[i] = importlib.import_module(f"conteudo_a{i}").AULA
+    for i in range(2, 40):
+        try:
+            todas[i] = importlib.import_module(f"conteudo_a{i}").AULA
+        except ModuleNotFoundError:
+            continue
     return todas
 
 def confere():
     A = aulas()
     erros = []
+    nao_capturadas = []
     def erra(m): erros.append(m)
 
     for i, a in A.items():
@@ -88,7 +92,9 @@ def confere():
         #     apontando um passo que EXISTE e virou o assunto errado. Quando a
         #     frase marca o termo que se vai conferir la, ele tem de estar la.
         for p in a["passos"]:
-            for m in re.finditer(r"passo (\d+)[^.<]{0,40}<(?:b|span[^>]*)>([^<]{4,})</(?:b|span)>",
+            # o vao nao pode conter '?' nem '(': sem isso o casamento pula de
+            # um item da lista para o seguinte ("...no passo 3? (3) o <b>X</b>")
+            for m in re.finditer(r"passo (\d+)[^.<?()]{0,40}<(?:b|span[^>]*)>([^<]{4,})</(?:b|span)>",
                                  p.get("corpo", "") + " " + " ".join(d + " " + r for d, r in p["sos"])):
                 alvo = [q for q in a["passos"] if q["n"] == int(m.group(1))]
                 termo = m.group(2).strip().lower()
@@ -126,11 +132,21 @@ def confere():
                 erra(f"aula {i} passo {p['n']}: o clipe {p['clipe']} insere um Script "
                      f"e o texto nunca fala em Script ('{p['titulo']}')")
 
-        # 8. toda foto e todo clipe existem no disco
+        # 8. toda foto existe no disco. Aula ainda NAO capturada fica de
+        #    fora desta regra — mas nunca em silencio: ela e LISTADA no fim,
+        #    porque pular calado e o jeito mais facil de um guarda mentir.
+        import glob as _glob
+        if i > 1 and not _glob.glob(f"aula{i}/*.jpg"):
+            nao_capturadas.append(i)
+            continue
         for p in a["passos"]:
             img = p.get("img")
             if img and not os.path.exists(img) and i > 1:
                 erra(f"aula {i} passo {p['n']}: foto sumida {img}")
+
+    if nao_capturadas:
+        print("  (aulas escritas mas ainda SEM captura, fora da regra da foto: "
+              + ", ".join(str(n) for n in sorted(nao_capturadas)) + ")")
     return erros
 
 if __name__ == "__main__":

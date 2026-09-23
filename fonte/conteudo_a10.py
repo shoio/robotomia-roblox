@@ -162,10 +162,11 @@ AULA = {
 
   dict(n=18, titulo="Conserte o nascimento sorteado", img="aula10/p_sss_pronto.jpg", clipe=None,
     codigo=LARGADA, auto=(3,),
-    corpo="Tem um problema, e é bom você saber dele: <b>o Roblox sorteia</b> em qual plataforma de nascimento o jogador começa. Com a Largada <b>e</b> a Bandeira no mundo, de vez em quando você já começa o jogo do outro lado da lava — o que estraga o obby.<br><br>O conserto é um script curto que manda todo mundo começar na Largada.<br><br>Na lista da direita ache <span class=ui>ServerScriptService</span> (algumas linhas abaixo de Workspace), clique nele, clique no <b>+</b>, escolha <span class=ui>Script</span>, apague a linha pronta e escreva:",
+    corpo="Tem um problema, e é bom você saber dele: <b>o Roblox sorteia</b> em qual plataforma de nascimento o jogador começa. Com a Largada <b>e</b> a Bandeira no mundo, de vez em quando você já começa o jogo do outro lado da lava — o que estraga o obby.<br><br>O conserto é um script curto que manda todo mundo começar na Largada.<br><br>Na lista da direita ache <span class=ui>ServerScriptService</span> (algumas linhas abaixo de Workspace; com o Workspace aberto ele fica <b>fora da vista</b> — role a lista para baixo com a rodinha do mouse, ou feche o Workspace na setinha dele), clique nele, clique no <b>+</b>, escolha <span class=ui>Script</span>, apague a linha pronta e escreva:",
     depois="<span class=ui>PlayerAdded</span> é o mesmo evento da Aula 5: “quando um jogador entrar”. Aqui ele só escreve a anotação inicial — <i>comece na Largada</i>. Depois disso, quem muda a anotação é a bandeira.",
     ck="Nenhum risco vermelho, e o <span class=ui>Script</span> está dentro do <span class=ui>ServerScriptService</span>.",
     sos=[("Diz que Largada não existe","O nome da peça na lista tem de ser exatamente <b>Largada</b>, com L maiúsculo."),
+         ("Não acho ServerScriptService","Escreva <b>server</b> na caixa <span class=ui>Pesquisar</span> do alto da lista."),
          ("Pus no lugar errado","Este script <b>não</b> vai numa peça: vai no <span class=ui>ServerScriptService</span>, porque vale para o jogo inteiro."),
          ("Apareceu uma caixinha cinza com sugestões","É o editor tentando adivinhar. Aperte <b>Esc</b> para fechá-la e continue digitando. Se você apertar <b>Enter</b> com ela aberta, ele escreve a sugestão no lugar do que você ia escrever.")]),
 

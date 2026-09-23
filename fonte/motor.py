@@ -200,8 +200,14 @@ class Aula:
                             int((alvo[1] - m["y"]) * 2) + mo_y])
         return True
 
-    def codigo(self, l1, completo, tem, foto="p_codigo_pronto", reg_nome="codigo"):
-        E.abre_editor(self.J)
+    def codigo(self, l1, completo, tem, foto="p_codigo_pronto", reg_nome="codigo", dono=None):
+        # dono: de QUEM e o script. Sem isto, abre_editor clica na primeira aba
+        # chamada "Script" — e todas se chamam assim, entao a aula seguinte
+        # escrevia por cima da anterior.
+        if dono:
+            self.abre_script_de(dono)
+        else:
+            E.abre_editor(self.J)
         self.cap("p_editor_nasce")
         rs.escreve_codigo(self.J, l1, tem=(l1.split()[1],), nao_tem=("Hello",))
         self.cap("p_linha1")
@@ -216,10 +222,9 @@ class Aula:
         l = E.acha_linha(J, nome)
         assert l, f"nao achei '{nome}' no Explorador"
         self.cap(tag + "_a")
-        rs.clique_direito_img(l[0], l[1], escala=2.0, janela=J); time.sleep(1.6)
-        menu = [j for j in rs.janelas() if j["w"] > 150 and j["h"] > 150 and j["camada"] >= 100]
-        assert menu, "o menu do botao direito nao abriu"
-        E.clica_item(J, menu[0], "Duplicar", 2.2)
+        mm = E.menu_contexto(J, l[0], l[1])      # nunca pelo [0] da lista: ha fantasma
+        assert mm, "o menu do botao direito nao abriu"
+        E.clica_item(J, mm, "Duplicar", 2.2)
         self.cap(tag + "_b")
         self.reg("duplicar", antes=tag + "_a.png", depois=tag + "_b.png", alvo=[l[0], l[1]])
         return True
@@ -281,6 +286,10 @@ class Aula:
         J = self.J
         E.fecha_abas_de_script(J)
         E.volta_ao_mundo(J)
+        if not E.acha_linha(J, dono, tentativas=1):
+            # peca do mundo pede a arvore ABERTA; servico pede ela FECHADA
+            if not E._com_workspace_aberto(J, dono):
+                E.mostra_servico(J, dono)
         p = E.script_de(J, dono)
         if not p:
             raise RuntimeError(f"nao achei o Script dentro de {dono}")
@@ -353,9 +362,11 @@ class Aula:
         (ServerScriptService, por exemplo), que fica mais abaixo na lista."""
         J = self.J
         E.limpa_popups(J); E.aba(J, "Modelo")
-        l = E.acha_linha(J, dono)
+        # com o Workspace aberto os servicos ficam fora da vista — a crianca
+        # passa pelo mesmo, e a aula manda fechar o Workspace na setinha
+        l = E.mostra_servico(J, dono)
         if not l:
-            raise RuntimeError(f"nao achei '{dono}' no Explorador")
+            raise RuntimeError(f"nao achei '{dono}' no Explorador, nem fechando o Workspace")
         rs.confere(); rs.clique_img(l[0], l[1], escala=2.0, janela=J); time.sleep(1.0)
         self.cap(tag + "_a")
         # o '+' fica logo depois do nome, mas o OCR as vezes o engole: varrer

@@ -64,11 +64,25 @@ def acha_linha(J, nome, n=0, tentativas=3):
 
 
 def seleciona(J, nome, n=0):
-    l = acha_linha(J, nome, n)
+    l = acha_linha(J, nome, n) or _com_workspace_aberto(J, nome, n)
     if not l:
         raise RuntimeError(f"nao achei '{nome}' no Explorador")
     rs.confere(); rs.clique_img(l[0], l[1], escala=2.0, janela=J); time.sleep(1.0)
     return l
+
+
+def _com_workspace_aberto(J, nome, n=0):
+    """Peca do mundo que nao aparece: a arvore do Workspace pode ter ficado
+       FECHADA pelo passo anterior (fechar e como se chega aos servicos).
+       Abro e procuro de novo. So vale para peca do mundo — servico quem
+       procura e mostra_servico, que faz o contrario."""
+    if nome.lower() in ("workspace", "camera", "terrain"):
+        return None
+    try:
+        expande_workspace(J)
+    except Exception:
+        return None
+    return acha_linha(J, nome, n, tentativas=2)
 
 
 def insere_em(J, pai, objeto, n=0):
@@ -225,7 +239,7 @@ def _renomeia1(J, de, para, n=0):
 def _enquadra1(J, nome, atras=6, n=0):
     """Poe a camera na peca (menu do botao direito -> Definir zoom em) e afasta.
        Sem isso a camera fica colada e a captura nao serve para aula."""
-    l = acha_linha(J, nome, n)
+    l = acha_linha(J, nome, n) or _com_workspace_aberto(J, nome, n)
     if not l:
         raise RuntimeError(f"nao achei '{nome}' para enquadrar")
     rs.confere(); rs.clique_img(l[0], l[1], escala=2.0, janela=J); time.sleep(0.9)
@@ -713,6 +727,71 @@ def expande_workspace(J):
             raise RuntimeError("nao achei Workspace no Explorador")
         rs.confere(); rs.clique_img(l[0] - 130, l[1], escala=2.0, janela=J); time.sleep(1.4)
     return bool(acha_linha(J, "Baseplate", tentativas=2))
+
+
+def scripts_do_jogo(J, arquivo="/tmp/_scripts.png"):
+    """Devolve o texto que o Studio imprime com TODO Script do jogo e o comeco
+       do codigo dele. Le do proprio jogo, nao da tela do editor: a foto do
+       editor mostra o codigo certo mesmo quando ele foi parar no script
+       errado — foi assim que a Aula 10 ficou com o codigo da bandeira dentro
+       da lava e 'Hello world' dentro da bandeira."""
+    limpa_saida(J)
+    lua = ('for _,d in ipairs(game:GetDescendants()) do if d:IsA("Script") then '
+           'print("##", d.Parent.Name, "##", string.sub(d.Source, 1, 26)) end end')
+    rs.comando_lua(J, lua, espera=3.0)
+    a, _ = rs.captura(J["id"], arquivo)
+    linhas = [t for t, *_ in rs.ocr(a, regiao=(0, 0.60, 0.80, 0.97), psm="6",
+                                    escala=2, limiar=90)]
+    return " ".join(linhas)
+
+
+def confere_scripts(J, esperado):
+    """esperado = {"Lava": "local lava", ...}. Reprova se algum script ainda
+       tiver a linha padrao do Studio, ou se o dono e o codigo nao estiverem
+       lado a lado na resposta do jogo."""
+    txt = scripts_do_jogo(J)
+    baixo = txt.lower()
+    problemas = []
+    if "hello world" in baixo:
+        problemas.append("algum Script ainda tem a linha padrao print(\"Hello world!\")")
+    for dono, comeco in esperado.items():
+        i = baixo.find(dono.lower())
+        perto = baixo[i:i + 60] if i >= 0 else ""
+        if i < 0:
+            problemas.append(f"o jogo nao tem Script nenhum dentro de {dono}")
+        elif comeco.lower()[:14] not in perto:
+            problemas.append(f"o Script de {dono} comeca com {perto[len(dono):40]!r}, "
+                             f"esperava {comeco!r}")
+    return problemas, txt
+
+
+def fecha_no(J, nome="Workspace"):
+    """Fecha a arvore de um no do Explorador clicando na setinha dele."""
+    l = acha_linha(J, nome, tentativas=2)
+    if not l:
+        return False
+    rs.confere(); rs.clique_img(l[0] - 130, l[1], escala=2.0, janela=J); time.sleep(1.4)
+    return True
+
+
+def mostra_servico(J, nome):
+    """Garante que um SERVICO (ServerScriptService, StarterGui, StarterPack…)
+       esteja a vista, e devolve a linha dele.
+
+       Com a arvore do Workspace aberta — que e o que a aula manda fazer no
+       comeco — os servicos ficam empurrados para fora do painel. O gesto que
+       resolve, e que as aulas ensinam, e FECHAR o Workspace na setinha. A
+       rodinha do mouse nao rola este painel: medido, cinco rolagens e a
+       ultima linha continuava sendo 'Players'."""
+    l = acha_linha(J, nome, tentativas=1)
+    if l:
+        return l
+    fecha_no(J, "Workspace")
+    l = acha_linha(J, nome, tentativas=2)
+    if l:
+        return l
+    busca_explorador(J, nome[:6].lower())        # ultimo recurso: a caixa Pesquisar
+    return acha_linha(J, nome, tentativas=2)
 
 
 def le_celula(J, y, arquivo="/tmp/_cel.png"):

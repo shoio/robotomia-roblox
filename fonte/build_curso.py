@@ -25,6 +25,7 @@ PLANO = [
     (7, "O martelo que gira", "Obstáculo que derruba. Repetição.", True),
     (8, "Loja: gaste as moedas", "Três moedas compram velocidade. Aqui entra o if.", True),
     (9, "Projeto livre e mostra", "Você monta o seu jogo, com o kit de receitas do curso inteiro.", True),
+    (10, "Checkpoint: a bandeira que salva", "Morreu? Volta na bandeira, não no começo.", True),
 ]
 
 
@@ -139,7 +140,8 @@ def monta():
         elif os.path.exists(alvo):
             os.remove(alvo)
     prontas = []
-    for construtor in (aula1, aula2, aula3, aula4, aula5, aula6, aula7, aula8, aula9):
+    for construtor in (aula1, aula2, aula3, aula4, aula5, aula6, aula7, aula8, aula9,
+                       aula10):
         a = construtor()
         pasta = os.path.join(SAIDA, a["slug"])
         os.makedirs(os.path.join(pasta, "fotos"), exist_ok=True)

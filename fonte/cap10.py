@@ -71,7 +71,8 @@ def lava(A=None):
     A.pinta("vermelho", "Bright red", alvo="Part", tag="s_cor")
     A.renomeia("Part", "Lava", tag="s_nome")
     A.insere_script("Lava", tag="s_script")
-    A.codigo("local lava = script.Parent", LAVA, tem=("Touched", "Humanoid", "Health"))
+    A.codigo("local lava = script.Parent", LAVA, tem=("Touched", "Humanoid", "Health"),
+             dono="Lava")
     A.volta("s_volta")
     return A
 
@@ -119,7 +120,7 @@ def bandeira(A=None):
     A.pinta("verde", "Bright green", alvo="SpawnLocation", tag="s_bandcor")
     A.renomeia("SpawnLocation", "Bandeira", tag="s_bandnome")
     A.insere_script("Bandeira", tag="s_bandscript")
-    E.abre_editor(J)
+    A.abre_script_de("Bandeira")        # NUNCA abre_editor: as abas se chamam todas "Script"
     rs.escreve_codigo(J, BANDEIRA, tem=("Touched", "RespawnLocation", "jogador"))
     A.cap("p_cp_pronto")
     A.volta("s_volta2")
@@ -132,19 +133,32 @@ def sss(A=None):
     J = A.J
     # a segunda lava, DEPOIS da bandeira, para provar o checkpoint
     E.limpa_popups(J)
+    # a arvore do Workspace precisa estar ABERTA para achar a Lava: o passo
+    # seguinte a fecha para chegar no ServerScriptService, e quem retoma a
+    # etapa encontra o painel como o passo anterior o deixou.
+    E.expande_workspace(J)
+    # etapa repetivel: se a copia ja existe, nao duplico de novo. Sem isto,
+    # retomar a etapa depois de uma falha mais adiante deixa TRES lavas.
+    ja = [t for t, *_ in E.explorador(J, regiao=(0.855, 0.10, 1, 0.95))
+          if t.strip().lower().startswith("lava")]
     l = E.acha_linha(J, "Lava")
     A.cap("s_dup_a")
-    rs.clique_direito_img(l[0], l[1], escala=2.0, janela=J); time.sleep(1.6)
-    menu = [j for j in rs.janelas() if j["w"] > 150 and j["h"] > 150 and j["camada"] >= 100]
-    assert menu, "o menu do botao direito nao abriu"
-    E.clica_item(J, menu[0], "Duplicar", 2.2)
-    E.poe_prop(J, "Lava", "Position", "0, 0.5, -45", )
-    E.enquadra(J, "Bandeira", atras=42)
-    A.cap("s_dup_b")
-    A.reg("duplicar", antes="s_dup_a.png", depois="s_dup_b.png", alvo=[l[0], l[1]])
+    # menu_contexto compara a lista de janelas ANTES e DEPOIS do clique: a
+    # lista do sistema guarda menus ja fechados, e pegar o [0] dela trouxe uma
+    # janela FANTASMA que nem capturar deu. O irmao renomeia ja fazia assim.
+    if len(ja) < 2:
+        m = E.menu_contexto(J, l[0], l[1])
+        assert m, "o menu do botao direito nao abriu"
+        E.clica_item(J, m, "Duplicar", 2.2)
+        E.poe_prop(J, "Lava", "Position", "0, 0.5, -45", )
+        E.enquadra(J, "Bandeira", atras=42)
+        A.cap("s_dup_b")
+        A.reg("duplicar", antes="s_dup_a.png", depois="s_dup_b.png", alvo=[l[0], l[1]])
+    else:
+        print("  (a copia da Lava ja existe — nao duplico de novo)", flush=True)
 
     A.insere_script_em("ServerScriptService", "s_sss")
-    E.abre_editor(J)
+    A.abre_script_de("ServerScriptService")
     rs.escreve_codigo(J, LARGADA, tem=("PlayerAdded", "RespawnLocation", "Largada"))
     A.cap("p_sss_pronto")
     A.volta("s_volta3")
@@ -164,6 +178,17 @@ def teste2(A=None):
     A.para("s_parar2")
     E.enquadra(J, "Bandeira", atras=48)
     A.cap("p_cena")
+    # a PROVA do jogo, nao da foto: cada codigo dentro do dono certo
+    problemas, txt = E.confere_scripts(J, {
+        "Lava": "local lava",
+        "Bandeira": "local bandeira",
+        "ServerScriptService": "game.Players.PlayerAdded",
+    })
+    if problemas:
+        for p in problemas:
+            print("  !!", p, flush=True)
+        raise RuntimeError("os scripts nao estao nos donos certos:\n" + txt[:600])
+    print("  scripts conferidos no jogo: cada um dentro do dono certo", flush=True)
     return A
 
 

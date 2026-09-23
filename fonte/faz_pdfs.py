@@ -10,8 +10,23 @@ def paginas(caminho):
     d = open(caminho, "rb").read()
     return d.count(b"/Type /Page") - d.count(b"/Type /Pages"), len(d)
 
+def aulas_no_site():
+    """As aulas que EXISTEM no site, tiradas do disco. Antes isto era
+       range(1, 10) cravado: a Aula 10 entrou no site e o PDF dela nao saiu,
+       sem ninguem reclamar — o jeito mais mudo de faltar uma peca."""
+    ns = []
+    for pasta in glob.glob(os.path.join(RAIZ, "aula*")):
+        resto = os.path.basename(pasta)[4:]
+        if resto.isdigit() and os.path.exists(os.path.join(pasta, "index.html")):
+            ns.append(int(resto))
+    return sorted(ns)
+
+
 def main():
-    for n in range(1, 10):
+    achadas = aulas_no_site()
+    if not achadas:
+        raise RuntimeError("nenhuma aula no site: nao ha o que imprimir")
+    for n in achadas:
         pasta = os.path.join(RAIZ, f"aula{n}")
         html = os.path.join(pasta, "index.html")
         pdf = os.path.join(pasta, f"aula{n}.pdf")

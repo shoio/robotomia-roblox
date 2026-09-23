@@ -745,11 +745,25 @@ def scripts_do_jogo(J, arquivo="/tmp/_scripts.png"):
     return " ".join(linhas)
 
 
-def confere_scripts(J, esperado):
+def confere_scripts(J, esperado, tentativas=3):
     """esperado = {"Lava": "local lava", ...}. Reprova se algum script ainda
        tiver a linha padrao do Studio, ou se o dono e o codigo nao estiverem
-       lado a lado na resposta do jogo."""
-    txt = scripts_do_jogo(J)
+       lado a lado na resposta do jogo.
+
+       NAO MEDIU e diferente de ESTA ERRADO: se a barra de comando nao chegou
+       a executar (acontece quando o clique no Correr erra o alvo), a resposta
+       vem sem nenhuma linha '##'. Nesse caso eu repito, e se continuar sem
+       medir eu digo isso com todas as letras — uma vez este guarda acusou
+       tres scripts ausentes num jogo que estava inteiro."""
+    txt = ""
+    for k in range(tentativas):
+        txt = scripts_do_jogo(J)
+        if "##" in txt:
+            break
+        time.sleep(1.5)
+    else:
+        return ([f"a barra de comando NAO EXECUTOU em {tentativas} tentativas — "
+                 "nao sei dizer nada sobre os scripts (isto nao e um defeito da aula)"], txt)
     baixo = txt.lower()
     problemas = []
     if "hello world" in baixo:

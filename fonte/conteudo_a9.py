@@ -85,7 +85,7 @@ AULA = {
  "subtitulo": "Hoje o jogo é seu. Nesta página estão todas as receitas do curso — escolha as que quiser e monte o que você imaginou.",
  "tempo": "50 minutos",
  "etiqueta": "Aula 9 · o jogo é seu",
- "fim": "Acabou o curso. Você sabe construir, fazer o Roblox reagir ao jogador, contar pontos, criar obstáculos que se mexem, fazer o código decidir — e publicar tudo isso num link. O resto é ideia sua.",
+ "fim": "Acabou o primeiro bloco do curso. Você sabe construir, fazer o Roblox reagir ao jogador, contar pontos, criar obstáculos que se mexem, fazer o código decidir — e publicar tudo isso num link. Na Aula 10 o jogo passa a guardar por onde você já andou.",
  "avisos": [
    ("Antes de digitar", "O <b>passo 2</b> desta aula prepara o editor: desligar o assistente de código e o fechamento automático. Não pule — sem isso o editor escreve linhas que você não pediu."),
    ("Hoje não tem passo a passo", "As outras aulas mandavam. Esta te dá as peças e você escolhe. Se travar, o quadro laranja de cada receita continua valendo."),

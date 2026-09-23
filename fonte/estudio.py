@@ -699,6 +699,55 @@ def poe_prop(J, alvo_nome, propriedade, valor):
         escreve_no_filtro(J, "")
 
 
+def marca_prop(J, alvo_nome, propriedade, caminho_lua, quero=True):
+    """Marca (ou desmarca) uma caixinha de propriedade — TextScaled, Enabled,
+       Neutral. O painel nao diz por OCR se a caixa esta marcada; quem responde
+       e a propria propriedade, lida pela barra de comando. Por isso o
+       caminho_lua e obrigatorio: e o invariante, o pixel seria proxy."""
+    def _faz():
+        escreve_no_filtro(J, propriedade.lower())
+        seleciona(J, alvo_nome)
+        y_filtro = acha_filtro(J)[1]
+        itens = [i for i in _painel_propriedades(J) if i[2] > y_filtro + 25]
+        pref = propriedade.lower()[:6]
+        alvo = None
+        for t, x, y, w, h in itens:
+            rot = t.strip().lower().rstrip(".")
+            if rot.startswith(pref):
+                alvo = (x + w + 60, y + h // 2); break
+        if not alvo:
+            raise RuntimeError(f"o filtro nao mostrou '{propriedade}' "
+                               f"(li {[i[0] for i in itens][:8]})")
+        if le_bool(J, caminho_lua) != quero:
+            rs.confere(); rs.clique_img(alvo[0], alvo[1], escala=2.0, janela=J)
+            time.sleep(1.2)
+        lido = le_bool(J, caminho_lua)
+        if lido != quero:
+            raise RuntimeError(f"{propriedade} ficou {lido}, eu queria {quero}")
+        return True
+    try:
+        return tentar(_faz, o_que=f"marcar {propriedade}")
+    finally:
+        escreve_no_filtro(J, "")
+
+
+def le_bool(J, caminho_lua):
+    """Le uma propriedade booleana pela barra de comando. Devolve True/False.
+       Imprime um SELO junto do valor: sem ele, uma saida velha na janela
+       responderia pela nova (a saida so cresce, ninguem a limpa)."""
+    selo = f"SELO{int(time.time() * 1000) % 100000}"
+    rs.comando_lua(J, f'print("{selo}", tostring({caminho_lua}))', espera=1.6)
+    linha = rs.linha_da_saida(J, selo)
+    if linha is None:
+        raise RuntimeError(f"a barra de comando nao respondeu sobre {caminho_lua}")
+    b = linha.lower()
+    if "true" in b:
+        return True
+    if "false" in b:
+        return False
+    raise RuntimeError(f"nao entendi a resposta sobre {caminho_lua}: {linha!r}")
+
+
 def janela_de_verdade(nome_janela, J):
     """A lista do sistema guarda janelas FANTASMA (fechadas mas ainda listadas).
        Clicar nelas manda o clique para a janela de tras — ja me enganou.

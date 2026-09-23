@@ -19,6 +19,12 @@ RECEITAS = [
   ("voltar",          "09_voltar_ao_mundo.gif", "gesto",    (0,100,2000,1400), 800),
   ("jogar",           "10_jogar.gif",           "jogo",     (0,0,2600,1600), 860),
   ("parar",           "11_parar.gif",           "jogo",     (0,0,2600,1600), 860),
+  # 2o bloco (aulas 10 a 18): inserir pela BUSCA do menu do '+', e a Caixa de Ferramentas
+  ("inserir_spawn",     "12_inserir_spawn.gif",     "menu",  (900,0,2940,1700), 860),
+  ("inserir_screengui", "12_inserir_screengui.gif", "menu",  (900,0,2940,1700), 860),
+  ("caixa_ferramentas", "13_caixa_ferramentas.gif", "gesto", (0,0,2600,1600),   860),
+  ("inserir_prompt",    "14_inserir_prompt.gif",    "menu",  (900,0,2940,1700), 860),
+  ("inserir_tool",      "15_inserir_tool.gif",      "menu",  (900,0,2940,1700), 860),
 ]
 
 

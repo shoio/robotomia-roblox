@@ -160,6 +160,41 @@ class Aula:
                  alvo_mais=[l[2] + 30, l[1]],
                  alvo_item=[int((alvo[0] - mm["x"]) * 2) + mo_x, int((alvo[1] - mm["y"]) * 2) + mo_y])
 
+    def insere_buscando(self, pai, objeto, tag, reg_nome, espera=2.6):
+        """Insere pela BUSCA do menu do '+' (objeto que nao esta na lista curta)
+           e registra o clipe: antes, o menu composto e o depois.
+           E o gesto que a Aula 10 fez com SpawnLocation e que as aulas 11 a 15
+           repetem com ScreenGui, TextLabel, Sound, ProximityPrompt e Tool."""
+        return E.tentar(lambda: self._insere_buscando(pai, objeto, tag, reg_nome, espera),
+                        n=3, o_que=f"inserir {objeto} em {pai}")
+
+    def _insere_buscando(self, pai, objeto, tag, reg_nome, espera):
+        J = self.J
+        E.limpa_popups(J); E.aba(J, "Modelo")
+        antes = [t for t, *_ in E.explorador(J, regiao=(0.855, 0.13, 1, 0.75))]
+        l, m, usado = E.menu_do_mais(J, pai)
+        self.cap(tag + "_a")
+        mo_x, mo_y = int((m["x"] - J["x"]) * 2), int((m["y"] - J["y"]) * 2)
+        comp = Image.open(rs.captura(J["id"], "/tmp/_mm.png")[0]).convert("RGB")
+        rs.captura(m["id"], "/tmp/_mp.png")
+        comp.paste(Image.open("/tmp/_mp.png").convert("RGB"), (mo_x, mo_y))
+        comp.save(f"{self.D}/{tag}_b.png")
+        rs.confere(); rs.clique_tela(m["x"] + m["w"] / 2, m["y"] + 14); time.sleep(0.8)
+        rs.digita_teclas(objeto.lower()[:9]); time.sleep(1.8)
+        alvo = E.item_do_menu(m, objeto)
+        assert alvo, f"a busca do menu nao achou {objeto}"
+        rs.confere(); rs.clique_tela(*alvo); time.sleep(espera)
+        self.cap(tag + "_c")
+        depois = [t for t, *_ in E.explorador(J, regiao=(0.855, 0.13, 1, 0.75))]
+        # o Explorador TRUNCA nome longo ("ProximityPrompt" vira "ProximityPro..")
+        conta = lambda ts: sum(1 for t in ts if t.strip()[:10].lower() == objeto[:10].lower())
+        assert conta(depois) > conta(antes), f"'{objeto}' nao apareceu no Explorador"
+        self.reg(reg_nome, antes=tag + "_a.png", menu=tag + "_b.png", depois=tag + "_c.png",
+                 alvo_mais=[usado, l[1]],
+                 alvo_item=[int((alvo[0] - m["x"]) * 2) + mo_x,
+                            int((alvo[1] - m["y"]) * 2) + mo_y])
+        return True
+
     def codigo(self, l1, completo, tem):
         E.abre_editor(self.J)
         self.cap("p_editor_nasce")

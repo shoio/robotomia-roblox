@@ -103,9 +103,18 @@ def captura(wid=None, arquivo=None):
 
 # ─────────────────────────────── OCR ───────────────────────────────
 
-def ocr(arquivo=None, regiao=None, psm="11", idioma="por+eng", escala=2):
+def ocr(arquivo=None, regiao=None, psm="11", idioma="por+eng", escala=2, limiar=None):
     """Devolve [(texto, x, y, w, h)] em pixels DA IMAGEM.
-       regiao = (x0,y0,x1,y1) em fração 0..1."""
+       regiao = (x0,y0,x1,y1) em fração 0..1.
+
+       `limiar` binariza ANTES de ler: tudo acima dele vira texto preto, o
+       resto vira branco. E obrigatorio quando o recorte e grande e quase
+       todo vazio — o painel do editor com duas linhas de codigo. Medido:
+       sem binarizar, o tesseract le ZERO palavra num recorte de 1650x915
+       com uma linha de codigo clara no alto, e le as quatro palavras
+       quando o mesmo recorte e so o topo. O limiar tira a dependencia do
+       tamanho do vazio. Default None = como sempre foi, para nao mexer em
+       quem ja estava lendo certo."""
     arquivo = arquivo or f"{SP}/rs_cap.png"
     im = Image.open(arquivo).convert("L")
     W, H = im.size
@@ -116,6 +125,8 @@ def ocr(arquivo=None, regiao=None, psm="11", idioma="por+eng", escala=2):
         im = im.crop((ox, oy, int(x1 * W), int(y1 * H)))
     if escala != 1:
         im = im.resize((im.width * escala, im.height * escala), Image.LANCZOS)
+    if limiar is not None:
+        im = im.point(lambda v: 0 if v > limiar else 255)
     p = f"{SP}/_ocr.png"; im.save(p)
     r = subprocess.run(["tesseract", p, "-", "-l", idioma, "--psm", psm, "tsv"],
                        capture_output=True, text=True)
@@ -388,7 +399,7 @@ def texto_do_editor(janela, arquivo="/tmp/_ed.png"):
     im = _I.open(a)
     L, A = im.size
     reg = (100 / L, 235 / A, min(1.0, 1750 / L), min(1.0, 1150 / A))
-    itens = ocr(arquivo, regiao=reg, psm="6", escala=2)
+    itens = ocr(arquivo, regiao=reg, psm="6", escala=2, limiar=90)
     return " ".join(t.strip() for t, *_ in itens if t.strip())
 
 

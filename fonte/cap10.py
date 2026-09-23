@@ -120,7 +120,7 @@ def bandeira(A=None):
     A.pinta("verde", "Bright green", alvo="SpawnLocation", tag="s_bandcor")
     A.renomeia("SpawnLocation", "Bandeira", tag="s_bandnome")
     A.insere_script("Bandeira", tag="s_bandscript")
-    A.abre_script_de("Bandeira")        # NUNCA abre_editor: as abas se chamam todas "Script"
+    A.editor_do_novo("Bandeira")        # NUNCA abre_editor: as abas se chamam todas "Script"
     rs.escreve_codigo(J, BANDEIRA, tem=("Touched", "RespawnLocation", "jogador"))
     A.cap("p_cp_pronto")
     A.volta("s_volta2")
@@ -158,7 +158,7 @@ def sss(A=None):
         print("  (a copia da Lava ja existe — nao duplico de novo)", flush=True)
 
     A.insere_script_em("ServerScriptService", "s_sss")
-    A.abre_script_de("ServerScriptService")
+    A.editor_do_novo("ServerScriptService")
     rs.escreve_codigo(J, LARGADA, tem=("PlayerAdded", "RespawnLocation", "Largada"))
     A.cap("p_sss_pronto")
     A.volta("s_volta3")

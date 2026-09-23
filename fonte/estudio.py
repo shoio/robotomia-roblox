@@ -956,14 +956,32 @@ def janela_de_verdade(nome_janela, J):
     return p if difere > 6 else None
 
 
+def esta_aberto(J, nome):
+    """A arvore deste item esta ABERTA? Respondo pela INDENTACAO: o filho
+       aparece mais a direita que o pai. Antes ninguem perguntava — expande()
+       so clicava no triangulo, que ALTERNA: chamado duas vezes, fechava o que
+       a chamada anterior tinha aberto, e o Script sumia debaixo da Lava."""
+    linhas = sorted([r for r in explorador(J, regiao=(0.855, 0.10, 1, 0.95))
+                     if len(r[0].strip()) > 2], key=lambda r: r[2])
+    for i, (t, x, y, w, h) in enumerate(linhas):
+        if t.strip().lower().rstrip("®*") == nome.lower():
+            if i + 1 >= len(linhas):
+                return False
+            return linhas[i + 1][1] > x + 8
+    return False
+
+
 def expande(J, nome):
-    """Abre a arvore de um item do Explorador clicando no triangulo."""
-    l = acha_linha(J, nome, tentativas=2)
-    if not l:
-        return False
-    rs.confere(); rs.clique_img(l[0] - (l[2] - l[0]) - 60, l[1], escala=2.0, janela=J)
-    time.sleep(1.2)
-    return True
+    """GARANTE a arvore aberta (nao alterna). Devolve True se ficou aberta."""
+    for k in range(3):
+        if esta_aberto(J, nome):
+            return True
+        l = acha_linha(J, nome, tentativas=2)
+        if not l:
+            return False
+        rs.confere(); rs.clique_img(l[0] - (l[2] - l[0]) - 60, l[1], escala=2.0, janela=J)
+        time.sleep(1.2)
+    return esta_aberto(J, nome)
 
 
 def script_de(J, dono):

@@ -205,7 +205,7 @@ class Aula:
         # chamada "Script" — e todas se chamam assim, entao a aula seguinte
         # escrevia por cima da anterior.
         if dono:
-            self.abre_script_de(dono)
+            self.editor_do_novo(dono)
         else:
             E.abre_editor(self.J)
         self.cap("p_editor_nasce")
@@ -277,6 +277,22 @@ class Aula:
         if not achou:
             raise RuntimeError(f"andei {passos} vezes e '{palavra}' nao apareceu na tela")
         E.para(J)
+        return True
+
+    def editor_do_novo(self, dono):
+        """Confere que o editor a vista e o do Script ACABADO DE INSERIR, pela
+           linha padrao do Studio. So depois disso se escreve.
+
+           Existe porque abre_editor clica na primeira aba chamada 'Script' —
+           e todas se chamam assim. A Aula 10 inteira foi capturada uma vez com
+           o codigo da bandeira dentro da lava por causa disso, e as fotos do
+           editor mostravam tudo certo. A linha padrao e a unica prova barata
+           de que a aba a vista e nova e que nao vou apagar codigo de ninguem."""
+        lido = rs.texto_do_editor(self.J).lower()
+        if "hello" not in lido and "world" not in lido:
+            raise RuntimeError(
+                f"o editor a vista nao e o Script novo de {dono} (li {lido[:60]!r}). "
+                "Escrever aqui apagaria codigo de outro script.")
         return True
 
     def abre_script_de(self, dono):

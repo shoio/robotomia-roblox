@@ -314,6 +314,27 @@ def roda_img(px, py, cliques=5, escala=2.0, janela=None):
     roda(j["x"]+px/escala, j["y"]+py/escala, cliques)
 
 
+_ENERGIA = {"quando": 0.0, "ok": None}
+
+
+def na_tomada(ttl=20.0):
+    """O Mac esta na TOMADA? Lido do sistema, com validade de 20 s para nao
+       pagar um subprocesso a cada clique. Isto existe porque uma captura
+       noturna segurou a tela acesa com a maquina na bateria: o certo e a
+       captura PARAR quando a energia cai, nao correr ate a bateria acabar."""
+    agora = time.time()
+    if _ENERGIA["ok"] is not None and agora - _ENERGIA["quando"] < ttl:
+        return _ENERGIA["ok"]
+    r = subprocess.run(["pmset", "-g", "ps"], capture_output=True, text=True)
+    ok = "AC Power" in (r.stdout or "")
+    _ENERGIA.update(quando=agora, ok=ok)
+    return ok
+
+
+class SemTomada(Exception):
+    """A energia externa caiu no meio da captura — parar e dizer."""
+
+
 class SaiuDoAr(Exception):
     """O Studio deixou de ser a janela da frente — abortar antes de clicar."""
 
@@ -326,6 +347,9 @@ def confere(janela_esperada=None):
         capture_output=True, text=True)
     if tela_bloqueada():
         raise SaiuDoAr("a SESSAO DO MAC esta BLOQUEADA — nenhum clique chega ao Studio; ABORTADO")
+    if not na_tomada():
+        raise SemTomada("o carregador parou de entregar energia — captura ABORTADA "
+                        "(na bateria a tela nao fica presa acesa)")
     frente = (r.stdout or "").strip()
     if frente != "RobloxStudio":
         raise SaiuDoAr(f"app na frente e '{frente}', nao o Studio — ABORTADO sem clicar")

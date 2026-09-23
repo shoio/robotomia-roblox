@@ -72,18 +72,19 @@ class Aula:
         rs.captura(pal["id"], "/tmp/_p.png")
         comp.paste(Image.open("/tmp/_p.png").convert("RGB"), (ox, oy))
         comp.save(f"{self.D}/{tag}_b.png")
-        rs.confere(); rs.clique_tela(pal["x"] + E.HEX[cor][0] / 2,
-                                     pal["y"] + E.HEX[cor][1] / 2); time.sleep(1.5)
+        hx = E.acha_hexagono(pal, cor) or E.HEX[cor]     # pela COR; a posicao e so o plano B
+        rs.confere(); rs.clique_tela(pal["x"] + hx[0] / 2,
+                                     pal["y"] + hx[1] / 2); time.sleep(1.5)
         self.cap(tag + "_c")
         rs.confere(); rs.clique_img(pc["aplicar"][0], pc["aplicar"][1], escala=2.0, janela=J)
         time.sleep(2.0)
         self.cap(tag + "_d")
         bc = E.linha_prop(J, "BrickColor")
-        assert espera.lower() in bc.lower(), f"BrickColor ficou '{bc}', esperava {espera}"
+        assert E.parece_nome(bc, espera), f"BrickColor ficou '{bc}', esperava {espera}"
         rs.tecla(E.ESC); time.sleep(1.0); self.cap(tag + "_e")
         self.reg("cor", antes=tag + "_a.png", paleta=tag + "_b.png", armada=tag + "_c.png",
                  depois=tag + "_d.png", limpo=tag + "_e.png", alvo_seta=list(pc["seta"]),
-                 alvo_hex=[ox + E.HEX[cor][0], oy + E.HEX[cor][1]],
+                 alvo_hex=[ox + hx[0], oy + hx[1]],
                  alvo_aplicar=list(pc["aplicar"]))
 
     def material(self, nome_mat, alvo="Part", tag="s_mat"):
@@ -205,7 +206,49 @@ class Aula:
         self.reg(reg_nome, nasce="p_editor_nasce.png", linha1="p_linha1.png",
                  pronto=foto + ".png")
 
-    def anda_ate(self, J, alvo, palavra, tag, atras=40, passos=6):
+    def duplica(self, J, nome, tag="s_dup"):
+        """Botao direito na linha do Explorador -> Duplicar, com o clipe."""
+        E.limpa_popups(J)
+        l = E.acha_linha(J, nome)
+        assert l, f"nao achei '{nome}' no Explorador"
+        self.cap(tag + "_a")
+        rs.clique_direito_img(l[0], l[1], escala=2.0, janela=J); time.sleep(1.6)
+        menu = [j for j in rs.janelas() if j["w"] > 150 and j["h"] > 150 and j["camada"] >= 100]
+        assert menu, "o menu do botao direito nao abriu"
+        E.clica_item(J, menu[0], "Duplicar", 2.2)
+        self.cap(tag + "_b")
+        self.reg("duplicar", antes=tag + "_a.png", depois=tag + "_b.png", alvo=[l[0], l[1]])
+        return True
+
+    def puxa_alavanca(self, J, alvo, tag, atras=22, palavras=("abrir",), passos=8):
+        """Joga, anda ate o balao do ProximityPrompt aparecer, aperta E e PROVA
+           que alguma coisa mudou no mundo. Sem a prova, a foto seria um jogo
+           bonito onde o E nunca chegou a disparar nada."""
+        import monta
+        E.enquadra(J, alvo, atras=atras)
+        self.cap(tag + "_a")
+        E.joga(J, espera=12.0); time.sleep(3)
+        rs.confere(); rs.clique_img(1200, 900, escala=2.0, janela=J); time.sleep(0.8)
+        viu = False
+        for k in range(passos):
+            if any(E.texto_na_tela(J, p) for p in palavras):
+                viu = True; break
+            rs.segura_tecla(13, 0.9); time.sleep(0.5)     # 13 = W
+        if not viu:
+            raise RuntimeError(f"andei {passos} vezes e o balao ({palavras}) nao apareceu")
+        antes_img = rs.captura(J["id"], "/tmp/_pa_a.png")[0]
+        rs.segura_tecla(14, 2.6)                          # 14 = E, segurando
+        time.sleep(1.2)
+        self.cap(tag + "_b"); time.sleep(1.5); self.cap(tag + "_c")
+        depois_img = rs.captura(J["id"], "/tmp/_pa_b.png")[0]
+        if not monta.mudou(antes_img, depois_img, regiao=E.VIEW, passo=4):
+            raise RuntimeError("apertei E e nada mudou no mundo")
+        self.reg(tag, antes=tag + "_a.png", depois=tag + "_b.png",
+                 quadros=[tag + "_b.png", tag + "_c.png"], alvo=[225, 28])
+        E.para(J)
+        return True
+
+    def anda_ate(self, J, alvo, palavra, tag, atras=40, passos=6, palavras=None):
         """Joga, anda para a frente e PROVA na tela que a palavra apareceu.
            Sem essa prova a foto do passo pode ser um jogo bonito onde o
            gesto que a aula ensina nunca aconteceu."""
@@ -217,7 +260,7 @@ class Aula:
         achou = False
         for k in range(passos):
             rs.segura_tecla(13, 1.1); time.sleep(0.6)     # 13 = W
-            if E.texto_na_tela(J, palavra):
+            if any(E.texto_na_tela(J, p) for p in (palavras or (palavra,))):
                 achou = True; break
         self.cap(tag + "_b"); time.sleep(1.5); self.cap(tag + "_c")
         self.reg(tag, antes=tag + "_a.png", depois=tag + "_b.png",
@@ -345,6 +388,9 @@ def projeto_novo_confiavel():
     """Reiniciar o Studio e escolher Baseplate na tela inicial e o unico
        caminho que sempre funciona: o Arquivo -> Novo falha de vez em quando
        e deixa o projeto anterior aberto, contaminando as capturas."""
+    if not rs.na_tomada():
+        raise rs.SemTomada("o Mac esta na BATERIA — a captura nao comeca assim. "
+                           "Ligue o carregador e confira que ele esta entregando.")
     import subprocess
     subprocess.run(["pkill", "-9", "-x", "RobloxStudio"])
     time.sleep(6)

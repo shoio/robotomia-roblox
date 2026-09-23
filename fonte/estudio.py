@@ -256,6 +256,64 @@ def pontos_material(J):
 HEX = {"vermelho": (646, 332), "azul": (520, 119), "verde": (212, 190),
        "amarelo": (90, 332), "branco": (672, 679), "preto": (55, 679)}
 
+# A COR de cada BrickColor que a aula pede. O hexagono se acha por ESTA cor,
+# nao pela posicao: a posicao entregou 'EE Grime' no lugar de 'Bright green'
+# numa captura da Aula 10 — o vizinho do verde na grade e um verde-oliva.
+CORES = {
+    "vermelho": ("Bright red",    (196,  40,  28)),
+    "verde":    ("Bright green",  ( 75, 151,  75)),
+    "azul":     ("Bright blue",   ( 13, 105, 172)),
+    "amarelo":  ("Bright yellow", (245, 205,  48)),
+    "branco":   ("White",         (242, 243, 243)),
+    "preto":    ("Really black",  ( 27,  42,  53)),
+}
+
+
+def parece_nome(lido, esperado, minimo=0.75):
+    """O painel diz o nome esperado? Comparo PALAVRA A PALAVRA com tolerancia,
+       porque quem le e o OCR: 'Bright green' voltou como 'EB Bright greer' e
+       um `in` exato reprovou uma pintura CERTA. A tolerancia e por palavra de
+       proposito — 'Medium green' e 'Dark green' continuam sendo reprovados,
+       porque a primeira palavra nao se parece com 'Bright'."""
+    import difflib
+    limpa = lambda t: "".join(c if c.isalpha() or c.isspace() else " " for c in t.lower()).split()
+    palavras = limpa(lido)
+    for alvo in limpa(esperado):
+        if not any(difflib.SequenceMatcher(None, alvo, p).ratio() >= minimo for p in palavras):
+            return False
+    return True
+
+
+def acha_hexagono(pal, cor, arquivo="/tmp/_hex.png"):
+    """Onde, DENTRO da paleta, esta o hexagono da cor pedida. Devolve (x, y)
+       em pixels da captura da paleta, ou None.
+
+       Mede em vez de decorar: procuro os pixels da cor exata do BrickColor,
+       fico com o aglomerado mais denso e devolvo o centro dele. A grade da
+       paleta muda de lugar com o tamanho da janela; a cor nao muda."""
+    import numpy as _np
+    rs.captura(pal["id"], arquivo)
+    im = _np.asarray(Image.open(arquivo).convert("RGB"), dtype=int)
+    alvo = _np.array(CORES[cor][1])
+    A, L = im.shape[0], im.shape[1]
+    # a grade vai ate ~90% da altura; embaixo ficam o interruptor e os botoes
+    corpo = im[: int(A * 0.88), :, :]
+    for tol in (10, 18, 28, 40):
+        mask = (_np.abs(corpo - alvo) <= tol).all(axis=2)
+        if mask.sum() < 60:
+            continue
+        ys, xs = _np.nonzero(mask)
+        # o hexagono e um bloco compacto: fico com o maior grupo em x e em y
+        for _ in range(3):
+            cx, cy = _np.median(xs), _np.median(ys)
+            perto = (_np.abs(xs - cx) < 40) & (_np.abs(ys - cy) < 40)
+            if perto.sum() < 40:
+                break
+            xs, ys = xs[perto], ys[perto]
+        if len(xs) >= 40:
+            return int(_np.median(xs)), int(_np.median(ys))
+    return None
+
 
 def paleta_aberta(J):
     return [j for j in rs.janelas() if j["w"] == 368 and j["h"] == 400]
@@ -276,11 +334,11 @@ def pinta(J, cor, espera_nome=None):
         ligado = ((q[:, :, 1] > 120) & (q[:, :, 1] - q[:, :, 0] > 40) & (q[:, :, 1] - q[:, :, 2] > 40)).sum() > 200
         if ligado:
             rs.confere(); rs.clique_lento(p["x"] + 665 / 2, p["y"] + 755 / 2); time.sleep(1.2)
-        hx = HEX[cor]
+        hx = acha_hexagono(p, cor) or HEX[cor]
         rs.confere(); rs.clique_tela(p["x"] + hx[0] / 2, p["y"] + hx[1] / 2); time.sleep(1.5)
         rs.confere(); rs.clique_img(1946, 118, escala=2.0, janela=J); time.sleep(2.0)
         bc = linha_prop(J, "BrickColor")
-        if espera_nome and espera_nome.lower() not in bc.lower():
+        if espera_nome and not parece_nome(bc, espera_nome):
             raise RuntimeError(f"BrickColor ficou '{bc}', esperava {espera_nome}")
         return bc
     return tentar(_faz, o_que=f"pintar de {cor}")
@@ -299,14 +357,38 @@ def _painel_propriedades(J, arquivo="/tmp/_prop.png"):
 
 def linha_prop(J, rotulo):
     """Le uma linha do painel Propriedades PELO ROTULO. O realce da selecao
-       lava a cor na captura, entao a propriedade e a fonte de verdade."""
+       lava a cor na captura, entao a propriedade e a fonte de verdade.
+
+       Le duas vezes: a varredura do painel inteiro e um recorte ESTREITO da
+       celula, ampliado e binarizado. A varredura larga perde o fim do valor —
+       'Bright yellow' voltava como 'Bright' e reprovava uma pintura certa,
+       o mesmo defeito do OCR do editor."""
     itens = _painel_propriedades(J)
     alvo = [i for i in itens if i[0].lower().rstrip(".") == rotulo.lower()]
     if not alvo:
         return ""
     _, ax, ay, aw, ah = alvo[0]
-    return " ".join(t for t, x, y, w, h in itens
-                    if abs((y + h // 2) - (ay + ah // 2)) < ah and x > ax + aw)
+    largo = " ".join(t for t, x, y, w, h in itens
+                     if abs((y + h // 2) - (ay + ah // 2)) < ah and x > ax + aw)
+    estreito = _celula_ampliada(J, ax + aw, ay, ah)
+    return estreito if len(estreito) > len(largo) else largo
+
+
+def _celula_ampliada(J, x0, y, h, arquivo="/tmp/_celamp.png"):
+    """A celula de valor, so ela, ampliada 4x e binarizada."""
+    from PIL import Image as _I
+    try:
+        a, _ = rs.captura(J["id"], arquivo)
+        im = _I.open(a).convert("L").crop((x0, max(0, y - 12), 2940, y + h + 12))
+        if im.width < 40 or im.height < 10:
+            return ""
+        im = im.resize((im.width * 4, im.height * 4), _I.LANCZOS)
+        im.save("/tmp/_celamp_big.png")
+        lido = [t.strip() for t, *_ in rs.ocr("/tmp/_celamp_big.png", psm="7",
+                                              escala=1, limiar=90) if t.strip()]
+        return " ".join(lido)
+    except Exception:
+        return ""
 
 
 def ponto_da_prop2(J, rotulo):
@@ -641,13 +723,13 @@ def le_celula(J, y, arquivo="/tmp/_cel.png"):
     return " ".join(t.strip() for t, *_ in rs.ocr("/tmp/_cel_big.png", psm="7", escala=1))
 
 
-def poe_prop(J, alvo_nome, propriedade, valor):
+def poe_prop(J, alvo_nome, propriedade, valor, n=0):
     """Escreve uma propriedade usando a caixa de filtro, SEM mexer em divisoria
        (mexer nela ja quebrou o layout uma vez). Ordem: filtro com nada
        selecionado (Delete seguro), depois seleciona, depois edita."""
     def _faz():
         escreve_no_filtro(J, propriedade.lower())
-        seleciona(J, alvo_nome)
+        seleciona(J, alvo_nome, n)
         y_filtro = acha_filtro(J)[1]
         itens = [i for i in _painel_propriedades(J) if i[2] > y_filtro + 25]
         pref = propriedade.lower()[:4]

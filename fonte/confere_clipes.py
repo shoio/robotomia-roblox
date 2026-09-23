@@ -48,8 +48,32 @@ CLIPES = [
 ]
 
 
+def das_novas():
+    """As aulas do 2o bloco nao entram na lista escrita a mao: o alvo de cada
+       gesto ja esta no alvos.json que o proprio motor gravou. Derivar evita a
+       lista copiada que envelhece — e o arquivo citado que NAO existe aqui
+       reprova, em vez de ser pulado em silencio."""
+    import glob, json
+    import confere_alvos
+    fora = []
+    for pasta in sorted(glob.glob("aula1[0-9]")) + sorted(glob.glob("aula[2-9][0-9]")):
+        caminho = f"{pasta}/alvos.json"
+        if not os.path.exists(caminho):
+            continue
+        A = json.load(open(caminho))
+        for chave, dados in A.items():
+            if not confere_alvos.ESPERADO.get(chave):
+                continue
+            antes = dados.get("antes")
+            if antes and not os.path.exists(os.path.join(pasta, antes)):
+                print(f"  {pasta}/{antes:<24} FALTA O ARQUIVO que o alvos.json cita")
+                fora.append((pasta, antes))
+        fora += confere_alvos.confere(pasta)
+    return fora
+
+
 def main():
-    ruins = []
+    ruins = das_novas()
     for pasta, arq, alvo, esperado in CLIPES:
         img = os.path.join(pasta, arq)
         if not os.path.exists(img):

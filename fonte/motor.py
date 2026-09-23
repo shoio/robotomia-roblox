@@ -195,15 +195,54 @@ class Aula:
                             int((alvo[1] - m["y"]) * 2) + mo_y])
         return True
 
-    def codigo(self, l1, completo, tem):
+    def codigo(self, l1, completo, tem, foto="p_codigo_pronto", reg_nome="codigo"):
         E.abre_editor(self.J)
         self.cap("p_editor_nasce")
         rs.escreve_codigo(self.J, l1, tem=(l1.split()[1],), nao_tem=("Hello",))
         self.cap("p_linha1")
         rs.escreve_codigo(self.J, completo, tem=tem)
-        self.cap("p_codigo_pronto")
-        self.reg("codigo", nasce="p_editor_nasce.png", linha1="p_linha1.png",
-                 pronto="p_codigo_pronto.png")
+        self.cap(foto)
+        self.reg(reg_nome, nasce="p_editor_nasce.png", linha1="p_linha1.png",
+                 pronto=foto + ".png")
+
+    def anda_ate(self, J, alvo, palavra, tag, atras=40, passos=6):
+        """Joga, anda para a frente e PROVA na tela que a palavra apareceu.
+           Sem essa prova a foto do passo pode ser um jogo bonito onde o
+           gesto que a aula ensina nunca aconteceu."""
+        E.enquadra(J, alvo, atras=atras)
+        self.cap(tag + "_a")
+        E.joga(J, espera=12.0); time.sleep(3)
+        self.cap(tag + "_b0")
+        rs.confere(); rs.clique_img(1200, 900, escala=2.0, janela=J); time.sleep(0.8)
+        achou = False
+        for k in range(passos):
+            rs.segura_tecla(13, 1.1); time.sleep(0.6)     # 13 = W
+            if E.texto_na_tela(J, palavra):
+                achou = True; break
+        self.cap(tag + "_b"); time.sleep(1.5); self.cap(tag + "_c")
+        self.reg(tag, antes=tag + "_a.png", depois=tag + "_b.png",
+                 quadros=[tag + "_b.png", tag + "_c.png"], alvo=[225, 28])
+        if not achou:
+            raise RuntimeError(f"andei {passos} vezes e '{palavra}' nao apareceu na tela")
+        E.para(J)
+        return True
+
+    def abre_script_de(self, dono):
+        """Abre no editor o Script que mora dentro de 'dono'. Com dois scripts
+           abertos as duas abas se chamam 'Script': fecho todas e abro pelo
+           Explorador, que sabe de quem cada uma e."""
+        J = self.J
+        E.fecha_abas_de_script(J)
+        E.volta_ao_mundo(J)
+        p = E.script_de(J, dono)
+        if not p:
+            raise RuntimeError(f"nao achei o Script dentro de {dono}")
+        rs.confere(); rs.clique_img(p[0], p[1], escala=2.0, janela=J, duplo=True)
+        time.sleep(2.5)
+        lido = rs.texto_do_editor(J)
+        if not lido.strip():
+            raise RuntimeError("abri a aba mas o editor leu vazio")
+        return lido
 
     def volta(self, tag="s_volta"):
         a = self.cap(tag + "_a")

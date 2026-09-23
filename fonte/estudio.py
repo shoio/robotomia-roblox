@@ -699,6 +699,25 @@ def poe_prop(J, alvo_nome, propriedade, valor):
         escreve_no_filtro(J, "")
 
 
+def sem_acento(t):
+    for a, b in zip("aaaaeeiooouuc", "áàâãéêíóôõúüç"):
+        t = t.replace(b, a)
+    return t
+
+
+def texto_na_tela(J, palavra, regiao=(0.02, 0.12, 0.78, 0.55)):
+    """A palavra esta escrita no mundo 3D? Serve para provar em JOGO o que o
+       aluno vai ver — o letreiro, o aviso, o cronometro. Le com e sem
+       binarizacao: o letreiro e claro sobre o ceu claro numa hora e escuro
+       sobre a lava noutra, e um limiar so perde metade dos casos."""
+    a, _ = rs.captura(J["id"], "/tmp/_tela.png")
+    lido = []
+    for lim in (None, 90, 150):
+        lido += [t for t, *_ in rs.ocr(a, regiao=regiao, psm="6", escala=2, limiar=lim)]
+    j = sem_acento(" ".join(lido).lower())
+    return sem_acento(palavra.lower()) in j
+
+
 def marca_prop(J, alvo_nome, propriedade, caminho_lua, quero=True):
     """Marca (ou desmarca) uma caixinha de propriedade — TextScaled, Enabled,
        Neutral. O painel nao diz por OCR se a caixa esta marcada; quem responde

@@ -8,6 +8,8 @@ import os, json, shutil
 from PIL import Image
 import gera_curso as G
 import conteudo_a2, conteudo_a3, conteudo_a4, conteudo_a5, conteudo_a6, conteudo_a7, conteudo_a8, conteudo_a9
+import conteudo_a10, conteudo_a11, conteudo_a12, conteudo_a13, conteudo_a14
+import conteudo_a15, conteudo_a16, conteudo_a17, conteudo_a18
 
 AQUI  = os.path.dirname(os.path.abspath(__file__))     # .../fonte
 SAIDA = os.path.dirname(AQUI)                          # a raiz do repositorio
@@ -69,6 +71,17 @@ def aula6(): return _de_conteudo(conteudo_a6)
 def aula7(): return _de_conteudo(conteudo_a7)
 def aula8(): return _de_conteudo(conteudo_a8)
 def aula9(): return _de_conteudo(conteudo_a9)
+# 2o bloco. Uma aula so entra no PLANO e na tupla do laco quando as fotos
+# dela existem: enquanto nao existem, ela nao e uma aula, e um texto.
+def aula10(): return _de_conteudo(conteudo_a10)
+def aula11(): return _de_conteudo(conteudo_a11)
+def aula12(): return _de_conteudo(conteudo_a12)
+def aula13(): return _de_conteudo(conteudo_a13)
+def aula14(): return _de_conteudo(conteudo_a14)
+def aula15(): return _de_conteudo(conteudo_a15)
+def aula16(): return _de_conteudo(conteudo_a16)
+def aula17(): return _de_conteudo(conteudo_a17)
+def aula18(): return _de_conteudo(conteudo_a18)
 
 
 def indice(aulas_prontas):

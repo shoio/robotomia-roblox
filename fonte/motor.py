@@ -155,7 +155,11 @@ class Aula:
         assert alvo, "nao achei Script no menu do +"
         rs.confere(); rs.clique_tela(*alvo); time.sleep(3.0)
         self.cap(tag + "_c")
-        assert E.linha_prop(J, "Parent").strip().lower() == dono.lower(), \
+        # mesma comparacao do irmao insere_script_em: so letras e numeros, por
+        # prefixo — o painel trunca nome longo e a leitura traz a borda junto
+        _pai = "".join(c for c in E.linha_prop(J, "Parent").lower() if c.isalnum())
+        assert _pai and (_pai.startswith(dono.lower()[:10])
+                         or dono.lower().startswith(_pai[:10])), \
             f"o Script nao entrou em {dono}"
         self.reg("inserir_script", antes=tag + "_a.png", menu=tag + "_b.png", depois=tag + "_c.png",
                  alvo_mais=[l[2] + 30, l[1]],

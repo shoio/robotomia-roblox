@@ -386,6 +386,9 @@ def _celula_ampliada(J, x0, y, h, arquivo="/tmp/_celamp.png"):
         im.save("/tmp/_celamp_big.png")
         lido = [t.strip() for t, *_ in rs.ocr("/tmp/_celamp_big.png", psm="7",
                                               escala=1, limiar=90) if t.strip()]
+        # a BORDA da celula vira um '|' solto na leitura, e um '|' a mais ja
+        # reprovou um Script que tinha entrado no lugar certo
+        lido = [t for t in lido if any(c.isalnum() for c in t)]
         return " ".join(lido)
     except Exception:
         return ""

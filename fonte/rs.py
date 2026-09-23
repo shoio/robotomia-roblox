@@ -2,12 +2,35 @@
 # -*- coding: utf-8 -*-
 """Ferramenta para inspecionar e operar o Roblox Studio em laço fechado:
    agir → capturar → ler por OCR → conferir."""
-import subprocess, time, os, re, sys
+import subprocess, time, os, re, sys, tempfile
 import Quartz
 from PIL import Image
 
-SP = "/private/tmp/claude-501/-Users-shoio/6f4de3a6-72e1-4514-805d-e784bd37f029/scratchpad"
+SP = os.environ.get("RS_TMP") or tempfile.gettempdir()
 APP = "Roblox Studio"
+
+
+class TelaCega(Exception):
+    """A captura nao mostra a tela: sessao bloqueada, monitor dormindo, ou
+       janela que devolveu quadro preto. NUNCA seguir em frente lendo isto —
+       o OCR le vazio e o robo age no escuro."""
+
+
+def tela_bloqueada():
+    """True se a sessao do Mac esta bloqueada (a captura vira quadro preto)."""
+    d = Quartz.CGSessionCopyCurrentDictionary() or {}
+    return bool(d.get("CGSSessionScreenIsLocked"))
+
+
+def _quadro_cego(im):
+    """Devolve o motivo, ou None se o quadro tem conteudo de verdade.
+       Quadro preto: extremos quase iguais e escuros. Quadro chapado: uma cor so."""
+    lo, hi = im.convert("L").getextrema()
+    if hi <= 16:
+        return f"quadro PRETO (brilho maximo {hi})"
+    if hi - lo <= 6:
+        return f"quadro CHAPADO (brilho {lo}..{hi})"
+    return None
 
 
 # ───────────────────────────── janelas ─────────────────────────────
@@ -64,6 +87,14 @@ def captura(wid=None, arquivo=None):
     data = bytes(Quartz.CGDataProviderCopyData(prov))
     bpr = Quartz.CGImageGetBytesPerRow(img)
     im = Image.frombuffer("RGBA", (w, h), data, "raw", "BGRA", bpr, 1).convert("RGB")
+    if os.environ.get("RS_SABOTA_CEGO"):          # so para PROVAR o guarda
+        im = Image.new("RGB", im.size, (0, 0, 0))
+    motivo = _quadro_cego(im)
+    if motivo:
+        raise TelaCega(f"captura da janela {wid}: {motivo}"
+                       + (" — a SESSAO DO MAC ESTA BLOQUEADA; so a pessoa destrava"
+                          if tela_bloqueada() else
+                          " — sessao destravada; janela minimizada ou monitor dormindo?"))
     arquivo = arquivo or f"{SP}/rs_cap.png"
     im.save(arquivo)
     escala = (w / lw) if lw else 2.0        # Retina costuma ser 2.0
@@ -282,6 +313,8 @@ def confere(janela_esperada=None):
     r = subprocess.run(["osascript","-e",
         'tell application "System Events" to get name of first process whose frontmost is true'],
         capture_output=True, text=True)
+    if tela_bloqueada():
+        raise SaiuDoAr("a SESSAO DO MAC esta BLOQUEADA — nenhum clique chega ao Studio; ABORTADO")
     frente = (r.stdout or "").strip()
     if frente != "RobloxStudio":
         raise SaiuDoAr(f"app na frente e '{frente}', nao o Studio — ABORTADO sem clicar")

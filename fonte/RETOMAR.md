@@ -1,5 +1,14 @@
 # Onde parei e como retomar
 
+**Conferido em 27-09-2026, 22h35** — nada mudou desde 23-09: nenhum commit
+novo, 10 aulas no ar, as 8 restantes com **18 fotos faltando cada uma**
+(144 fotos e 34 clipes no total) e fora do `PLANO` do build.
+
+⚠️ **O repositorio agora mora em `~/Coding/robotomia-roblox`.** Ele vivia no
+scratchpad do `/tmp`, e o limpador do macOS ja comeu a pasta tres vezes — da
+ultima, apagou `HEAD` e `config` de dentro do `.git` e deixou um repositorio
+pela metade. Clone de novo ali, nunca no `/tmp`.
+
 **Estado em 23-09-2026, 08h50.** A **Aula 10 está no ar** — capturada,
 conferida, provada em jogo e publicada. As Aulas 11 a 18 continuam
 **escritas e sem foto nenhuma**.
